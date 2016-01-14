@@ -11,6 +11,8 @@ A heads-up display into your Pantheon environment.
 
 ## Description ##
 
+[![Build Status](https://travis-ci.org/danielbachhuber/pantheon-hud.svg?branch=master)](https://travis-ci.org/danielbachhuber/pantheon-hud)
+
 tk
 
 ## Installation ##
