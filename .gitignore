@@ -1,2 +1,3 @@
 .DS_Store
+binding.pem
 node_modules/
