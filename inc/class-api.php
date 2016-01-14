@@ -16,12 +16,51 @@ class API {
 	}
 
 	/**
+	 * Get the id of the Pantheon site.
+	 */
+	public function get_site_id() {
+		return $this->get_site_data( 'environments', 'dev', 'site' );
+	}
+
+	/**
+	 * Get the name of the Pantheon site.
+	 *
+	 * @return string
+	 */
+	public function get_site_name() {
+		return $this->get_site_data( 'site', 'name' );
+	}
+
+	/**
 	 * Get the timestamp of the last code push
 	 *
 	 * @return int
 	 */
 	public function get_last_code_push_timestamp() {
-		return ! empty( $this->site_data['site']['last_code_push']['timestamp'] ) ? strtotime( $this->site_data['site']['last_code_push']['timestamp'] ) : 0;
+		$timestamp = $this->get_site_data( 'site', 'last_code_push', 'timestamp' );
+		if ( $timestamp ) {
+			return strtotime( $timestamp );
+		} else {
+			return 0;
+		}
+	}
+
+	/**
+	 * Traverse the $site_data variable and return value if it exists
+	 *
+	 * @return mixed|null
+	 */
+	private function get_site_data() {
+		$args = func_get_args();
+		$val = $this->site_data;
+		foreach( $args as $arg ) {
+			if ( isset( $val[ $arg ] ) ) {
+				$val = $val[ $arg ];
+			} else {
+				return null;
+			}
+		}
+		return $val;
 	}
 
 	private function fetch_site_data() {

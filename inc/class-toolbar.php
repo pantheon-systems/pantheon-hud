@@ -23,14 +23,36 @@ class Toolbar {
 	}
 
 	public function action_admin_bar_menu( $wp_admin_bar ) {
+		$api = new API;
 		$title = '<img style="height:32px;width:32px;vertical-align:middle;margin-top:-4px;" src="' . esc_url( plugins_url( 'assets/img/pantheon-fist-color.svg', PANTHEON_HUD_ROOT_FILE ) ) . '" />';
-		$environment = ! empty( $_ENV['PANTHEON_ENVIRONMENT'] ) ? $_ENV['PANTHEON_ENVIRONMENT'] : 'local';
-		$title .= ' ' . esc_html( strtoupper( $environment ) );
+		$bits = array();
+		if ( $name = $api->get_site_name() ) {
+			$bits[] = $name;
+		}
+		$bits[] = $this->get_environment();
+		$title .= ' ' . esc_html( strtolower( implode( ':', $bits ) ) );
 		$wp_admin_bar->add_node( array(
 			'id'       => 'pantheon-hud',
 			'href'     => false,
 			'title'    => $title,
 			) );
+
+		if ( $site_id = $api->get_site_id() ) {
+			$dashboard_link = sprintf( 'https://dashboard.pantheon.io/sites/%s#%s/code', $site_id, $this->get_environment() );
+			$wp_admin_bar->add_node( array(
+				'id'     => 'pantheon-hud-dashboard-link',
+				'parent' => 'pantheon-hud',
+				'href'   => $dashboard_link,
+				'title'  => esc_html__( 'Visit Dashboard', 'pantheon-hud' ),
+				'meta'   => array(
+					'target' => '_blank',
+					),
+				) );
+		}
+	}
+
+	private function get_environment() {
+		return ! empty( $_ENV['PANTHEON_ENVIRONMENT'] ) ? $_ENV['PANTHEON_ENVIRONMENT'] : 'local';
 	}
 
 }
