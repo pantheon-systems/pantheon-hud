@@ -11,6 +11,17 @@
  * @package Pantheon HUD
  */
 
+define( 'PANTHEON_HUD_ROOT_FILE', __FILE__ );
+
+add_action( 'init', function(){
+
+	$view_pantheon_hud = apply_filters( 'pantheon_hud_current_user_can_view', current_user_can( 'manage_options' ) );
+	if ( is_admin_bar_showing() && $view_pantheon_hud ) {
+		Pantheon\HUD\Toolbar::get_instance();
+	}
+
+});
+
 spl_autoload_register( function( $class ) {
 	$class = ltrim( $class, '\\' );
 	if ( 0 !== stripos( $class, 'Pantheon\HUD\\' ) ) {
