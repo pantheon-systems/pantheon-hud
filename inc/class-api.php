@@ -81,8 +81,7 @@ class API {
 			};
 			add_action( 'http_api_curl', $client_cert );
 			$response = wp_remote_get( self::$endpoint_url, array(
-				'sslcertificates' => dirname( dirname( __FILE__ ) ) . '/binding.crt',
-				'sslverify' => false, // @todo need to get verification working
+				'sslverify' => false, // yolo
 			) );
 			remove_action( 'http_api_curl', $client_cert );
 			remove_filter( 'http_api_transports', $require_curl );
