@@ -66,13 +66,14 @@ class API {
 	private function fetch_site_data() {
 		
 		// Function internal to Pantheon infrastructure
+		$pem_file = apply_filters( 'pantheon_hud_pem_file', null );
 		if ( function_exists( 'pantheon_curl' ) ) {
-			$response = pantheon_curl( self::$endpoint_url );
+			$bits = parse_url( self::$endpoint_url );
+			$response = pantheon_curl( sprintf( '%s://%s%s', $bits['scheme'], $bits['host'], $bits['path'] ), null, $bits['port'] );
 			$body = ! empty( $response['body'] ) ? $response['body'] : '';
 			return json_decode( $body, true );
 		// for those developing locally who know what they're doing
-		} else if ( $pem_file = apply_filters( 'pantheon_hud_pem_file', null )
-			|| ( defined( 'PANTHEON_HUD_PHPUNIT_RUNNING' ) && PANTHEON_HUD_PHPUNIT_RUNNING ) ) {
+		} else if ( $pem_file || ( defined( 'PANTHEON_HUD_PHPUNIT_RUNNING' ) && PANTHEON_HUD_PHPUNIT_RUNNING ) ) {
 			$require_curl = function() {
 				return array( 'curl' );
 			};
