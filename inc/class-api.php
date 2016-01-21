@@ -68,6 +68,7 @@ class API {
 		// Function internal to Pantheon infrastructure
 		if ( function_exists( 'pantheon_curl' ) ) {
 			$response = pantheon_curl( self::$endpoint_url );
+			$body = ! empty( $response['body'] ) ? $response['body'] : '';
 			return json_decode( $body, true );
 		// for those developing locally who know what they're doing
 		} else if ( $pem_file = apply_filters( 'pantheon_hud_pem_file', null )
