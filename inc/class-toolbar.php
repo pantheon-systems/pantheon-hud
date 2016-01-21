@@ -43,7 +43,7 @@ class Toolbar {
 				'id'     => 'pantheon-hud-dashboard-link',
 				'parent' => 'pantheon-hud',
 				'href'   => $dashboard_link,
-				'title'  => esc_html__( 'Visit Dashboard', 'pantheon-hud' ),
+				'title'  => esc_html__( 'Visit Pantheon Dashboard', 'pantheon-hud' ),
 				'meta'   => array(
 					'target' => '_blank',
 					),
