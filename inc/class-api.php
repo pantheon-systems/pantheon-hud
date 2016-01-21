@@ -64,26 +64,34 @@ class API {
 	}
 
 	private function fetch_site_data() {
-
-		$require_curl = function() {
-			return array( 'curl' );
-		};
-		add_filter( 'http_api_transports', $require_curl );
-		$client_cert = function( $handle ) {
-			curl_setopt( $handle, CURLOPT_SSLCERT, dirname( dirname( __FILE__ ) ) . '/binding.pem' );
-		};
-		add_action( 'http_api_curl', $client_cert );
-		$response = wp_remote_get( self::$endpoint_url, array(
-			'sslcertificates' => dirname( dirname( __FILE__ ) ) . '/binding.crt',
-			'sslverify' => false, // @todo need to get verification working
-		) );
-		remove_action( 'http_api_curl', $client_cert );
-		remove_filter( 'http_api_transports', $require_curl );
-		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			return null;
+		
+		// Function internal to Pantheon infrastructure
+		if ( function_exists( 'pantheon_curl' ) ) {
+			$response = pantheon_curl( self::$endpoint_url );
+			return json_decode( $body, true );
+		// for those developing locally who know what they're doing
+		} else if ( $pem_file = apply_filters( 'pantheon_hud_pem_file', null ) ) {
+			$require_curl = function() {
+				return array( 'curl' );
+			};
+			add_filter( 'http_api_transports', $require_curl );
+			$client_cert = function( $handle ) use ( $pem_file ) {
+				curl_setopt( $handle, CURLOPT_SSLCERT, $pem_file );
+			};
+			add_action( 'http_api_curl', $client_cert );
+			$response = wp_remote_get( self::$endpoint_url, array(
+				'sslcertificates' => dirname( dirname( __FILE__ ) ) . '/binding.crt',
+				'sslverify' => false, // @todo need to get verification working
+			) );
+			remove_action( 'http_api_curl', $client_cert );
+			remove_filter( 'http_api_transports', $require_curl );
+			if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
+				return null;
+			}
+			$body = wp_remote_retrieve_body( $response );
+			return json_decode( $body, true );
 		}
-		$body = wp_remote_retrieve_body( $response );
-		return json_decode( $body, true );
+		return array();
 	}
 
 }
