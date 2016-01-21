@@ -70,7 +70,8 @@ class API {
 			$response = pantheon_curl( self::$endpoint_url );
 			return json_decode( $body, true );
 		// for those developing locally who know what they're doing
-		} else if ( $pem_file = apply_filters( 'pantheon_hud_pem_file', null ) ) {
+		} else if ( $pem_file = apply_filters( 'pantheon_hud_pem_file', null )
+			|| ( defined( 'PANTHEON_HUD_PHPUNIT_RUNNING' ) && PANTHEON_HUD_PHPUNIT_RUNNING ) ) {
 			$require_curl = function() {
 				return array( 'curl' );
 			};
