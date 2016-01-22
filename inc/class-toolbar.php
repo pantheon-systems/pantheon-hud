@@ -41,15 +41,16 @@ class Toolbar {
 			'href'     => false,
 			'title'    => $title,
 			) );
-			
+
 		$env_admins = '';
+		# TODO: List envs from API to include Multidev.
 		foreach( array( 'dev', 'test', 'live' ) as $e ) {
 			$url = $api->get_primary_environment_url( $e );
 			if ( $url ) {
-				$env_admins .= '<a target="_blank" href="' . esc_url( rtrim( $url ) . '/wp-admin/' ) . '">' . esc_html( $e ) . '</a> | '; 
+				$env_admins .= '<a target="_blank" href="' . esc_url( rtrim( $url ) . '/wp-admin/' ) . '">' . esc_html( $e ) . '</a> | ';
 			}
 		}
-		
+
 		if ( ! empty( $env_admins ) ) {
 			$wp_admin_bar->add_node( array(
 				'id'     => 'pantheon-hud-wp-admin-links',
@@ -58,13 +59,13 @@ class Toolbar {
 				'title'  => '<em>wp-admin links</em><br />' . rtrim( $env_admins, ' |' ),
 				) );
 		}
-			
+
 		$environment_details = $api->get_environment_details();
 		if ( $environment_details ) {
 			$details_html = array();
 			if ( isset( $environment_details['web']['appserver_count'] ) ) {
 				$pluralize = $environment_details['web']['appserver_count'] > 1 ? 's' : '';
-				$web_detail = $environment_details['web']['appserver_count'] . ' app server' . $pluralize;
+				$web_detail = $environment_details['web']['appserver_count'] . ' app container' . $pluralize;
 				if ( isset( $environment_details['web']['php_version'] ) ) {
 					$web_detail .= ' running ' . $environment_details['web']['php_version'];
 				}
@@ -72,9 +73,9 @@ class Toolbar {
 			}
 			if ( isset( $environment_details['database']['dbserver_count'] ) ) {
 				$pluralize = $environment_details['database']['dbserver_count'] > 1 ? 's' : '';
-				$db_detail = $environment_details['database']['dbserver_count'] . ' db server' . $pluralize;
+				$db_detail = $environment_details['database']['dbserver_count'] . ' db container' . $pluralize;
 				if ( isset( $environment_details['database']['read_replication_enabled'] ) ) {
-					$db_detail .= ' with ' . ( $environment_details['database']['read_replication_enabled'] ? 'read replication enabled' : 'read replication disabled' );
+					$db_detail .= ' with ' . ( $environment_details['database']['read_replication_enabled'] ? 'replication enabled' : 'replication disabled' );
 				}
 				$details_html[] = $db_detail;
 			}
@@ -87,13 +88,13 @@ class Toolbar {
 					) );
 			}
 		}
-			
+
 		if ( $name && $env ) {
 			$wp_cli_stub = sprintf( 'terminus wp --site=%s --env=%s', $name, $env );
 			$wp_admin_bar->add_node( array(
 				'id'     => 'pantheon-hud-wp-cli-stub',
 				'parent' => 'pantheon-hud',
-				'title'  => '<em>' . esc_html__( 'Quick Terminus', 'pantheon-hud' ) . '</em><br /><input value="' . esc_attr( $wp_cli_stub ) . '">',
+				'title'  => '<em>' . esc_html__( 'WP-CLI via Terminus', 'pantheon-hud' ) . '</em><br /><input value="' . esc_attr( $wp_cli_stub ) . '">',
 				) );
 		}
 
@@ -103,7 +104,7 @@ class Toolbar {
 				'id'     => 'pantheon-hud-dashboard-link',
 				'parent' => 'pantheon-hud',
 				'href'   => $dashboard_link,
-				'title'  => esc_html__( 'Visit Pantheon Dashboard', 'pantheon-hud' ),
+				'title'  => esc_html__( 'Pantheon Dashboard', 'pantheon-hud' ),
 				'meta'   => array(
 					'target' => '_blank',
 					),
@@ -111,7 +112,7 @@ class Toolbar {
 		}
 
 	}
-	
+
 	public function action_wp_footer() {
 ?>
 <style>
