@@ -15,7 +15,7 @@ A heads-up display into your Pantheon environment.
 
 This plugin provides situational awareness of the Pantheon plaform from within your WordPress dashboard. It's helpful to be reminded what environment you're in, as well as providing quick links to get back to Pantheon's dashboard, or to interface with your WordPress installation via the command line.
 
-This plugin is in early stages of development. We want your feedback! [Create a Github issue](https://github.com/pantheon-systems/pantheon-hud/issues) with questions, feature requests, or bug reports.
+Pantheon HUD is in early stages of development. We want your feedback! [Create a Github issue](https://github.com/pantheon-systems/pantheon-hud/issues) with questions, feature requests, or bug reports.
 
 ## Installation ##
 
@@ -31,10 +31,16 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
         return false;
     });
 
+## Screenshots ##
+
+### 1. Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links. ###
+![Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links.](http://s.wordpress.org/extend/plugins/pantheon-hud/screenshot-1.png)
+
+
 ## Changelog ##
 
 ### 0.1.0 (January 22, 2016) ###
 * Initial release / MVP functionality.
 * Environment badge and basic container stats.
-* Quick WP-CLI copy/paste,
+* Quick WP-CLI copy/paste.
 * Links to other envs and to Pantheon dash.
