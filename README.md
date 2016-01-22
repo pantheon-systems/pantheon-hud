@@ -15,9 +15,21 @@ A heads-up display into your Pantheon environment.
 
 This plugin provides situational awareness of the Pantheon plaform from within your WordPress dashboard. It's helpful to be reminded what environment you're in, as well as providing quick links to get back to Pantheon's dashboard, or to interface with your WordPress installation via the command line.
 
+This plugin is in early stages of development. We want your feedback! [Create a Github issue](https://github.com/pantheon-systems/pantheon-hud/issues) with questions, feature requests, or bug reports.
+
 ## Installation ##
 
 Installation is vanilla. The plugin should have no ill effect when the site is running locally or if you move your site off the Pantheon platform. It knows how to nerf itself in other environments.
+
+By default, the Pantheon HUD appears for logged-in users with the `manage_options` capability. You can instead restrict it to specific users with the `pantheon_hud_current_user_can_view` filter:
+
+    add_filter( 'pantheon_hud_current_user_can_view', function(){
+        $current_user = wp_get_current_user();
+        if ( $current_user && in_array( $current_user->user_login, array( 'myuserlogin' ) ) ) {
+            return true;
+        }
+        return false;
+    });
 
 ## Changelog ##
 
