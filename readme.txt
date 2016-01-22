@@ -11,22 +11,18 @@ A heads-up display into your Pantheon environment.
 
 == Description ==
 
-[![Build Status](https://travis-ci.org/danielbachhuber/pantheon-hud.svg?branch=master)](https://travis-ci.org/danielbachhuber/pantheon-hud)
+[![Build Status](https://travis-ci.org/pantheon-systems/pantheon-hud.svg?branch=master)](https://travis-ci.org/pantheon-systems/pantheon-hud)
 
-tk
+This plugin provides situational awareness of the Pantheon plaform from within your WordPress dashboard. It's helpful to be reminded what environment you're in, as well as providing quick links to get back to Pantheon's dashboard, or to interface with your WordPress installation via the command line.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
-
+Installation is vanilla. The plugin should have no ill effect when the site is running locally or if you move your site off the Pantheon platform. It knows how to nerf itself in other environments.
 
 == Changelog ==
 
-= 0.1.0 (???? ??, ????) =
-* Initial release.
+= 0.1.0 (January 22, 2016) =
+* Initial release / MVP functionality.
+* Environment badge and basic container stats.
+* Quick WP-CLI copy/paste,
+* Links to other envs and to Pantheon dash.
