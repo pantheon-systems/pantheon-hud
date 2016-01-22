@@ -42,5 +42,5 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 ### 0.1.0 (January 22, 2016) ###
 * Initial release / MVP functionality.
 * Environment badge and basic container stats.
-* Quick WP-CLI copy/paste,
+* Quick WP-CLI copy/paste.
 * Links to other envs and to Pantheon dash.
