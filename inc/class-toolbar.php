@@ -42,6 +42,23 @@ class Toolbar {
 			'title'    => $title,
 			) );
 			
+		$env_admins = '';
+		foreach( array( 'dev', 'test', 'live' ) as $e ) {
+			$url = $api->get_primary_environment_url( $e );
+			if ( $url ) {
+				$env_admins .= '<a target="_blank" href="' . esc_url( rtrim( $url ) . '/wp-admin/' ) . '">' . esc_html( $e ) . '</a> | '; 
+			}
+		}
+		
+		if ( ! empty( $env_admins ) ) {
+			$wp_admin_bar->add_node( array(
+				'id'     => 'pantheon-hud-wp-admin-links',
+				'parent' => 'pantheon-hud',
+				'href'   => false,
+				'title'  => '<em>wp-admin links</em><br />' . rtrim( $env_admins, ' |' ),
+				) );
+		}
+			
 		$environment_details = $api->get_environment_details();
 		if ( $environment_details ) {
 			$details_html = array();
@@ -112,6 +129,12 @@ class Toolbar {
 	#wpadminbar li#wp-admin-bar-pantheon-hud br {
 		line-height: 0;
 	}
+	#wpadminbar #wp-admin-bar-pantheon-hud-wp-admin-links a {
+		display: inline;
+		padding:0;
+		height: auto;
+	}
+	#wpadminbar ul li#wp-admin-bar-pantheon-hud-wp-admin-links .ab-item,
 	#wpadminbar ul li#wp-admin-bar-pantheon-hud-environment-details .ab-item,
 	#wpadminbar ul li#wp-admin-bar-pantheon-hud-wp-cli-stub .ab-item {
 		height: auto;

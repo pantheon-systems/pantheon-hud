@@ -44,6 +44,20 @@ class API {
 			return 0;
 		}
 	}
+	
+	/**
+	 * Get the primary url for the environment
+	 *
+	 * @return string
+	 */
+	public function get_primary_environment_url( $env ) {
+		$urls = $this->get_site_data( 'environments', $env, 'urls' );
+		if ( ! empty( $urls ) ) {
+			return $urls[0];
+		} else {
+			return '';
+		}
+	}
 
 	/**
 	 * Get details about this particular environments
