@@ -46,6 +46,33 @@ class API {
 	}
 
 	/**
+	 * Get details about this particular environments
+	 *
+	 * @return array
+	 */
+	public function get_environment_details() {
+		$env = ! empty( $_ENV['PANTHEON_ENVIRONMENT'] ) ? $_ENV['PANTHEON_ENVIRONMENT'] : 'dev';
+		$details = array(
+			'web'      => array(),
+			'database' => array(),
+		);
+		if ( $appserver_count = $this->get_site_data( 'environments', $env, 'appserver' ) ) {
+			$details['web']['appserver_count'] = $appserver_count;
+		}
+		if ( $php_version = $this->get_site_data( 'environments', $env, 'php_version' ) ) {
+			$php_version = (string) $php_version;
+			$details['web']['php_version'] = "PHP " . $php_version[0] . "." . $php_version[1];
+		}
+		if ( $dbserver_count = $this->get_site_data( 'environments', $env, 'dbserver' ) ) {
+			$details['database']['dbserver_count'] = $appserver_count;
+		}
+		if ( null !== ( $read_replication_enabled = $this->get_site_data( 'environments', $env, 'allow_read_slaves' ) ) ) {
+			$details['database']['read_replication_enabled'] = (bool) $read_replication_enabled;
+		}
+		return $details;
+	}
+
+	/**
 	 * Traverse the $site_data variable and return value if it exists
 	 *
 	 * @return mixed|null

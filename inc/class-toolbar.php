@@ -42,12 +42,41 @@ class Toolbar {
 			'title'    => $title,
 			) );
 			
+		$environment_details = $api->get_environment_details();
+		if ( $environment_details ) {
+			$details_html = array();
+			if ( isset( $environment_details['web']['appserver_count'] ) ) {
+				$pluralize = $environment_details['web']['appserver_count'] > 1 ? 's' : '';
+				$web_detail = $environment_details['web']['appserver_count'] . ' app server' . $pluralize;
+				if ( isset( $environment_details['web']['php_version'] ) ) {
+					$web_detail .= ' running ' . $environment_details['web']['php_version'];
+				}
+				$details_html[] = $web_detail;
+			}
+			if ( isset( $environment_details['database']['dbserver_count'] ) ) {
+				$pluralize = $environment_details['database']['dbserver_count'] > 1 ? 's' : '';
+				$db_detail = $environment_details['database']['dbserver_count'] . ' db server' . $pluralize;
+				if ( isset( $environment_details['database']['read_replication_enabled'] ) ) {
+					$db_detail .= ' with ' . ( $environment_details['database']['read_replication_enabled'] ? 'read replication enabled' : 'read replication disabled' );
+				}
+				$details_html[] = $db_detail;
+			}
+			if ( ! empty( $details_html ) ) {
+				$details_html = '<em>' . esc_html__( 'Environment Details', 'pantheon-hud' ) . '</em><br /> - ' . implode( '<br /> - ', $details_html );
+				$wp_admin_bar->add_node( array(
+					'id'     => 'pantheon-hud-environment-details',
+					'parent' => 'pantheon-hud',
+					'title'  => $details_html,
+					) );
+			}
+		}
+			
 		if ( $name && $env ) {
 			$wp_cli_stub = sprintf( 'terminus wp --site=%s --env=%s', $name, $env );
 			$wp_admin_bar->add_node( array(
 				'id'     => 'pantheon-hud-wp-cli-stub',
 				'parent' => 'pantheon-hud',
-				'title'  => '<h5>' . esc_html__( 'Quick Terminus', 'pantheon-hud' ) . '</h5><input value="' . esc_attr( $wp_cli_stub ) . '">',
+				'title'  => '<em>' . esc_html__( 'Quick Terminus', 'pantheon-hud' ) . '</em><br /><input value="' . esc_attr( $wp_cli_stub ) . '">',
 				) );
 		}
 
@@ -75,11 +104,15 @@ class Toolbar {
 		vertical-align:middle;
 		margin-top:-4px;
 	}
-	#wpadminbar li#wp-admin-bar-pantheon-hud h5 {
+	#wpadminbar li#wp-admin-bar-pantheon-hud em {
 		font-size: 11px;
 		line-height: 13px;
 		font-style: italic;
 	}
+	#wpadminbar li#wp-admin-bar-pantheon-hud br {
+		line-height: 0;
+	}
+	#wpadminbar ul li#wp-admin-bar-pantheon-hud-environment-details .ab-item,
 	#wpadminbar ul li#wp-admin-bar-pantheon-hud-wp-cli-stub .ab-item {
 		height: auto;
 	}
@@ -96,7 +129,7 @@ class Toolbar {
 	#wpadminbar ul li#wp-admin-bar-pantheon-hud-dashboard-link a {
 		border-top: 1px solid rgba(240,245,250,.4);
 		padding-top: 3px;
-		margin-top: 6px;
+		margin-top: 10px;
 	}
 </style>
 <?php
