@@ -90,7 +90,7 @@ class Toolbar {
 		}
 
 		if ( $name && $env ) {
-			$wp_cli_stub = sprintf( 'terminus wp --site=%s --env=%s', $name, $env );
+			$wp_cli_stub = sprintf( 'terminus wp %s.%s', $name, $env );
 			$wp_admin_bar->add_node( array(
 				'id'     => 'pantheon-hud-wp-cli-stub',
 				'parent' => 'pantheon-hud',
