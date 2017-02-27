@@ -2,8 +2,8 @@
 Contributors: getpantheon, danielbachhuber
 Tags: Pantheon, hosting
 Requires at least: 4.4
-Tested up to: 4.4
-Stable tag: 0.1.0
+Tested up to: 4.7.3
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,9 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 1. Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links.
 
 == Changelog ==
+
+= 0.1.1 (February 27, 2017) =
+* Updates `terminus` stub command to use new syntax.
 
 = 0.1.0 (January 22, 2016) =
 * Initial release / MVP functionality.
