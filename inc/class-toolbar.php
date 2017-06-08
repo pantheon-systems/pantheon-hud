@@ -20,8 +20,8 @@ class Toolbar {
 
 	private function setup_actions() {
 		add_action( 'admin_bar_menu', array( $this, 'action_admin_bar_menu' ), 100 );
-		add_action( 'wp_footer', array( $this, 'action_wp_footer' ) );
-		add_action( 'admin_footer', array( $this, 'action_wp_footer' ) );
+		add_action( 'wp_head', array( $this, 'action_wp_head' ) );
+		add_action( 'admin_head', array( $this, 'action_wp_head' ) );
 	}
 
 	public function action_admin_bar_menu( $wp_admin_bar ) {
@@ -113,7 +113,7 @@ class Toolbar {
 
 	}
 
-	public function action_wp_footer() {
+	public function action_wp_head() {
 ?>
 <style>
 	#wpadminbar li#wp-admin-bar-pantheon-hud > .ab-item img {
