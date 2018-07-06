@@ -29,7 +29,7 @@ class Toolbar {
 		$name = $api->get_site_name();
 		$site_id = $api->get_site_id();
 		$env = $this->get_environment();
-		$title = '<img src="' . esc_url( plugins_url( 'assets/img/pantheon-fist-color.svg', PANTHEON_HUD_ROOT_FILE ) ) . '" />';
+		$title = '<img src="' . esc_url( plugins_url( 'assets/img/pantheon-fist-color.svg', PANTHEON_HUD_ROOT_FILE ) ) . '" width="32" height="32" />';
 		$bits = array();
 		if ( $name ) {
 			$bits[] = $name;
@@ -117,8 +117,6 @@ class Toolbar {
 ?>
 <style>
 	#wpadminbar li#wp-admin-bar-pantheon-hud > .ab-item img {
-		height:32px;
-		width:32px;
 		vertical-align:middle;
 		margin-top:-4px;
 	}
