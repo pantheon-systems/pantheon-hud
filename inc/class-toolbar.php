@@ -117,6 +117,8 @@ class Toolbar {
 ?>
 <style>
 	#wpadminbar li#wp-admin-bar-pantheon-hud > .ab-item img {
+		height:32px;
+		width:32px;
 		vertical-align:middle;
 		margin-top:-4px;
 	}
