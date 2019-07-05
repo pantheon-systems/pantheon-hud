@@ -7,19 +7,36 @@ namespace Pantheon\HUD;
  */
 class API {
 
+	/**
+	 * Base URL for all API requests.
+	 *
+	 * @var string
+	 */
+	const API_URL_BASE = 'https://api.live.getpantheon.com:8443';
+
 	private static $endpoint_url = 'https://api.live.getpantheon.com:8443/sites/self/state';
 
-	private $site_data;
+	/**
+	 * Holds the domains data when present.
+	 *
+	 * @var array
+	 */
+	private $domains_data;
 
-	public function __construct() {
-		$this->site_data = $this->fetch_site_data();
-	}
+	/**
+	 * Holds the environment settings data when present.
+	 *
+	 * @var array
+	 */
+	private $environment_settings_data;
 
 	/**
 	 * Get the id of the Pantheon site.
+	 *
+	 * @return string
 	 */
 	public function get_site_id() {
-		return $this->get_site_data( 'environments', 'dev', 'site' );
+		return ! empty( $_ENV['PANTHEON_SITE'] ) ? $_ENV['PANTHEON_SITE'] : '';
 	}
 
 	/**
@@ -28,7 +45,7 @@ class API {
 	 * @return string
 	 */
 	public function get_site_name() {
-		return $this->get_site_data( 'site', 'name' );
+		return ! empty( $_ENV['PANTHEON_SITE_NAME'] ) ? $_ENV['PANTHEON_SITE_NAME'] : '';
 	}
 
 	/**
@@ -37,23 +54,23 @@ class API {
 	 * @return int
 	 */
 	public function get_last_code_push_timestamp() {
-		$timestamp = $this->get_site_data( 'site', 'last_code_push', 'timestamp' );
-		if ( $timestamp ) {
-			return strtotime( $timestamp );
+		$environment_settings = $this->get_environment_settings_data();
+		if ( ! empty( $environment_settings['last_code_push']['timestamp'] ) ) {
+			return strtotime( $environment_settings['last_code_push']['timestamp'] );
 		} else {
 			return 0;
 		}
 	}
-	
+
 	/**
 	 * Get the primary url for the environment
 	 *
 	 * @return string
 	 */
 	public function get_primary_environment_url( $env ) {
-		$urls = $this->get_site_data( 'environments', $env, 'urls' );
-		if ( ! empty( $urls ) ) {
-			return $urls[0];
+		$domains = $this->get_domains_data( $env );
+		if ( ! empty( $domains[0]['key'] ) ) {
+			return $domains[0]['key'];
 		} else {
 			return '';
 		}
@@ -70,19 +87,20 @@ class API {
 			'web'      => array(),
 			'database' => array(),
 		);
-		if ( $appserver_count = $this->get_site_data( 'environments', $env, 'appserver' ) ) {
-			$details['web']['appserver_count'] = $appserver_count;
+		$environment_settings = $this->get_environment_settings_data();
+		if ( ! empty( $environment_settings['appserver'] ) ) {
+			$details['web']['appserver_count'] = $environment_settings['appserver'];
 		}
 		$php_version = $this->get_php_version();
 		if ( $php_version ) {
 			$php_version = (string) $php_version;
 			$details['web']['php_version'] = 'PHP ' . $php_version;
 		}
-		if ( $dbserver_count = $this->get_site_data( 'environments', $env, 'dbserver' ) ) {
-			$details['database']['dbserver_count'] = $appserver_count;
+		if ( ! empty( $environment_settings['dbserver'] ) ) {
+			$details['database']['dbserver_count'] = $environment_settings['dbserver'];
 		}
-		if ( null !== ( $read_replication_enabled = $this->get_site_data( 'environments', $env, 'allow_read_slaves' ) ) ) {
-			$details['database']['read_replication_enabled'] = (bool) $read_replication_enabled;
+		if ( isset( $environment_settings['allow_read_slaves'] ) ) {
+			$details['database']['read_replication_enabled'] = (bool) $environment_settings['allow_read_slaves'];
 		}
 		return $details;
 	}
@@ -97,29 +115,53 @@ class API {
 	}
 
 	/**
-	 * Traverse the $site_data variable and return value if it exists
+	 * Gets the domains data.
 	 *
-	 * @return mixed|null
+	 * @param string $env Environment to fetch the domains of.
+	 * @return array
 	 */
-	private function get_site_data() {
-		$args = func_get_args();
-		$val = $this->site_data;
-		foreach( $args as $arg ) {
-			if ( isset( $val[ $arg ] ) ) {
-				$val = $val[ $arg ];
-			} else {
-				return null;
-			}
+	private function get_domains_data( $env ) {
+		if ( isset( $this->domains_data[ $env ] ) ) {
+			return $this->domains_data[ $env ];
 		}
-		return $val;
+		if ( ! empty( $env ) ) {
+			$url = sprintf( '%s/sites/self/environments/%s/domains', self::API_URL_BASE, $env );
+			$this->domains_data[ $env ] = self::fetch_api_data( $url );
+		} else {
+			$this->domains_data[ $env ] = [];
+		}
+		return $this->domains_data[ $env ];
 	}
 
-	private function fetch_site_data() {
-		
+	/**
+	 * Gets the environment settings data.
+	 *
+	 * @return array
+	 */
+	private function get_environment_settings_data() {
+		if ( isset( $this->environment_settings_data ) ) {
+			return $this->environment_settings_data;
+		}
+		if ( ! empty( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
+			$url = sprintf( '%s/sites/self/environments/%s/settings', self::API_URL_BASE, $_ENV['PANTHEON_ENVIRONMENT'] );
+			$this->environment_settings_data = self::fetch_api_data( $url );
+		} else {
+			$this->environment_settings_data = [];
+		}
+		return $this->environment_settings_data;
+	}
+
+	/**
+	 * Fetch data from a given Pantheon API URL.
+	 *
+	 * @return array
+	 */
+	private function fetch_api_data( $url ) {
+
 		// Function internal to Pantheon infrastructure
 		$pem_file = apply_filters( 'pantheon_hud_pem_file', null );
 		if ( function_exists( 'pantheon_curl' ) ) {
-			$bits = parse_url( self::$endpoint_url );
+			$bits = parse_url( $url );
 			$response = pantheon_curl( sprintf( '%s://%s%s', $bits['scheme'], $bits['host'], $bits['path'] ), null, $bits['port'] );
 			$body = ! empty( $response['body'] ) ? $response['body'] : '';
 			return json_decode( $body, true );
@@ -133,7 +175,7 @@ class API {
 				curl_setopt( $handle, CURLOPT_SSLCERT, $pem_file );
 			};
 			add_action( 'http_api_curl', $client_cert );
-			$response = wp_remote_get( self::$endpoint_url, array(
+			$response = wp_remote_get( $url, array(
 				'sslverify' => false, // yolo
 			) );
 			remove_action( 'http_api_curl', $client_cert );

@@ -6,6 +6,9 @@ class APITest extends WP_UnitTestCase {
 		parent::setUp();
 		$this->api = new Pantheon\HUD\API;
 		$_ENV['PANTHEON_ENVIRONMENT'] = 'dev';
+		$_ENV['PANTHEON_SITE'] = '73cae74a-b66e-440a-ad3b-4f0679eb5e97';
+		$_ENV['PANTHEON_SITE_NAME'] = 'daniel-pantheon';
+		$_ENV['php_version'] = '7.3';
 	}
 
 	public function test_get_site_id() {
@@ -17,23 +20,28 @@ class APITest extends WP_UnitTestCase {
 	}
 
 	public function test_get_last_code_push_timestamp() {
-		$this->assertEquals( 1446237120, $this->api->get_last_code_push_timestamp() );
+		$this->assertEquals( 1562339889, $this->api->get_last_code_push_timestamp() );
+	}
+
+	/**
+	 * Ensures primary environment URL is properly fetched.
+	 */
+	public function test_get_primary_environment_url() {
+		$this->assertEquals( '', $this->api->get_primary_environment_url( 'dev' ) );
 	}
 
 	/**
 	 * Ensures the PHP version is pulled from the $_ENV variable as expected.
 	 */
 	public function test_get_php_version() {
-		$_ENV['php_version'] = '7.3';
 		$this->assertEquals( '7.3', $this->api->get_php_version() );
 	}
 
 	public function test_get_environment_details() {
-		$_ENV['php_version'] = '7.3';
 		$environment_details = $this->api->get_environment_details();
 		$this->assertEquals( array(
 			'web'      => array(
-				'appserver_count'  => 1,
+				'appserver_count'  => 2,
 				'php_version'      => 'PHP 7.3',
 			),
 			'database' => array(
