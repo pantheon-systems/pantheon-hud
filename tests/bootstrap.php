@@ -12,7 +12,12 @@ require_once $_tests_dir . '/includes/functions.php';
 function _manually_load_plugin() {
 
 	add_filter( 'pre_http_request', function( $response, $request, $url ){
-		if ( 'https://api.live.getpantheon.com:8443/sites/self/state' !== $url ) {
+		$data_files = [
+			'/sites/self/environments/dev/domains'  => 'domains.json',
+			'/sites/self/environments/dev/settings' => 'environment-settings.json',
+		];
+		$path = wp_parse_url( $url, PHP_URL_PATH );
+		if ( ! isset( $data_files[ $path ] ) ) {
 			return $response;
 		}
 		return array(
@@ -22,7 +27,7 @@ function _manually_load_plugin() {
 				'x-pantheon-host' => 'yggdrasil4ead8a2d.chios.panth.io',
 				'server'          => 'TwistedWeb/12.2.0',
 				),
-			'body'        => file_get_contents( __DIR__ . '/data/sample-response.json' ),
+			'body'        => file_get_contents( __DIR__ . '/data/' . $data_files[ $path ] ),
 			'response'    => array(
 				'code'    => 200,
 				'message' => 'OK'
