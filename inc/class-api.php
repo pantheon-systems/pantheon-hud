@@ -73,9 +73,10 @@ class API {
 		if ( $appserver_count = $this->get_site_data( 'environments', $env, 'appserver' ) ) {
 			$details['web']['appserver_count'] = $appserver_count;
 		}
-		if ( $php_version = $this->get_site_data( 'environments', $env, 'php_version' ) ) {
+		$php_version = $this->get_php_version();
+		if ( $php_version ) {
 			$php_version = (string) $php_version;
-			$details['web']['php_version'] = "PHP " . $php_version[0] . "." . $php_version[1];
+			$details['web']['php_version'] = 'PHP ' . $php_version;
 		}
 		if ( $dbserver_count = $this->get_site_data( 'environments', $env, 'dbserver' ) ) {
 			$details['database']['dbserver_count'] = $appserver_count;
@@ -84,6 +85,15 @@ class API {
 			$details['database']['read_replication_enabled'] = (bool) $read_replication_enabled;
 		}
 		return $details;
+	}
+
+	/**
+	 * Gets the PHP version for the site.
+	 *
+	 * @return string|false
+	 */
+	public function get_php_version() {
+		return ! empty( $_ENV['php_version'] ) ? $_ENV['php_version'] : PHP_VERSION;
 	}
 
 	/**
