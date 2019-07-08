@@ -3,7 +3,7 @@
 **Tags:** Pantheon, hosting  
 **Requires at least:** 4.9  
 **Tested up to:** 5.2  
-**Stable tag:** 0.1.4  
+**Stable tag:** 0.2.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -38,6 +38,9 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 
 
 ## Changelog ##
+
+### 0.2.0 (July 8, 2019) ###
+* Refactors API calls to use new API endpoints [[#35](https://github.com/pantheon-systems/pantheon-hud/pull/35)].
 
 ### 0.1.4 (July 18, 2018) ###
 * Restores the CSS for the logo image, while retaining inline attrs [[#26](https://github.com/pantheon-systems/pantheon-hud/pull/26)].
