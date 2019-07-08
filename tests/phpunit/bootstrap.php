@@ -37,7 +37,7 @@ function _manually_load_plugin() {
 			);
 	}, 10, 3 );
 
-	require dirname( dirname( __FILE__ ) ) . '/pantheon-hud.php';
+	require dirname( dirname( dirname( __FILE__ ) ) ) . '/pantheon-hud.php';
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 
