@@ -1,9 +1,9 @@
 # Pantheon HUD #
-**Contributors:** getpantheon, danielbachhuber  
+**Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber)  
 **Tags:** Pantheon, hosting  
 **Requires at least:** 4.9  
 **Tested up to:** 5.2  
-**Stable tag:** 0.1.4  
+**Stable tag:** 0.2.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -34,10 +34,13 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 ## Screenshots ##
 
 ### 1. Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links. ###
-![Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links.](http://s.wordpress.org/extend/plugins/pantheon-hud/screenshot-1.png)
+![Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links.](https://raw.githubusercontent.com/pantheon-systems/pantheon-hud/master/screenshot-1.png)
 
 
 ## Changelog ##
+
+### 0.2.0 (July 8, 2019) ###
+* Refactors API calls to use new API endpoints [[#35](https://github.com/pantheon-systems/pantheon-hud/pull/35)].
 
 ### 0.1.4 (July 18, 2018) ###
 * Restores the CSS for the logo image, while retaining inline attrs [[#26](https://github.com/pantheon-systems/pantheon-hud/pull/26)].
