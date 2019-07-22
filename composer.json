@@ -1,7 +1,7 @@
 {
     "name": "pantheon-systems/pantheon-hud",
-    "description": "SAML authentication for WordPress, using SimpleSAMLphp.",
     "type": "wordpress-plugin",
+    "description": "Provide situational awareness of the Pantheon platform from within your WordPress dashboard.",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -13,21 +13,31 @@
             "email": "daniel@handbuilt.co"
         }
     ],
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+        "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-master",
+        "phpstan/phpstan-shim": "^0.11.12",
+        "phpunit/phpunit": "^7",
+        "szepeviktor/phpstan-wordpress": "dev-master",
+        "wp-coding-standards/wpcs": "^2.1"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PantheonSystems\\WPSamlAuth\\Behat\\": "tests/behat/bootstrap/"
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "require-dev": {
-        "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-master",
-        "wp-coding-standards/wpcs": "^2.1",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
-        "phpunit/phpunit": "^7"
-    },
     "scripts": {
-        "lint": "@phpcs",
-        "phpcs": "vendor/bin/phpcs",
-        "phpunit": "vendor/bin/phpunit",
+        "post-install-cmd": "PHPStan\\WordPress\\Composer\\FixWpStubs::php73Polyfill",
+        "post-update-cmd": "PHPStan\\WordPress\\Composer\\FixWpStubs::php73Polyfill",
+        "lint": [
+            "@phpcs",
+            "@phpstan"
+        ],
+        "phpcs": "phpcs",
+        "phpstan": "phpstan analyze",
+        "phpunit": "phpunit",
         "test": "@phpunit"
-    },
-    "autoload": {
-        "psr-4": { "PantheonSystems\\WPSamlAuth\\Behat\\": "tests/behat/bootstrap/" }
     }
 }
