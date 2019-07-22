@@ -161,6 +161,7 @@ class API {
 		// Function internal to Pantheon infrastructure
 		$pem_file = apply_filters( 'pantheon_hud_pem_file', null );
 		if ( function_exists( 'pantheon_curl' ) ) {
+			/** @var string[] */
 			$bits = parse_url( $url );
 			$response = pantheon_curl( sprintf( '%s://%s%s', $bits['scheme'], $bits['host'], $bits['path'] ), null, $bits['port'] );
 			$body = ! empty( $response['body'] ) ? $response['body'] : '';
@@ -178,10 +179,13 @@ class API {
 			$response = wp_remote_get( $url, array(
 				'sslverify' => false, // yolo
 			) );
+			if ( is_wp_error( $response ) ) {
+				return array();
+			}
 			remove_action( 'http_api_curl', $client_cert );
 			remove_filter( 'http_api_transports', $require_curl );
 			if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-				return null;
+				return array();
 			}
 			$body = wp_remote_retrieve_body( $response );
 			return json_decode( $body, true );

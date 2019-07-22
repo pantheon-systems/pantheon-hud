@@ -1,0 +1,13 @@
+# Start command: vendor/bin/phpstan analyze
+
+includes:
+    # https://github.com/phpstan/phpstan/blob/master/conf/bleedingEdge.neon
+    - phar://phpstan.phar/conf/bleedingEdge.neon
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+parameters:
+    level: max
+    paths:
+        - %currentWorkingDirectory%/inc/
+    autoload_files:
+        - %currentWorkingDirectory%/tests/phpstan/bootstrap.php
+        - %currentWorkingDirectory%/pantheon-hud.php
