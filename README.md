@@ -1,5 +1,5 @@
 # Pantheon HUD #
-**Contributors:** getpantheon, danielbachhuber  
+**Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber)  
 **Tags:** Pantheon, hosting  
 **Requires at least:** 4.9  
 **Tested up to:** 5.2  
@@ -34,7 +34,7 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 ## Screenshots ##
 
 ### 1. Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links. ###
-![Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links.](http://s.wordpress.org/extend/plugins/pantheon-hud/screenshot-1.png)
+![Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links.](https://raw.githubusercontent.com/pantheon-systems/pantheon-hud/master/screenshot-1.png)
 
 
 ## Changelog ##
