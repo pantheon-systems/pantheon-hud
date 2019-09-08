@@ -20,7 +20,8 @@ class Toolbar {
 
 	private function setup_actions() {
 		add_action( 'admin_bar_menu', array( $this, 'action_admin_bar_menu' ), 100 );
-		add_action( 'wp_default_styles', array( $this, 'add_admin_bar_inline_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'add_admin_bar_inline_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'add_admin_bar_inline_styles' ) );
 	}
 
 	public function action_admin_bar_menu( $wp_admin_bar ) {
@@ -114,10 +115,8 @@ class Toolbar {
 
 	/**
 	 * Add admin bar inline styles.
-	 *
-	 * @param \WP_Styles $styles Styles.
 	 */
-	public function add_admin_bar_inline_styles( \WP_Styles $styles ) {
+	public function add_admin_bar_inline_styles() {
 		ob_start();
 		?>
 		<style>
@@ -162,7 +161,7 @@ class Toolbar {
 			}
 		</style>
 		<?php
-		$styles->add_inline_style( 'admin-bar', str_replace( array( '<style>', '</style>' ), '', ob_get_clean() ) );
+		wp_add_inline_style( 'admin-bar', str_replace( array( '<style>', '</style>' ), '', ob_get_clean() ) );
 	}
 
 	private function get_environment() {
