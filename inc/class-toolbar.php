@@ -20,8 +20,8 @@ class Toolbar {
 
 	private function setup_actions() {
 		add_action( 'admin_bar_menu', array( $this, 'action_admin_bar_menu' ), 100 );
-		add_action( 'wp_head', array( $this, 'action_wp_head' ) );
-		add_action( 'admin_head', array( $this, 'action_wp_head' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'add_admin_bar_inline_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'add_admin_bar_inline_styles' ) );
 	}
 
 	public function action_admin_bar_menu( $wp_admin_bar ) {
@@ -113,50 +113,55 @@ class Toolbar {
 
 	}
 
-	public function action_wp_head() {
-?>
-<style>
-	#wpadminbar li#wp-admin-bar-pantheon-hud > .ab-item img {
-		height:32px;
-		width:32px;
-		vertical-align:middle;
-		margin-top:-4px;
-	}
-	#wpadminbar li#wp-admin-bar-pantheon-hud em {
-		font-size: 11px;
-		line-height: 13px;
-		font-style: italic;
-	}
-	#wpadminbar li#wp-admin-bar-pantheon-hud br {
-		line-height: 0;
-	}
-	#wpadminbar #wp-admin-bar-pantheon-hud-wp-admin-links a {
-		display: inline;
-		padding:0;
-		height: auto;
-	}
-	#wpadminbar ul li#wp-admin-bar-pantheon-hud-wp-admin-links .ab-item,
-	#wpadminbar ul li#wp-admin-bar-pantheon-hud-environment-details .ab-item,
-	#wpadminbar ul li#wp-admin-bar-pantheon-hud-wp-cli-stub .ab-item {
-		height: auto;
-	}
-	#wpadminbar ul li#wp-admin-bar-pantheon-hud-wp-cli-stub input {
-		width: 100%;
-		line-height: 15px;
-		background-color: rgba( 255, 255, 255, 0.9 );
-		border-width: 1px;
-	}
-	#wpadminbar ul li#wp-admin-bar-pantheon-hud-dashboard-link {
-		padding-left: 3px;
-		padding-right: 3px;
-	}
-	#wpadminbar ul li#wp-admin-bar-pantheon-hud-dashboard-link a {
-		border-top: 1px solid rgba(240,245,250,.4);
-		padding-top: 3px;
-		margin-top: 10px;
-	}
-</style>
-<?php
+	/**
+	 * Add admin bar inline styles.
+	 */
+	public function add_admin_bar_inline_styles() {
+		ob_start();
+		?>
+		<style>
+			#wpadminbar li#wp-admin-bar-pantheon-hud > .ab-item img {
+				height:32px;
+				width:32px;
+				vertical-align:middle;
+				margin-top:-4px;
+			}
+			#wpadminbar li#wp-admin-bar-pantheon-hud em {
+				font-size: 11px;
+				line-height: 13px;
+				font-style: italic;
+			}
+			#wpadminbar li#wp-admin-bar-pantheon-hud br {
+				line-height: 0;
+			}
+			#wpadminbar #wp-admin-bar-pantheon-hud-wp-admin-links a {
+				display: inline;
+				padding:0;
+				height: auto;
+			}
+			#wpadminbar ul li#wp-admin-bar-pantheon-hud-wp-admin-links .ab-item,
+			#wpadminbar ul li#wp-admin-bar-pantheon-hud-environment-details .ab-item,
+			#wpadminbar ul li#wp-admin-bar-pantheon-hud-wp-cli-stub .ab-item {
+				height: auto;
+			}
+			#wpadminbar ul li#wp-admin-bar-pantheon-hud-wp-cli-stub input {
+				width: 100%;
+				line-height: 15px;
+				background-color: rgba( 255, 255, 255, 0.9 );
+				border-width: 1px;
+			}
+			#wpadminbar ul li#wp-admin-bar-pantheon-hud-dashboard-link {
+				padding-left: 3px;
+				padding-right: 3px;
+			}
+			#wpadminbar ul li#wp-admin-bar-pantheon-hud-dashboard-link a {
+				border-top: 1px solid rgba(240,245,250,.4);
+				padding-top: 3px;
+				margin-top: 10px;
+			}
+		</style>
+		<?php
+		wp_add_inline_style( 'admin-bar', str_replace( array( '<style>', '</style>' ), '', ob_get_clean() ) );
 	}
 
 	private function get_environment() {
