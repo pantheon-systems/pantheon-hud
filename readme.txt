@@ -3,7 +3,7 @@ Contributors: getpantheon, danielbachhuber
 Tags: Pantheon, hosting
 Requires at least: 4.9
 Tested up to: 5.2
-Stable tag: 0.2.0
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,9 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 1. Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links.
 
 == Changelog ==
+
+= 0.2.1 (September 9, 2019) =
+* Uses inline style system to add admin bar styles to page [[#44](https://github.com/pantheon-systems/pantheon-hud/pull/44)].
 
 = 0.2.0 (July 8, 2019) =
 * Refactors API calls to use new API endpoints [[#35](https://github.com/pantheon-systems/pantheon-hud/pull/35)].
