@@ -19,7 +19,6 @@ jobs:
     working_directory: ~/pantheon-systems/pantheon-hud
     parallelism: 1
     docker:
-    - image: circleci/php:7.1
     - image: quay.io/pantheon-public/build-tools-ci:6.x
     steps:
     - checkout
