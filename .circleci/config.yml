@@ -24,7 +24,6 @@ jobs:
     - checkout
     - run: echo $(openssl rand -hex 8) > /tmp/WORDPRESS_ADMIN_PASSWORD
     - run: |
-        echo 'export PATH=/tmp/terminus/bin:$PATH' >> $BASH_ENV
         echo 'export TERMINUS_ENV=ci-$CIRCLE_BUILD_NUM' >> $BASH_ENV
         echo 'export TERMINUS_SITE=pantheon-hud' >> $BASH_ENV
         echo 'export SITE_ENV=pantheon-hud.ci-$CIRCLE_BUILD_NUM' >> $BASH_ENV
