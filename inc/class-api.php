@@ -14,8 +14,6 @@ class API {
 	 */
 	const API_URL_BASE = 'https://api.live.getpantheon.com:8443';
 
-	private static $endpoint_url = 'https://api.live.getpantheon.com:8443/sites/self/state';
-
 	/**
 	 * Holds the domains data when present.
 	 *
