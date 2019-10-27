@@ -2,7 +2,7 @@
 **Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber)  
 **Tags:** Pantheon, hosting  
 **Requires at least:** 4.9  
-**Tested up to:** 5.2  
+**Tested up to:** 5.3  
 **Stable tag:** 0.2.1  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
