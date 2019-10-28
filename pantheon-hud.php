@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Pantheon HUD
- * Version: 0.2.1
+ * Version: 0.2.2
  * Description: A heads-up display into your Pantheon environment.
  * Author: Pantheon
  * Author URI: https://pantheon.io
@@ -34,7 +34,7 @@ spl_autoload_register( function( $class ) {
 	$last = array_pop( $parts ); // File should be 'class-[...].php'
 	$last = 'class-' . $last . '.php';
 	$parts[] = $last;
-	$file = dirname( __FILE__ ) . '/inc/' . str_replace( '_', '-', strtolower( implode( $parts, '/' ) ) );
+	$file = dirname( __FILE__ ) . '/inc/' . str_replace( '_', '-', strtolower( implode( '/', $parts ) ) );
 	if ( file_exists( $file ) ) {
 		require $file;
 	}
