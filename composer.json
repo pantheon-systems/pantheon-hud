@@ -19,7 +19,8 @@
         "phpstan/phpstan-shim": "^0.11.12",
         "phpunit/phpunit": "^7",
         "szepeviktor/phpstan-wordpress": "dev-master",
-        "wp-coding-standards/wpcs": "^2.1"
+        "wp-coding-standards/wpcs": "^2.1",
+        "danielbachhuber/composer-lock-updater": "^0.8.1"
     },
     "autoload-dev": {
         "psr-4": {
@@ -31,6 +32,7 @@
     "scripts": {
         "post-install-cmd": "PHPStan\\WordPress\\Composer\\FixWpStubs::php73Polyfill",
         "post-update-cmd": "PHPStan\\WordPress\\Composer\\FixWpStubs::php73Polyfill",
+        "clu": "vendor/bin/clu",
         "lint": [
             "@phpcs",
             "@phpstan"
