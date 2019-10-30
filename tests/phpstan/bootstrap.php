@@ -1,4 +1,19 @@
 <?php
+/**
+ * Bootstrap PHPStan
+ *
+ * @package Pantheon HUD
+ */
 
-// Function stubs.
-function pantheon_curl( $param1, $param2, $param3 ) { return []; }
+/**
+ * Pantheon CURL
+ *
+ * @param unknown $param1 Unknown Parameter.
+ * @param unknown $param2 Unknown Parameter.
+ * @param unknown $param3 Unknown Parameter.
+ *
+ * @return array
+ */
+function pantheon_curl( $param1, $param2, $param3 ) {
+	return [];
+}
