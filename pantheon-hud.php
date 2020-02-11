@@ -18,7 +18,7 @@ add_action(
 	'init',
 	function() {
 		$view_pantheon_hud = apply_filters( 'pantheon_hud_current_user_can_view', current_user_can( 'manage_options' ) );
-		if ( is_admin_bar_showing() && $view_pantheon_hud ) {
+		if ( $view_pantheon_hud ) {
 			Pantheon\HUD\Toolbar::get_instance();
 		}
 	}
