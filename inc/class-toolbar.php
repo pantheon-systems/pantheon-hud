@@ -71,7 +71,7 @@ class Toolbar {
 				'id'     => 'pantheon-hud-wp-admin-loading',
 				'parent' => 'pantheon-hud',
 				'href'   => false,
-				'title'  => 'Loading &hellip;',
+				'title'  => 'Loading&hellip;',
 			)
 		);
 
