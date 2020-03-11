@@ -3,7 +3,7 @@
 **Tags:** Pantheon, hosting  
 **Requires at least:** 4.9  
 **Tested up to:** 5.4  
-**Stable tag:** 0.2.2  
+**Stable tag:** 0.3.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -38,6 +38,10 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 
 
 ## Changelog ##
+
+### 0.3.0 (March 11, 2020) ###
+* Improves performance by populating Pantheon HUD menu with an AJAX request on hover [[#55](https://github.com/pantheon-systems/pantheon-hud/pull/55)].
+* Cleans up PHPCS errors [[#49](https://github.com/pantheon-systems/pantheon-hud/pull/49)].
 
 ### 0.2.2 (October 28, 2019) ###
 * Fixes reversed argument order to `implode()` [[#52](https://github.com/pantheon-systems/pantheon-hud/pull/52)].
