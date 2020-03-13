@@ -158,7 +158,7 @@ class Toolbar {
 			admin_url( 'admin-ajax.php' )
 		);
 		$script      = <<<EOT
-(function(){
+document.addEventListener( 'DOMContentLoaded', function() {
 	var el = document.querySelector('#wp-admin-bar-pantheon-hud');
 	if ( ! el ) {
 		return;
@@ -180,7 +180,7 @@ class Toolbar {
 	};
 	el.addEventListener('mouseover', fetchData);
 	el.addEventListener('focus', fetchData);
-}());
+} );
 EOT;
 		wp_add_inline_script( 'admin-bar', $script );
 add_filter(
