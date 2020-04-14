@@ -132,7 +132,7 @@ class API {
 			$url                        = sprintf( '%s/sites/self/environments/%s/domains', self::API_URL_BASE, $env );
 			$this->domains_data[ $env ] = self::fetch_api_data( $url );
 		} else {
-			$this->domains_data[ $env ] = [];
+			$this->domains_data[ $env ] = array();
 		}
 		return $this->domains_data[ $env ];
 	}
@@ -150,7 +150,7 @@ class API {
 			$url                             = sprintf( '%s/sites/self/environments/%s/settings', self::API_URL_BASE, $_ENV['PANTHEON_ENVIRONMENT'] );
 			$this->environment_settings_data = self::fetch_api_data( $url );
 		} else {
-			$this->environment_settings_data = [];
+			$this->environment_settings_data = array();
 		}
 		return $this->environment_settings_data;
 	}

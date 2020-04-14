@@ -130,12 +130,12 @@ class Toolbar {
 
 		if ( $name && $env ) {
 			$wp_cli_stub = sprintf( 'terminus wp %s.%s', $name, $env );
-			$markup[] = '<li id="wp-admin-bar-pantheon-hud-wp-cli-stub"><div class="ab-item ab-empty-item"><em>' . esc_html__( 'WP-CLI via Terminus', 'pantheon-hud' ) . '</em><br /><input value="' . esc_attr( $wp_cli_stub ) . '"></div></li>';
+			$markup[]    = '<li id="wp-admin-bar-pantheon-hud-wp-cli-stub"><div class="ab-item ab-empty-item"><em>' . esc_html__( 'WP-CLI via Terminus', 'pantheon-hud' ) . '</em><br /><input value="' . esc_attr( $wp_cli_stub ) . '"></div></li>';
 		}
 
 		if ( $site_id && $env ) {
 			$dashboard_link = sprintf( 'https://dashboard.pantheon.io/sites/%s#%s/code', $site_id, $env );
-			$markup[] = sprintf( '<li id="wp-admin-bar-pantheon-hud-dashboard-link"><a class="ab-item" href="%s" target="_blank">Visit Pantheon Dashboard</a></li>', $dashboard_link );
+			$markup[]       = sprintf( '<li id="wp-admin-bar-pantheon-hud-dashboard-link"><a class="ab-item" href="%s" target="_blank">Visit Pantheon Dashboard</a></li>', $dashboard_link );
 		}
 
 		$markup[] = '</ul>';
@@ -183,7 +183,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 } );
 EOT;
 		wp_add_inline_script( 'admin-bar', $script );
-add_filter(
+		add_filter(
 			'amp_dev_mode_element_xpaths',
 			static function( $xpaths ) {
 				$xpaths[] = '//script[ contains( text(), "wp-admin-bar-pantheon-hud" ) ]';
