@@ -16,9 +16,7 @@
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
         "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-master",
-        "phpstan/phpstan-shim": "^0.12",
         "phpunit/phpunit": "^7",
-        "szepeviktor/phpstan-wordpress": "dev-master",
         "wp-coding-standards/wpcs": "^2.1",
         "phpcompatibility/php-compatibility": "^9.3"
     },
@@ -30,14 +28,10 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "post-install-cmd": "PHPStan\\WordPress\\Composer\\FixWpStubs::php73Polyfill",
-        "post-update-cmd": "PHPStan\\WordPress\\Composer\\FixWpStubs::php73Polyfill",
         "lint": [
-            "@phpcs",
-            "@phpstan"
+            "@phpcs"
         ],
         "phpcs": "phpcs",
-        "phpstan": "phpstan analyze",
         "phpunit": "phpunit",
         "test": "@phpunit"
     }
