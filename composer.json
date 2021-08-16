@@ -18,7 +18,8 @@
         "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-master",
         "phpunit/phpunit": "^7",
         "wp-coding-standards/wpcs": "^2.1",
-        "phpcompatibility/php-compatibility": "^9.3"
+        "phpcompatibility/php-compatibility": "^9.3",
+        "yoast/phpunit-polyfills": "^1.0"
     },
     "autoload-dev": {
         "psr-4": {
