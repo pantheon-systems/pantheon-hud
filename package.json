@@ -2,7 +2,10 @@
   "name": "pantheon-hud",
   "version": "0.3.2",
   "main": "Gruntfile.js",
-  "author": "YOUR NAME HERE",
+  "author": "Pantheon <noreply@pantheon.io>",
+  "scripts": {
+    "readme": "grunt readme"
+  },
   "devDependencies": {
     "grunt": "^1.5.2",
     "grunt-wp-readme-to-markdown": "^2"

@@ -1,6 +1,5 @@
 # Pantheon HUD #
-
-**Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber)  
+**Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon/), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/)  
 **Tags:** Pantheon, hosting  
 **Requires at least:** 4.9  
 **Tested up to:** 5.9  
@@ -13,7 +12,6 @@ A heads-up display into your Pantheon environment.
 ## Description ##
 
 [![Build Status](https://travis-ci.org/pantheon-systems/pantheon-hud.svg?branch=master)](https://travis-ci.org/pantheon-systems/pantheon-hud)
-[![Actively Maintained](https://img.shields.io/badge/Pantheon-Actively_Maintained-yellow?logo=pantheon&color=FFDC28)](https://pantheon.io/docs/oss-support-levels#actively-maintained)
 
 This plugin provides situational awareness of the Pantheon plaform from within your WordPress dashboard. It's helpful to be reminded what environment you're in, as well as providing quick links to get back to Pantheon's dashboard, or to interface with your WordPress installation via the command line.
 
@@ -37,15 +35,6 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 
 ### 1. Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links. ###
 ![Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links.](https://raw.githubusercontent.com/pantheon-systems/pantheon-hud/master/screenshot-1.png)
-
-## Release Process
-
-1. Update plugin version in `package.json`, `README.md`, `readme.txt`, and `pantheon-hud.php`.
-2. Create a PR against the `master` branch.
-3. After all tests and code reviews pass (including resolving any merge conflicts) and you have received approval from a CODEOWNER, merge the PR into `master`.
-4. Pull `master` locally push a new tag.
-5. Confirm that the necessary assets are present in the newly created tag, and test on a WP install if desired.
-6. Publish a new release using the latest tag. Publishing a release will kick off `wordpress-plugin-deploy.yml` and release the plugin to wp.org. If you do not want a tag to be publised to wp.org, do not publish a release from it.
 
 
 ## Changelog ##
