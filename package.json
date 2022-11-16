@@ -1,6 +1,6 @@
 {
   "name": "pantheon-hud",
-  "version": "0.0.0",
+  "version": "0.3.2",
   "main": "Gruntfile.js",
   "author": "YOUR NAME HERE",
   "devDependencies": {

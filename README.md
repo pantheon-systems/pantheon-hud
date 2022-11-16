@@ -4,7 +4,7 @@
 **Tags:** Pantheon, hosting  
 **Requires at least:** 4.9  
 **Tested up to:** 5.9  
-**Stable tag:** 0.3.1  
+**Stable tag:** 0.3.2  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -38,8 +38,20 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 ### 1. Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links. ###
 ![Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links.](https://raw.githubusercontent.com/pantheon-systems/pantheon-hud/master/screenshot-1.png)
 
+## Release Process
+
+1. Update plugin version in `package.json`, `README.md`, `readme.txt`, and `pantheon-hud.php`.
+2. Create a PR against the `master` branch.
+3. After all tests and code reviews pass (including resolving any merge conflicts) and you have received approval from a CODEOWNER, merge the PR into `master`.
+4. Pull `master` locally push a new tag.
+5. Confirm that the necessary assets are present in the newly created tag, and test on a WP install if desired.
+6. Publish a new release using the latest tag. Publishing a release will kick off `wordpress-plugin-deploy.yml` and release the plugin to wp.org. If you do not want a tag to be publised to wp.org, do not publish a release from it.
+
 
 ## Changelog ##
+
+### 0.3.2 (November 17, 2022) ###
+* Adds Github Action to automate deploys to wordpress.org [[#103](https://github.com/pantheon-systems/pantheon-hud/pull/103)].
 
 ### 0.3.1 (March 13, 2020) ###
 * Fixes issue where indicator didn't properly load on the frontend [[#58](https://github.com/pantheon-systems/pantheon-hud/pull/58)].
