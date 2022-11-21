@@ -6,7 +6,9 @@
 .github
 .gitignore
 .DS_Store
+Thumbs.db
 bin
+behat.yml
 CODEOWNERS
 composer.json
 composer.lock
@@ -18,8 +20,8 @@ phpcs.xml.dist
 phpunit.xml.dist
 README.md
 tests
-node_modules
 vendor
+node_modules
 *.sql
 *.tar.gz
 *.zip
