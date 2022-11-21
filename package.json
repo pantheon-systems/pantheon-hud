@@ -1,6 +1,6 @@
 {
   "name": "pantheon-hud",
-  "version": "0.3.2",
+  "version": "0.3.1",
   "main": "Gruntfile.js",
   "author": "Pantheon <noreply@pantheon.io>",
   "scripts": {
