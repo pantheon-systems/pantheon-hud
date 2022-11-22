@@ -37,9 +37,6 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 
 == Changelog ==
 
-= 0.3.2 (November 17, 2022) =
-* Adds Github Action to automate deploys to wordpress.org [[#103](https://github.com/pantheon-systems/pantheon-hud/pull/103)].
-
 = 0.3.1 (March 13, 2020) =
 * Fixes issue where indicator didn't properly load on the frontend [[#58](https://github.com/pantheon-systems/pantheon-hud/pull/58)].
 
