@@ -3,7 +3,7 @@
 **Tags:** Pantheon, hosting  
 **Requires at least:** 4.9  
 **Tested up to:** 5.9  
-**Stable tag:** 0.3.1  
+**Stable tag:** 0.4.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -39,6 +39,9 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 
 
 ## Changelog ##
+
+### 0.4.0 (November 22, 2020) ###
+* Adds CONTRIBUTING.md and Github Action to automate deploys to wordpress.org [[#103](https://github.com/pantheon-systems/pantheon-hud/pull/103)].
 
 ### 0.3.1 (March 13, 2020) ###
 * Fixes issue where indicator didn't properly load on the frontend [[#58](https://github.com/pantheon-systems/pantheon-hud/pull/58)].
