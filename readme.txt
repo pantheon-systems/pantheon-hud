@@ -3,7 +3,7 @@ Contributors: getpantheon, danielbachhuber
 Tags: Pantheon, hosting
 Requires at least: 4.9
 Tested up to: 6.1
-Stable tag: 0.4.0
+Stable tag: 0.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,7 +37,10 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 
 == Changelog ==
 
-= 0.4.0 (November 22, 2020) =
+= 0.4.1 (November 28, 2022) =
+* Moves .distignore to .gitattributes [[#106](https://github.com/pantheon-systems/pantheon-hud/pull/106)].
+
+= 0.4.0 (November 22, 2022) =
 * Adds CONTRIBUTING.md and Github Action to automate deploys to wordpress.org [[#103](https://github.com/pantheon-systems/pantheon-hud/pull/103)].
 
 = 0.3.1 (March 13, 2020) =
