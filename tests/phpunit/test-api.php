@@ -13,7 +13,7 @@ class APITest extends WP_UnitTestCase {
 	/**
 	 * Setup Test.
 	 */
-	public function setUp() {
+	public function setUp(): void {
 		parent::setUp();
 		$this->api                    = new Pantheon\HUD\API();
 		$_ENV['PANTHEON_ENVIRONMENT'] = 'dev';
