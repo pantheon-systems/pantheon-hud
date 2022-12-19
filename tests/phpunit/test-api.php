@@ -8,6 +8,7 @@
 /**
  * API Unit Test
  */
+#[AllowDynamicProperties]
 class APITest extends WP_UnitTestCase {
 
 	/**
