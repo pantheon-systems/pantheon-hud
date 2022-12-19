@@ -17,7 +17,7 @@
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
         "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-master",
         "phpunit/phpunit": "^7 || ^8",
-        "wp-coding-standards/wpcs": "^2.1",
+        "wp-coding-standards/wpcs": "dev-develop",
         "phpcompatibility/php-compatibility": "^9.3",
         "yoast/phpunit-polyfills": "^1.0",
         "symfony/yaml": "^5"
