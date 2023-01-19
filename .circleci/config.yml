@@ -93,10 +93,10 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - test-phpunit-dependencies-{{ checksum "composer.json" }}
+            - test-phpunit-74-dependencies-{{ checksum "composer.json" }}
       - run: composer install -n --prefer-dist
       - save_cache:
-          key: test-phpunit-dependencies-{{ checksum "composer.json" }}
+          key: test-phpunit-74-dependencies-{{ checksum "composer.json" }}
           paths:
             - vendor
       - run:
@@ -131,10 +131,10 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - test-phpunit-dependencies-{{ checksum "composer.json" }}
+            - test-phpunit-82-dependencies-{{ checksum "composer.json" }}
       - run: composer install -n --prefer-dist
       - save_cache:
-          key: test-phpunit-dependencies-{{ checksum "composer.json" }}
+          key: test-phpunit-82-dependencies-{{ checksum "composer.json" }}
           paths:
             - vendor
       - run:
