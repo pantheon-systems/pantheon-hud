@@ -17,10 +17,10 @@
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
         "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-master",
         "phpunit/phpunit": "^9",
+        "wp-coding-standards/wpcs": "dev-develop",
         "phpcompatibility/php-compatibility": "^9.3",
         "yoast/phpunit-polyfills": "^1.0",
-        "symfony/yaml": "^5",
-        "humanmade/coding-standards": "1.2.0"
+        "symfony/yaml": "^5"
     },
     "autoload-dev": {
         "psr-4": {
