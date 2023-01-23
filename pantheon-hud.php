@@ -25,8 +25,8 @@ add_action(
 );
 
 spl_autoload_register(
-	function( $class ) {
-		$class = ltrim( $class, '\\' );
+	function( $pantheon_class ) {
+		$class = ltrim( $pantheon_class, '\\' );
 		if ( 0 !== stripos( $class, 'Pantheon\HUD\\' ) ) {
 			return;
 		}
@@ -37,7 +37,7 @@ spl_autoload_register(
 		$last    = array_pop( $parts ); // File should be 'class-[...].php'.
 		$last    = 'class-' . $last . '.php';
 		$parts[] = $last;
-		$file    = dirname( __FILE__ ) . '/inc/' . str_replace( '_', '-', strtolower( implode( '/', $parts ) ) );
+		$file    = __DIR__ . '/inc/' . str_replace( '_', '-', strtolower( implode( '/', $parts ) ) );
 		if ( file_exists( $file ) ) {
 			require $file;
 		}

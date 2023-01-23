@@ -74,7 +74,6 @@ class Toolbar {
 				'title'  => 'Loading&hellip;',
 			)
 		);
-
 	}
 
 	/**
