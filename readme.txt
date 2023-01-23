@@ -3,7 +3,7 @@ Contributors: getpantheon, danielbachhuber
 Tags: Pantheon, hosting
 Requires at least: 4.9
 Tested up to: 6.1
-Stable tag: 0.4.1
+Stable tag: 0.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,6 +36,12 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 1. Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links.
 
 == Changelog ==
+
+= 0.4.2 (January 23, 2023) =
+* PHP 8.2 compatibility and testing [[#110](https://github.com/pantheon-systems/pantheon-hud/pull/110)].
+* Update Composer dependencies [[#112](https://github.com/pantheon-systems/pantheon-hud/pull/112)].
+* Update images for lint and test-behat jobs [[#111](https://github.com/pantheon-systems/pantheon-hud/pull/111)].
+* Make dependabot target develop branch [[#109](https://github.com/pantheon-systems/pantheon-hud/pull/109)].
 
 = 0.4.1 (November 28, 2022) =
 * Moves .distignore to .gitattributes [[#106](https://github.com/pantheon-systems/pantheon-hud/pull/106)].
