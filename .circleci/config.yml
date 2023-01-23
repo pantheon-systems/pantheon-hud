@@ -21,7 +21,7 @@ jobs:
   lint:
     working_directory: ~/pantheon-systems/pantheon-hud
     docker:
-      - image: quay.io/pantheon-public/build-tools-ci:8.x-php8.1
+      - image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2
     steps:
       - checkout
       - restore_cache:
@@ -40,7 +40,7 @@ jobs:
     working_directory: ~/pantheon-systems/pantheon-hud
     parallelism: 1
     docker:
-    - image: quay.io/pantheon-public/build-tools-ci:8.x-php8.1
+    - image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2
     steps:
     - checkout
     - restore_cache:
