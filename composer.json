@@ -20,7 +20,7 @@
         "wp-coding-standards/wpcs": "dev-develop as 2.3.1",
         "phpcompatibility/php-compatibility": "^9.3",
         "yoast/phpunit-polyfills": "^1.0",
-        "symfony/yaml": "^5"
+        "symfony/yaml": "^5.4 || ^6"
     },
     "autoload-dev": {
         "psr-4": {

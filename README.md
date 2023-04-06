@@ -1,18 +1,18 @@
 # Pantheon HUD #
-**Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon/), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/)  
-**Tags:** Pantheon, hosting  
+**Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon/), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/), [jspellman](https://profiles.wordpress.org/jspellman/), [jazzs3quence](https://profiles.wordpress.org/jazzs3quence)  
+**Tags:** Pantheon, hosting 
 **Requires at least:** 4.9  
-**Tested up to:** 6.1  
-**Stable tag:** 0.4.2  
+**Tested up to:** 6.2  
+**Stable tag:** 0.4.3  
 **License:** GPLv2 or later  
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
 A heads-up display into your Pantheon environment.
 
 ## Description ##
 
-[![Build Status](https://travis-ci.org/pantheon-systems/pantheon-hud.svg?branch=master)](https://travis-ci.org/pantheon-systems/pantheon-hud)
-[![Actively Maintained](https://img.shields.io/badge/Pantheon-Actively_Maintained-yellow?logo=pantheon&color=FFDC28)](https://pantheon.io/docs/oss-support-levels#actively-maintained)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/pantheon-systems/pantheon-hud/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/pantheon-systems/pantheon-hud/tree/master)
+[![Actively Maintained](https://img.shields.io/badge/Pantheon-Actively_Maintained-yellow?logo=pantheon&color=FFDC28)](https://docs.pantheon.io/oss-support-levels#actively-maintained-support)
 
 This plugin provides situational awareness of the Pantheon plaform from within your WordPress dashboard. It's helpful to be reminded what environment you're in, as well as providing quick links to get back to Pantheon's dashboard, or to interface with your WordPress installation via the command line.
 
@@ -39,6 +39,10 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 
 
 ## Changelog ##
+### 0.4.3 (April 6, 2023) ###
+* Update Composer dependencies [[#116](https://github.com/pantheon-systems/pantheon-hud/pull/116)] [[#118](https://github.com/pantheon-systems/pantheon-hud/pull/118)]
+* Update Actively Maintained anchor link [[#102](https://github.com/pantheon-systems/pantheon-hud/pull/102)]
+* Update Tested up to version.
 
 ### 0.4.2 (January 23, 2023) ###
 * PHP 8.2 compatibility and testing [[#110](https://github.com/pantheon-systems/pantheon-hud/pull/110)].
