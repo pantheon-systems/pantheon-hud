@@ -1,5 +1,5 @@
 === Pantheon HUD ===
-Contributors: getpantheon, danielbachhuber
+Contributors: getpantheon, danielbachhuber, jspellman, jazzs3quence
 Tags: Pantheon, hosting
 Requires at least: 4.9
 Tested up to: 6.2
