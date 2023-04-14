@@ -14,11 +14,9 @@
         }
     ],
     "require-dev": {
-        "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
         "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-master",
+        "pantheon-systems/pantheon-wp-coding-standards": "^1.0.0",
         "phpunit/phpunit": "^9",
-        "wp-coding-standards/wpcs": "dev-develop as 2.3.1",
-        "phpcompatibility/php-compatibility": "^9.3",
         "yoast/phpunit-polyfills": "^1.0",
         "symfony/yaml": "^5.4 || ^6"
     },
