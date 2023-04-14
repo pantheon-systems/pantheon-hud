@@ -9,11 +9,7 @@
 	<!-- Show sniff codes in all reports -->
 	<arg value="ps"/>
 
-	<rule ref="Pantheon-WP">
-		<!-- Explicitly exclude this VIP rule against wp_remote_get. To be updated in Pantheon-WP standards. see https://github.com/pantheon-systems/Pantheon-WP-Coding-Standards/pull/2 -->
-		<exclude name="WordPressVIPMinimum.Functions.RestrictedFunctions.wp_remote_get_wp_remote_get" />
-		<exclude name="WordPressVIPMinimum.Files.IncludingFile.UsingVariable" />
-	</rule>
+	<rule ref="Pantheon-WP" />
 	<rule ref="WordPress-Docs" />
 	<rule ref="PHPCompatibility"/>
 
