@@ -32,6 +32,7 @@
             "@phpcs"
         ],
         "phpcs": "phpcs",
+        "phpcbf": "phpcbf",
         "phpunit": "phpunit",
         "test": "@phpunit"
     },
