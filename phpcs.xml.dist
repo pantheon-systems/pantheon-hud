@@ -13,6 +13,9 @@
 	<rule ref="WordPress-Docs" />
 	<rule ref="PHPCompatibility"/>
 
+	<!-- Explicitly exclude this VIP rule against wp_remote_get. To be updated in Pantheon-WP standards. see https://github.com/pantheon-systems/Pantheon-WP-Coding-Standards/pull/2 -->
+	<rule ref="WordPressVIPMinimum.Functions.RestrictedFunctions.wp_remote_get_wp_remote_get" />
+
 	<!-- Minimum PHP and WP versions -->
 	<config name="testVersion" value="7.1-"/>
 	<config name="minimum_supported_wp_version" value="4.4"/>
