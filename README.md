@@ -3,7 +3,7 @@
 **Tags:** Pantheon, hosting 
 **Requires at least:** 4.9  
 **Tested up to:** 6.2  
-**Stable tag:** 0.4.3  
+**Stable tag:** 0.4.4-dev  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,9 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 
 
 ## Changelog ##
+### Latest ###
+* Update CONTRIBUTING.md [[#123](https://github.com/pantheon-systems/pantheon-hud/pull/123)]
+
 ### 0.4.3 (April 6, 2023) ###
 * Update Composer dependencies [[#116](https://github.com/pantheon-systems/pantheon-hud/pull/116)] [[#118](https://github.com/pantheon-systems/pantheon-hud/pull/118)]
 * Update Actively Maintained anchor link [[#102](https://github.com/pantheon-systems/pantheon-hud/pull/102)]
