@@ -40,7 +40,7 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 
 ## Changelog ##
 ### Latest ###
-* Update CONTRIBUTING.md [[#117](https://github.com/pantheon-systems/pantheon-hud/pull/117)]
+* Update CONTRIBUTING.md [[#123](https://github.com/pantheon-systems/pantheon-hud/pull/123)]
 
 ### 0.4.3 (April 6, 2023) ###
 * Update Composer dependencies [[#116](https://github.com/pantheon-systems/pantheon-hud/pull/116)] [[#118](https://github.com/pantheon-systems/pantheon-hud/pull/118)]
