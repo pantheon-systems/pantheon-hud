@@ -17,14 +17,17 @@ jobs:
   test-phpunit-74:
     needs: lint
     runs-on: ubuntu-latest
-    container:
-      image: quay.io/pantheon-public/build-tools-ci:8.x-php7.4
     services:
       mariadb:
         image: mariadb:10.5
     name: PHP 7.4 Unit Tests
     steps:
       - uses: actions/checkout@v3
+      - name: Setup PHP 7.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          extensions: mysqli, zip, imagick
       - name: Start MySQL Service
         run: sudo systemctl start mysql
       - name: Cache dependencies
@@ -47,14 +50,17 @@ jobs:
   test-phpunit-82:
     needs: lint
     runs-on: ubuntu-latest
-    container:
-      image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2
     services:
       mariadb:
         image: mariadb:10.6
     name: PHP 8.2 Unit Tests
     steps:
       - uses: actions/checkout@v3
+      - name: Setup PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          extensions: mysqli, zip, imagick
       - name: Start MySQL Service
         run: sudo systemctl start mysql
       - name: Cache dependencies
