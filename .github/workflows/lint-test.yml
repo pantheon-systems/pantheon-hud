@@ -2,7 +2,11 @@ name: Lint & Test
 on:
   schedule:
     - cron: "0 0 * * *"
-  push
+  push:
+    branches:
+      - master
+      - develop
+      - main
 jobs:
   lint:
     runs-on: ubuntu-latest
