@@ -34,8 +34,8 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/vendor
-          key: test-phpunit-dependencies-{{ checksum "composer.json" }}
-          restore-keys: test-phpunit-dependencies-{{ checksum "composer.json" }}
+          key: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
+          restore-keys: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
       - name: Install Composer dependencies
         run: |
           composer update && composer install
@@ -68,8 +68,8 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/vendor
-          key: test-phpunit-dependencies-{{ checksum "composer.json" }}
-          restore-keys: test-phpunit-dependencies-{{ checksum "composer.json" }}
+          key: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
+          restore-keys: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
       - name: Install Composer dependencies
         run: composer install
       - name: Run PHPUnit
