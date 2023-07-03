@@ -4,9 +4,7 @@ on:
     - cron: "0 0 * * *"
   push:
     branches:
-      - master
-      - develop
-      - main
+      - **
 jobs:
   lint:
     runs-on: ubuntu-latest
