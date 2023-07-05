@@ -10,7 +10,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist
       - name: Run PHP Lint
@@ -53,7 +53,7 @@ jobs:
           echo "Running PHPUnit on Single Site"
           composer phpunit
           rm -rf $WP_TESTS_DIR $WP_CORE_DIR
-          bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1 nightly true
+          bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1 latest true
           echo "Running PHPUnit on Multisite"
           WP_MULTISITE=1 composer phpunit
   test-phpunit-82:
@@ -86,6 +86,6 @@ jobs:
           echo "Running PHPUnit on Single Site"
           composer phpunit
           rm -rf $WP_TESTS_DIR $WP_CORE_DIR
-          bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1 nightly true
+          bash bin/install-wp-tests.sh wordpress_test root root 127.0.0.1 latest true
           echo "Running PHPUnit on Multisite"
           WP_MULTISITE=1 composer phpunit
