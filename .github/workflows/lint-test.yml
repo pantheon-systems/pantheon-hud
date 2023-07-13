@@ -22,6 +22,13 @@ jobs:
       - uses: pantheon-systems/action-wporg-validator@1.0.0
         with:
           type: 'plugin'
+  validate-readme-spacing:
+    name: Validate README Spacing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: pantheon-systems/validate-readme-spacing@v1
   test-phpunit-74:
     needs: lint
     runs-on: ubuntu-latest
