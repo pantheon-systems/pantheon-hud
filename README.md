@@ -1,6 +1,6 @@
 # Pantheon HUD #
 **Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon/), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/), [jspellman](https://profiles.wordpress.org/jspellman/), [jazzs3quence](https://profiles.wordpress.org/jazzs3quence)  
-**Tags:** Pantheon, hosting 
+**Tags:** Pantheon, hosting, environment-indicator  
 **Requires at least:** 4.9  
 **Tested up to:** 6.2  
 **Stable tag:** 0.4.4-dev  
@@ -12,6 +12,7 @@ A heads-up display into your Pantheon environment.
 ## Description ##
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/pantheon-systems/pantheon-hud/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/pantheon-systems/pantheon-hud/tree/master)
+[![Lint & Test](https://github.com/pantheon-systems/pantheon-hud/actions/workflows/lint-test.yml/badge.svg)](https://github.com/pantheon-systems/pantheon-hud/actions/workflows/lint-test.yml)
 [![Actively Maintained](https://img.shields.io/badge/Pantheon-Actively_Maintained-yellow?logo=pantheon&color=FFDC28)](https://docs.pantheon.io/oss-support-levels#actively-maintained-support)
 
 This plugin provides situational awareness of the Pantheon plaform from within your WordPress dashboard. It's helpful to be reminded what environment you're in, as well as providing quick links to get back to Pantheon's dashboard, or to interface with your WordPress installation via the command line.
@@ -39,8 +40,9 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 
 
 ## Changelog ##
-### Latest ###
+### 0.4.4-dev ###
 * Update CONTRIBUTING.md [[#123](https://github.com/pantheon-systems/pantheon-hud/pull/123)]
+* Added "environment-indicator" to tags [[#]()]
 
 ### 0.4.3 (April 6, 2023) ###
 * Update Composer dependencies [[#116](https://github.com/pantheon-systems/pantheon-hud/pull/116)] [[#118](https://github.com/pantheon-systems/pantheon-hud/pull/118)]

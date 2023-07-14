@@ -1,6 +1,6 @@
 === Pantheon HUD ===
 Contributors: getpantheon, danielbachhuber, jspellman, jazzs3quence
-Tags: Pantheon, hosting
+Tags: Pantheon, hosting, environment-indicator
 Requires at least: 4.9
 Tested up to: 6.2
 Stable tag: 0.4.4-dev
@@ -36,8 +36,9 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 1. Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links.
 
 == Changelog ==
-= Latest =
+= 0.4.4-dev =
 * Update CONTRIBUTING.md [[#123](https://github.com/pantheon-systems/pantheon-hud/pull/123)]
+* Added "environment-indicator" to tags [[#]()]
 
 = 0.4.3 (April 6, 2023) =
 * Update Composer dependencies [[#116](https://github.com/pantheon-systems/pantheon-hud/pull/116)] [[#118](https://github.com/pantheon-systems/pantheon-hud/pull/118)]
