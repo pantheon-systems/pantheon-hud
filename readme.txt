@@ -2,7 +2,7 @@
 Contributors: getpantheon, danielbachhuber, jspellman, jazzs3quence
 Tags: Pantheon, hosting, environment-indicator
 Requires at least: 4.9
-Tested up to: 6.2
+Tested up to: 6.3
 Stable tag: 0.4.4-dev
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
