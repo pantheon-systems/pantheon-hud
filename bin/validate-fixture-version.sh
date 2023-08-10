@@ -22,9 +22,8 @@ main(){
 
     # Use find to locate the file with a case-insensitive search
     README_FILE_PATH=$(find ${DIRNAME}/.. -iname "readme.txt" -print -quit)
-
     if [[ -z "$README_FILE_PATH" ]]; then
-        echo "File not found."
+        echo "readme.txt not found."
         exit 1
     fi
 
