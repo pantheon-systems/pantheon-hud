@@ -36,7 +36,7 @@ main(){
 
     if ! php -r "exit(version_compare('${TESTED_UP_TO}', '${FIXTURE_VERSION}'));"; then
         echo "${FIXTURE_VERSION} is less than ${TESTED_UP_TO}"
-        echo "Please update ${TERMINUS_SITE} to at least WordPress ${FIXTURE_VERSION}"
+        echo "Please update ${TERMINUS_SITE} to at least WordPress ${TESTED_UP_TO}"
         exit 1
     fi
 }
