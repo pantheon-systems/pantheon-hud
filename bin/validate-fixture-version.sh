@@ -19,8 +19,17 @@ main(){
         terminus auth:login --machine-token="${TERMINUS_TOKEN}"
     fi
 
+
+    # Use find to locate the file with a case-insensitive search
+    README_FILE_PATH=$(find ${DIRNAME}/.. -iname "readme.txt" -print -quit)
+
+    if [[ -z "$README_FILE_PATH" ]]; then
+        echo "File not found."
+        exit 1
+    fi
+
     local TESTED_UP_TO
-    TESTED_UP_TO=$(grep -i "Tested up to:" ${DIRNAME}/../README.txt | tr -d '\r\n' | awk -F ': ' '{ print $2 }')
+    TESTED_UP_TO=$(grep -i "Tested up to:" "${README_FILE_PATH}" | tr -d '\r\n' | awk -F ': ' '{ print $2 }')
     echo "Tested Up To: ${TESTED_UP_TO}"
     local FIXTURE_VERSION
     FIXTURE_VERSION=$(terminus wp "${TERMINUS_SITE}.dev" -- core version)
