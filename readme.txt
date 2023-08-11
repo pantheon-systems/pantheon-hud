@@ -2,7 +2,7 @@
 Contributors: getpantheon, danielbachhuber, jspellman, jazzs3quence
 Tags: Pantheon, hosting, environment-indicator
 Requires at least: 4.9
-Tested up to: 6.2
+Tested up to: 6.3
 Stable tag: 0.4.4-dev
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -10,8 +10,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 A heads-up display into your Pantheon environment.
 
 == Description ==
-
-[![Build Status](https://travis-ci.org/pantheon-systems/pantheon-hud.svg?branch=master)](https://travis-ci.org/pantheon-systems/pantheon-hud)
 
 This plugin provides situational awareness of the Pantheon plaform from within your WordPress dashboard. It's helpful to be reminded what environment you're in, as well as providing quick links to get back to Pantheon's dashboard, or to interface with your WordPress installation via the command line.
 
