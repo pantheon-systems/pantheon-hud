@@ -179,7 +179,7 @@ EOT;
 		wp_add_inline_script( 'admin-bar', $script );
 		add_filter(
 			'amp_dev_mode_element_xpaths',
-			static function( $xpaths ) {
+			static function ( $xpaths ) {
 				$xpaths[] = '//script[ contains( text(), "wp-admin-bar-pantheon-hud" ) ]';
 				return $xpaths;
 			}
@@ -239,5 +239,4 @@ EOT;
 	private function get_environment() {
 		return ! empty( $_ENV['PANTHEON_ENVIRONMENT'] ) ? $_ENV['PANTHEON_ENVIRONMENT'] : 'local';
 	}
-
 }
