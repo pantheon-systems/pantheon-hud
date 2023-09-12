@@ -20,7 +20,7 @@ The `master` branch matches the latest stable release deployed to [wp.org](wp.or
 
 You may notice there are three sets of tests running:
 
-* [PHPCS](https://github.com/squizlabs/PHP_CodeSniffer) to detect violations of `wp-coding-standards/wpcs` coding standards.
+* [PHPCS](https://github.com/squizlabs/PHP_CodeSniffer) to detect violations of [Pantheon WP Coding Standards](https://github.com/pantheon-systems/Pantheon-WP-Coding-Standards).
 * [PHPUnit](https://phpunit.de/) test suite.
 * [Behat](http://behat.org/) test suite against a Pantheon site, to ensure the plugin's compatibility with the Pantheon platform.
 
