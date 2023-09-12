@@ -42,7 +42,8 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 ## Changelog ##
 ### 0.4.4-dev ###
 * Update CONTRIBUTING.md [[#123](https://github.com/pantheon-systems/pantheon-hud/pull/123)]
-* Added "environment-indicator" to tags [[#]()]
+* Added "environment-indicator" to tags [[#128](https://github.com/pantheon-systems/pantheon-hud/pull/128)]
+* Updates Pantheon WP Coding Standards to 2.0 [[#131](https://github.com/pantheon-systems/pantheon-hud/pull/131)]
 
 ### 0.4.3 (April 6, 2023) ###
 * Update Composer dependencies [[#116](https://github.com/pantheon-systems/pantheon-hud/pull/116)] [[#118](https://github.com/pantheon-systems/pantheon-hud/pull/118)]

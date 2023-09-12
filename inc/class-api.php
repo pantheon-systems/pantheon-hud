@@ -172,11 +172,11 @@ class API {
 
 			// For those developing locally who know what they're doing.
 		} elseif ( $pem_file || ( defined( 'PANTHEON_HUD_PHPUNIT_RUNNING' ) && PANTHEON_HUD_PHPUNIT_RUNNING ) ) {
-			$require_curl = function() {
+			$require_curl = function () {
 				return [ 'curl' ];
 			};
 			add_filter( 'http_api_transports', $require_curl );
-			$client_cert = function( $handle ) use ( $pem_file ) {
+			$client_cert = function ( $handle ) use ( $pem_file ) {
 				curl_setopt( $handle, CURLOPT_SSLCERT, $pem_file ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 			};
 			add_action( 'http_api_curl', $client_cert );
@@ -197,5 +197,4 @@ class API {
 		}
 		return [];
 	}
-
 }
