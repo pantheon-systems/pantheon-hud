@@ -13,7 +13,7 @@ if [[ "$1" == "--no-db" ]]; then
 fi
 
 # Run install-wp-tests.sh
-echo "Installing local tests into ${WP_TESTS_DIR}"
+echo "Installing local tests into ${TMPDIR}"
 bash "$(dirname "$0")/install-wp-tests.sh" wordpress_test root '' 127.0.0.1 latest $SKIP_DB
 
 # Run PHPUnit
