@@ -22,4 +22,4 @@ bash "$(dirname "$0")/install-wp-tests.sh" wordpress_test root '' 127.0.0.1 late
 
 # Run PHPUnit
 echo "Running PHPUnit"
-composer phpunit --no-cache
+composer phpunit
