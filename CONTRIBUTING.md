@@ -37,7 +37,7 @@ Note that dependencies are installed via Composer and the `vendor` directory is 
 1. From `main`, checkout a new branch `release_X.Y.Z`.
 1. Make a release commit:
     * Drop the `-dev` from the version number in `package.json`, `README.md`, `readme.txt`, and `pantheon-hud.php`.
-    * Update the "Latest" heading in the changelog to the new version number with the date
+    * Update the "X.Y.Z-dev" heading in the changelog to the new version number with the date
     * Commit these changes with the message `Release X.Y.Z`
     * Push the release branch up.
 1. Open a Pull Request to merge `release_X.Y.Z` into `release`. Your PR should consist of all commits to `main` since the last release, and one commit to update the version number. The PR name should also be `Release X.Y.Z`.
