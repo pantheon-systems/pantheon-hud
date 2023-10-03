@@ -20,9 +20,6 @@ if [ -z "$WORDPRESS_ADMIN_USERNAME" ] || [ -z "$WORDPRESS_ADMIN_PASSWORD" ]; the
 	exit 1
 fi
 
-# Activate the twentytwentythree theme.
-terminus wp $TERMINUS_SITE.$TERMINUS_ENV -- theme activate twentytwentythree
-
 set -ex
 
 export BEHAT_PARAMS='{"extensions" : {"Behat\\MinkExtension" : {"base_url" : "http://'$TERMINUS_ENV'-'$TERMINUS_SITE'.pantheonsite.io"} }}'
