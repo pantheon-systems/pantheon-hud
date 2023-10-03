@@ -28,6 +28,7 @@ set -ex
 # Apply any outstanding upstream updates.
 # This never happens manually, so we might as well do it in automation before we run tests.
 ###
+terminus connection:set $SITE_ENV git
 terminus upstream:updates:apply $TERMINUS_SITE.dev --accept-upstream
 
 ###
@@ -47,7 +48,6 @@ BASH_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ###
 # Switch to git mode for pushing the files up
 ###
-terminus connection:set $SITE_ENV git
 rm -rf $PREPARE_DIR
 git clone -b $TERMINUS_ENV $PANTHEON_GIT_URL $PREPARE_DIR
 
