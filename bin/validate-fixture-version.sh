@@ -36,7 +36,7 @@ main(){
 
     if [ $compare_result == "-1" ]; then
         echo "${FIXTURE_VERSION} is greater than ${TESTED_UP_TO}"
-        echo "You should update the 'Tested up to' in your plugin's readme.txt"
+        echo "You should update the 'Tested up to' in your plugin's readme.txt to '${FIXTURE_VERSION}'."
         exit 1
 	elif [ $compare_result == "1" ]; then
         echo "${FIXTURE_VERSION} is less than ${TESTED_UP_TO}"
