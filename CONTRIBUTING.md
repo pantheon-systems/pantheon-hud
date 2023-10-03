@@ -41,7 +41,7 @@ Note that dependencies are installed via Composer and the `vendor` directory is 
     * Commit these changes with the message `Release X.Y.Z`
     * Push the release branch up.
 1. Open a Pull Request to merge `release_X.Y.Z` into `release`. Your PR should consist of all commits to `main` since the last release, and one commit to update the version number. The PR name should also be `Release X.Y.Z`.
-1. After all tests pass and you have received approval from a CODEOWNER (including resolving any merge conflicts), merge the PR into `release`.
+1. After all tests pass and you have received approval from a CODEOWNER (including resolving any merge conflicts), merge the PR into `release`. Use a "merge" commit, do no not rebase or squash.
 1. Pull `release` locally, create a new tag, and push up.
 1. Confirm that the necessary assets are present in the newly created tag, and test on a WP install if desired.
 1. Create a [new release](https://github.com/pantheon-systems/pantheon-hud/releases/new) using the tag created in the previous steps, naming the release with the new version number, and targeting the tag created in the previous step. Paste the release changelog from the `Changelog` section of [the readme](readme.txt) into the body of the release, including the links to the closed issues if applicable.
