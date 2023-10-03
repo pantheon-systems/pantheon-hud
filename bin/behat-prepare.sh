@@ -28,7 +28,7 @@ set -ex
 # Apply any outstanding upstream updates.
 # This never happens manually, so we might as well do it in automation before we run tests.
 ###
-terminus upstream:updates:apply $TERMINUS_SITE.$TERMINUS_ENV --accept-upstream
+terminus upstream:updates:apply $TERMINUS_SITE.dev --accept-upstream
 
 ###
 # Create a new environment for this particular test run.
