@@ -1,6 +1,6 @@
 # Pantheon HUD #
 **Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon/), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/), [jazzs3quence](https://profiles.wordpress.org/jazzs3quence)  
-**Tags:** Pantheon, hosting  
+**Tags:** Pantheon, hosting, environment-indicator  
 **Requires at least:** 4.9  
 **Tested up to:** 6.3.1  
 **Stable tag:** 0.4.4-dev  
