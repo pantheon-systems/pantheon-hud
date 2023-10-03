@@ -4,10 +4,6 @@ set -e
 # Check if TMPDIR is set; if not, default to /tmp
 TMPDIR="/tmp"
 
-# Explicitly set WP_TESTS_DIR based on TMPDIR
-export WP_TESTS_DIR="${TMPDIR}/wordpress-tests-lib"
-export WP_CORE_DIR="${TMPDIR}/wordpress/"
-
 # Initialize a variable to hold the 'true' flag for skipping DB creation
 SKIP_DB=""
 
