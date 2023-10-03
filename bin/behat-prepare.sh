@@ -25,6 +25,12 @@ fi
 set -ex
 
 ###
+# Apply any outstanding upstream updates.
+# This never happens manually, so we might as well do it in automation before we run tests.
+###
+terminus upstream:updates:apply $TERMINUS_SITE.$TERMINUS_ENV --accept-upstream
+
+###
 # Create a new environment for this particular test run.
 ###
 terminus env:create  $TERMINUS_SITE.dev $TERMINUS_ENV
