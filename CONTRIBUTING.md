@@ -34,8 +34,8 @@ Note that dependencies are installed via Composer and the `vendor` directory is 
 
 ## Release Process
 
-1. Make a release commit:
 1. From `main`, checkout a new branch `release_X.Y.Z`.
+1. Make a release commit:
     * Drop the `-dev` from the version number in `package.json`, `README.md`, `readme.txt`, and `pantheon-hud.php`.
     * Update the "Latest" heading in the changelog to the new version number with the date
     * Commit these changes with the message `Release X.Y.Z`
