@@ -25,11 +25,16 @@ fi
 set -ex
 
 ###
-# Apply any outstanding upstream updates.
+# Check for and apply any outstanding upstream updates.
 # This never happens manually, so we might as well do it in automation before we run tests.
 ###
 terminus connection:set $TERMINUS_SITE.dev git
-terminus upstream:updates:apply $TERMINUS_SITE.dev --accept-upstream
+updates=$(terminus upstream:updates:list "$TERMINUS_SITE.dev")
+if echo "$updates" | grep -q "There are no available updates for this site."; then
+  echo "No upstream updates to apply."
+else
+  terminus upstream:updates:apply "$TERMINUS_SITE.dev" --accept-upstream
+fi
 
 ###
 # Create a new environment for this particular test run.
