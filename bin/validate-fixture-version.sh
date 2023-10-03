@@ -45,7 +45,6 @@ main(){
     elif [ $compare_result == "0" ]; then
         echo "${FIXTURE_VERSION} is equal to ${TESTED_UP_TO}"
         echo "No action required."
-        exit 0
     else
         echo "An error occurred during version comparison."
         exit 1
