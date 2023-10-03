@@ -14,7 +14,7 @@ We prefer to squash commits (i.e. avoid merge PRs) from a feature branch into `d
 
 `develop` should be stable and usable, though possibly a few commits ahead of the public release on wp.org.
 
-The `master` branch matches the latest stable release deployed to [wp.org](wp.org).
+The `main` branch matches the latest stable release deployed to [wp.org](wp.org).
 
 ## Testing
 
@@ -49,7 +49,7 @@ Note that dependencies are installed via Composer and the `vendor` directory is 
 1. Check WordPress.org: Ensure that the changes are live on [the plugin repository](https://wordpress.org/plugins/pantheon-hud/). This may take a few minutes.
 1. Following the release, prepare the next dev version with the following steps:
     * `git checkout develop`
-    * `git rebase master`
+    * `git rebase main`
     * Update the version number in all locations, incrementing the version by one patch version, and add the `-dev` flag (e.g. after releasing `1.2.3`, the new verison will be `1.2.4-dev`)
     * Add a new `** Latest **` heading to the changelog
     * `git add -A .`
