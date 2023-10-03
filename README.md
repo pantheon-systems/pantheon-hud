@@ -5,13 +5,13 @@
 **Tested up to:** 6.3.1  
 **Stable tag:** 0.4.4-dev  
 **License:** GPLv2 or later  
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
 A heads-up display into your Pantheon environment.
 
 ## Description ##
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/pantheon-systems/pantheon-hud/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/pantheon-systems/pantheon-hud/tree/master)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/pantheon-systems/pantheon-hud/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/pantheon-systems/pantheon-hud/tree/main)
 [![Lint & Test](https://github.com/pantheon-systems/pantheon-hud/actions/workflows/lint-test.yml/badge.svg)](https://github.com/pantheon-systems/pantheon-hud/actions/workflows/lint-test.yml)
 [![Actively Maintained](https://img.shields.io/badge/Pantheon-Actively_Maintained-yellow?logo=pantheon&color=FFDC28)](https://docs.pantheon.io/oss-support-levels#actively-maintained-support)
 
