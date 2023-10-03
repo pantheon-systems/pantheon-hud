@@ -51,7 +51,7 @@ Note that dependencies are installed via Composer and the `vendor` directory is 
     * `git checkout develop`
     * `git rebase release`
     * Update the version number in all locations, incrementing the version by one patch version, and add the `-dev` flag (e.g. after releasing `1.2.3`, the new verison will be `1.2.4-dev`)
-    * Add a new `** Latest **` heading to the changelog
+    * Add a new `** X.Y.Z-dev **` heading to the changelog where `X.Y.Z-dev` is the new patch version.
     * `git add -A .`
     * `git commit -m "Prepare X.Y.X-dev"`
     * `git push origin develop`
