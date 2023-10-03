@@ -32,9 +32,21 @@ main(){
     FIXTURE_VERSION=$(terminus wp "${TERMINUS_SITE}.dev" -- core version)
     echo "Fixture Version: ${FIXTURE_VERSION}"
 
-    if ! php -r "exit(version_compare('${TESTED_UP_TO}', '${FIXTURE_VERSION}'));"; then
+    compare_result=$(php -r "echo version_compare('${TESTED_UP_TO}', '${FIXTURE_VERSION}');")
+
+    if [ $compare_result == "-1" ]; then
+        echo "${FIXTURE_VERSION} is greater than ${TESTED_UP_TO}"
+        echo "You should update the 'Tested up to' in your plugin's readme.txt to '${FIXTURE_VERSION}'."
+        exit 1
+	elif [ $compare_result == "1" ]; then
         echo "${FIXTURE_VERSION} is less than ${TESTED_UP_TO}"
         echo "Please update ${TERMINUS_SITE} to at least WordPress ${TESTED_UP_TO}"
+        exit 1
+    elif [ $compare_result == "0" ]; then
+        echo "${FIXTURE_VERSION} is equal to ${TESTED_UP_TO}"
+        echo "No action required."
+    else
+        echo "An error occurred during version comparison."
         exit 1
     fi
 }

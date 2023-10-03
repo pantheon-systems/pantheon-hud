@@ -25,6 +25,18 @@ fi
 set -ex
 
 ###
+# Check for and apply any outstanding upstream updates.
+# This never happens manually, so we might as well do it in automation before we run tests.
+###
+terminus connection:set $TERMINUS_SITE.dev git
+updates=$(terminus upstream:updates:list "$TERMINUS_SITE.dev")
+if echo "$updates" | grep -q "There are no available updates for this site."; then
+  echo "No upstream updates to apply."
+else
+  terminus upstream:updates:apply "$TERMINUS_SITE.dev" --accept-upstream
+fi
+
+###
 # Create a new environment for this particular test run.
 ###
 terminus env:create  $TERMINUS_SITE.dev $TERMINUS_ENV
@@ -41,7 +53,6 @@ BASH_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ###
 # Switch to git mode for pushing the files up
 ###
-terminus connection:set $SITE_ENV git
 rm -rf $PREPARE_DIR
 git clone -b $TERMINUS_ENV $PANTHEON_GIT_URL $PREPARE_DIR
 
