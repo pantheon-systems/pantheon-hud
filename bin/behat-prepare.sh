@@ -28,7 +28,7 @@ set -ex
 # Apply any outstanding upstream updates.
 # This never happens manually, so we might as well do it in automation before we run tests.
 ###
-terminus connection:set $SITE_ENV git
+terminus connection:set $TERMINUS_SITE.dev git
 terminus upstream:updates:apply $TERMINUS_SITE.dev --accept-upstream
 
 ###
