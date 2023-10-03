@@ -1,5 +1,5 @@
 === Pantheon HUD ===
-Contributors: getpantheon, danielbachhuber, jspellman, jazzs3quence
+Contributors: getpantheon, danielbachhuber, jazzs3quence
 Tags: Pantheon, hosting, environment-indicator
 Requires at least: 4.9
 Tested up to: 6.3.1
