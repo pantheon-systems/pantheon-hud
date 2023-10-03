@@ -33,10 +33,10 @@
         ],
         "phpcs": "phpcs",
         "phpcbf": "phpcbf",
-        "phpunit": "phpunit",
+        "phpunit": "phpunit --no-cache",
         "test": "@phpunit",
-        "test:install": "bash bin/install-wp-tests.sh wordpress_test root '' 127.0.0.1 latest true",
-        "test:install:withdb": "bash bin/install-wp-tests.sh wordpress_test root '' 127.0.0.1 latest"
+        "test:install": "bin/install-local-tests.sh --no-db",
+        "test:install:withdb": "bin/install-local-tests.sh"
     },
     "config": {
         "allow-plugins": {
