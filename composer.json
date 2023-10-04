@@ -29,10 +29,12 @@
     "prefer-stable": true,
     "scripts": {
         "lint": [
-            "@phpcs"
+            "@phpcs",
+            "@phplint"
         ],
         "phpcs": "phpcs",
         "phpcbf": "phpcbf",
+        "phplint": "find . -type f -name '*.php' -not -path './vendor/*' -not -path './tests/*' -exec php -l {} \\;",
         "phpunit": "phpunit --do-not-cache-result",
         "test": "@phpunit",
         "test:install": "bin/install-local-tests.sh --no-db",
