@@ -65,6 +65,8 @@ jobs:
       - name: Install Composer dependencies
         run: |
           composer update && composer install
+      - name: Run PHP linting
+        run: composer phplint
       - name: Run PHPUnit
         run: bash ./bin/phpunit-test.sh
   test-phpunit-83:
@@ -91,5 +93,7 @@ jobs:
           restore-keys: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
       - name: Install Composer dependencies
         run: composer install
+      - name: Run PHP linting
+        run: composer phplint
       - name: Run PHPUnit
         run: bash ./bin/phpunit-test.sh
