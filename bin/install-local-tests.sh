@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Check if TMPDIR is set; if not, default to /tmp
+# Set TMPDIR to /tmp.
 TMPDIR="/tmp"
 
 # Initialize a variable to hold the 'true' flag for skipping DB creation
