@@ -18,7 +18,9 @@
         "pantheon-systems/pantheon-wp-coding-standards": "^2.0",
         "phpunit/phpunit": "^9",
         "yoast/phpunit-polyfills": "^2.0",
-        "symfony/yaml": "^5.4 || ^6"
+        "symfony/yaml": "^5.4 || ^6",
+        "phpcompatibility/phpcompatibility-wp": "dev-master as 2.1.0",
+        "phpcompatibility/php-compatibility": "dev-master as 9.3.0"
     },
     "autoload-dev": {
         "psr-4": {

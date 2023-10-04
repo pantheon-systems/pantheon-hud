@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "762aedeb842219cbe0204d08822e130a",
+    "content-hash": "dc61dbbf770feb3a621a0357a91aa31b",
     "packages": [],
     "packages-dev": [
         {
@@ -1373,7 +1373,7 @@
         },
         {
             "name": "phpcompatibility/php-compatibility",
-            "version": "9.3.5",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCompatibility/PHPCompatibility.git",
@@ -1492,16 +1492,16 @@
         },
         {
             "name": "phpcompatibility/phpcompatibility-wp",
-            "version": "2.1.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCompatibility/PHPCompatibilityWP.git",
-                "reference": "b6c1e3ee1c35de6c41a511d5eb9bd03e447480a5"
+                "reference": "1708fc935ceeff3ec57dca5b1b18666403e53fba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibilityWP/zipball/b6c1e3ee1c35de6c41a511d5eb9bd03e447480a5",
-                "reference": "b6c1e3ee1c35de6c41a511d5eb9bd03e447480a5",
+                "url": "https://api.github.com/repos/PHPCompatibility/PHPCompatibilityWP/zipball/1708fc935ceeff3ec57dca5b1b18666403e53fba",
+                "reference": "1708fc935ceeff3ec57dca5b1b18666403e53fba",
                 "shasum": ""
             },
             "require": {
@@ -1509,12 +1509,13 @@
                 "phpcompatibility/phpcompatibility-paragonie": "^1.0"
             },
             "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.7"
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
             },
             "suggest": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.7 || This Composer plugin will sort out the PHP_CodeSniffer 'installed_paths' automatically.",
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0 || This Composer plugin will sort out the PHP_CodeSniffer 'installed_paths' automatically.",
                 "roave/security-advisories": "dev-master || Helps prevent installing dependencies with known security issues."
             },
+            "default-branch": true,
             "type": "phpcodesniffer-standard",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1543,7 +1544,7 @@
                 "issues": "https://github.com/PHPCompatibility/PHPCompatibilityWP/issues",
                 "source": "https://github.com/PHPCompatibility/PHPCompatibilityWP"
             },
-            "time": "2022-10-24T09:00:36+00:00"
+            "time": "2023-09-27T11:31:40+00:00"
         },
         {
             "name": "phpcsstandards/phpcsextra",
@@ -5633,10 +5634,25 @@
             "time": "2023-06-06T20:28:24+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "phpcompatibility/php-compatibility",
+            "version": "9999999-dev",
+            "alias": "9.3.0",
+            "alias_normalized": "9.3.0.0"
+        },
+        {
+            "package": "phpcompatibility/phpcompatibility-wp",
+            "version": "9999999-dev",
+            "alias": "2.1.0",
+            "alias_normalized": "2.1.0.0"
+        }
+    ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "pantheon-systems/pantheon-wordpress-upstream-tests": 20
+        "pantheon-systems/pantheon-wordpress-upstream-tests": 20,
+        "phpcompatibility/phpcompatibility-wp": 20,
+        "phpcompatibility/php-compatibility": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
