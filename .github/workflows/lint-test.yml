@@ -80,5 +80,7 @@ jobs:
           restore-keys: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
       - name: Install Composer dependencies
         run: composer install
+      - name: Run PHP 8.x Compatibility Check
+        run: composer php8-check
       - name: Run PHPUnit
         run: bash ./bin/phpunit-test.sh
