@@ -31,11 +31,15 @@
     "prefer-stable": true,
     "scripts": {
         "lint": [
-            "@phpcs"
+            "@phpcs",
+            "@php8-check"
         ],
         "phpcs": "phpcs",
         "phpcbf": "phpcbf",
         "phpunit": "phpunit --do-not-cache-result",
+        "php8-check": [
+          "phpcs -p . --standard=PHPCompatibilityWP --ignore=vendor/ --runtime-set testVersion 8.0-"
+        ],
         "test": "@phpunit",
         "test:install": "bin/install-local-tests.sh --no-db",
         "test:install:withdb": "bin/install-local-tests.sh"
