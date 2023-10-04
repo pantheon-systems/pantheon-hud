@@ -67,32 +67,6 @@ jobs:
           composer update && composer install
       - name: Run PHPUnit
         run: bash ./bin/phpunit-test.sh
-  test-phpunit-82:
-    needs: lint
-    runs-on: ubuntu-latest
-    services:
-      mariadb:
-        image: mariadb:10.6
-    name: PHP 8.2 Unit Tests
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup PHP 8.2
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.2
-          extensions: mysqli, zip, imagick
-      - name: Start MySQL Service
-        run: sudo systemctl start mysql
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/vendor
-          key: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
-          restore-keys: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
-      - name: Install Composer dependencies
-        run: composer install
-      - name: Run PHPUnit
-        run: bash ./bin/phpunit-test.sh
   test-phpunit-83:
     needs: lint
     runs-on: ubuntu-latest
