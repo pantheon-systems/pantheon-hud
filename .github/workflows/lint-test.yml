@@ -29,6 +29,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - uses: pantheon-systems/validate-readme-spacing@v1
+  php8-compatibility:
+    name: PHP 8.x Compatibility
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: PHP Compatibility
+        uses: pantheon-systems/phpcompatibility-action@dev
+        with:
+          test-versions: 8.0-
+          paths: ${{ github.workspace }}/*.php ${{ github.workspace }}/inc/*.php
   test-phpunit-74:
     needs: lint
     runs-on: ubuntu-latest
@@ -54,21 +65,23 @@ jobs:
       - name: Install Composer dependencies
         run: |
           composer update && composer install
+      - name: Run PHP linting
+        run: composer phplint
       - name: Run PHPUnit
         run: bash ./bin/phpunit-test.sh
-  test-phpunit-82:
+  test-phpunit-83:
     needs: lint
     runs-on: ubuntu-latest
     services:
       mariadb:
         image: mariadb:10.6
-    name: PHP 8.2 Unit Tests
+    name: PHP 8.3 Unit Tests
     steps:
       - uses: actions/checkout@v3
-      - name: Setup PHP 8.2
+      - name: Setup PHP 8.3
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: 8.3
           extensions: mysqli, zip, imagick
       - name: Start MySQL Service
         run: sudo systemctl start mysql
@@ -80,5 +93,7 @@ jobs:
           restore-keys: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
       - name: Install Composer dependencies
         run: composer install
+      - name: Run PHP linting
+        run: composer phplint
       - name: Run PHPUnit
         run: bash ./bin/phpunit-test.sh
