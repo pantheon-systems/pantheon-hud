@@ -1,5 +1,5 @@
 # Pantheon HUD #
-**Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon/), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/), [jazzs3quence](https://profiles.wordpress.org/jazzs3quence)  
+**Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon/), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/), [jspellman](https://profiles.wordpress.org/jspellman/), [jazzs3quence](https://profiles.wordpress.org/jazzs3quence)    
 **Tags:** Pantheon, hosting, environment-indicator  
 **Requires at least:** 4.9  
 **Tested up to:** 6.3.1  
