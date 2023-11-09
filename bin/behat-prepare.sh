@@ -50,7 +50,7 @@ PANTHEON_SITE_URL="$TERMINUS_ENV-$TERMINUS_SITE.pantheonsite.io"
 PREPARE_DIR="/tmp/$TERMINUS_ENV-$TERMINUS_SITE"
 BASH_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-PHP_VERSION="$(terminus connection:info $SITE_ENV --field=php_version)"
+PHP_VERSION="$(terminus env:info $SITE_ENV --field=php_version)"
 echo "PHP Version: $PHP_VERSION"
 
 ###
