@@ -29,7 +29,6 @@ main(){
     TESTED_UP_TO=$(grep -i "Tested up to:" "${README_FILE_PATH}" | tr -d '\r\n' | awk -F ': ' '{ print $2 }')
     echo "Tested Up To: ${TESTED_UP_TO}"
     local FIXTURE_VERSION
-    # Ignore NewRelic error.
     FIXTURE_VERSION=$(terminus wp "${TERMINUS_SITE}.dev" -- core version)
     echo "Fixture Version: ${FIXTURE_VERSION}"
 
