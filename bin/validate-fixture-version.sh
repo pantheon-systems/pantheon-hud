@@ -30,7 +30,7 @@ main(){
     echo "Tested Up To: ${TESTED_UP_TO}"
     local FIXTURE_VERSION
     # Ignore NewRelic error.
-    FIXTURE_VERSION=$(terminus wp "${TERMINUS_SITE}.dev" -- core version 2>&1 | grep -v "PHP Startup: Unable to load dynamic library" | awk '/^[0-9]+\.[0-9]+(\.[0-9]+)?$/ {print $0; exit}')
+    FIXTURE_VERSION=$(terminus wp "${TERMINUS_SITE}.dev" -- core version)
     echo "Fixture Version: ${FIXTURE_VERSION}"
 
     compare_result=$(php -r "echo version_compare('${TESTED_UP_TO}', '${FIXTURE_VERSION}');")
