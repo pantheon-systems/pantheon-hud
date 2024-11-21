@@ -192,6 +192,7 @@ EOT;
 				width:32px;
 				vertical-align:middle;
 				margin-top:-4px;
+				display:inline;
 			}
 			#wpadminbar li#wp-admin-bar-pantheon-hud em {
 				font-size: 11px;
