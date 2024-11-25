@@ -188,6 +188,7 @@ EOT;
 		?>
 		<style>
 			#wpadminbar li#wp-admin-bar-pantheon-hud > .ab-item img {
+				display:inline;
 				height:32px;
 				width:32px;
 				vertical-align:middle;
