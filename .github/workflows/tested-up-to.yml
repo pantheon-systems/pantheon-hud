@@ -1,0 +1,18 @@
+name: Validate Plugin "Tested Up To" Version
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  validate-wp-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Plugin Tested Up To Version
+        uses: jazzsequence/action-validate-plugin-version@v1
+        with:
+          filenames: 'readme.txt,README.md'
+          branch: 'main'
