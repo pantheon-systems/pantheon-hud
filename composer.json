@@ -18,7 +18,8 @@
         "pantheon-systems/pantheon-wp-coding-standards": "^2.0",
         "phpunit/phpunit": "^9",
         "yoast/phpunit-polyfills": "^2.0",
-        "symfony/yaml": "^5.4 || ^6"
+        "symfony/yaml": "^5.4 || ^6",
+        "pantheon-systems/wpunit-helpers": "^2.0"
     },
     "autoload-dev": {
         "psr-4": {
@@ -42,7 +43,8 @@
     },
     "config": {
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "pantheon-systems/wpunit-helpers": true
         }
     }
 }

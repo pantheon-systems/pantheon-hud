@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "495907a95f131d852721af5a9bdc4055",
+    "content-hash": "de689e2c52cd4cb88935f7b1e0598113",
     "packages": [],
     "packages-dev": [
         {
@@ -1263,6 +1263,52 @@
             ],
             "description": "PHPCS Rulesets for WordPress projects on Pantheon.",
             "time": "2023-09-12T17:25:08+00:00"
+        },
+        {
+            "name": "pantheon-systems/wpunit-helpers",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pantheon-systems/wpunit-helpers.git",
+                "reference": "4663809a3dd9bffdd98169afcb6c31e8f6aab91c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pantheon-systems/wpunit-helpers/zipball/4663809a3dd9bffdd98169afcb6c31e8f6aab91c",
+                "reference": "4663809a3dd9bffdd98169afcb6c31e8f6aab91c",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.0"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Pantheon\\WPUnitHelpers\\Plugin"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pantheon\\WPUnitHelpers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pantheon",
+                    "email": "noreply@pantheon.io"
+                }
+            ],
+            "description": "Unified scripts for installing and running automated WP Unit Tests.",
+            "support": {
+                "issues": "https://github.com/pantheon-systems/wpunit-helpers/issues",
+                "source": "https://github.com/pantheon-systems/wpunit-helpers/tree/v2.0.1"
+            },
+            "time": "2024-08-28T17:02:11+00:00"
         },
         {
             "name": "phar-io/manifest",
