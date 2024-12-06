@@ -14,13 +14,12 @@
         }
     ],
     "require-dev": {
-        "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
         "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-master",
+        "pantheon-systems/pantheon-wp-coding-standards": "^2.0",
         "phpunit/phpunit": "^9",
-        "wp-coding-standards/wpcs": "dev-develop as 2.3.1",
-        "phpcompatibility/php-compatibility": "^9.3",
-        "yoast/phpunit-polyfills": "^1.0",
-        "symfony/yaml": "^5.4 || ^6"
+        "yoast/phpunit-polyfills": "^2.0",
+        "symfony/yaml": "^5.4 || ^6",
+        "pantheon-systems/wpunit-helpers": "^2.0"
     },
     "autoload-dev": {
         "psr-4": {
@@ -31,15 +30,21 @@
     "prefer-stable": true,
     "scripts": {
         "lint": [
-            "@phpcs"
+            "@phpcs",
+            "@phplint"
         ],
         "phpcs": "phpcs",
-        "phpunit": "phpunit",
-        "test": "@phpunit"
+        "phpcbf": "phpcbf",
+        "phplint": "find . -type f -name '*.php' -not -path './vendor/*' -not -path './tests/*' -exec php -l {} \\;",
+        "phpunit": "phpunit --do-not-cache-result",
+        "test": "@phpunit",
+        "test:install": "bin/install-local-tests.sh --no-db",
+        "test:install:withdb": "bin/install-local-tests.sh"
     },
     "config": {
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "pantheon-systems/wpunit-helpers": true
         }
     }
 }

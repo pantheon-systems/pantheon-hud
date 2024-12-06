@@ -12,7 +12,7 @@ module.exports = function( grunt ) {
 					'README.md': 'readme.txt'
 				},
 				options: {
-					screenshot_url: 'https://raw.githubusercontent.com/pantheon-systems/pantheon-hud/master/{screenshot}.png',
+					screenshot_url: 'https://raw.githubusercontent.com/pantheon-systems/pantheon-hud/main/{screenshot}.png',
 				},
 			},
 		},

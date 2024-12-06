@@ -25,10 +25,22 @@ fi
 set -ex
 
 ###
+# Check for and apply any outstanding upstream updates.
+# This never happens manually, so we might as well do it in automation before we run tests.
+###
+terminus connection:set $TERMINUS_SITE.dev git
+updates=$(terminus upstream:updates:list "$TERMINUS_SITE.dev")
+if echo "$updates" | grep -q "There are no available updates for this site."; then
+  echo "No upstream updates to apply."
+else
+  terminus upstream:updates:apply "$TERMINUS_SITE.dev" --accept-upstream
+fi
+
+###
 # Create a new environment for this particular test run.
 ###
-terminus env:create  $TERMINUS_SITE.dev $TERMINUS_ENV
-terminus env:wipe $SITE_ENV --yes
+terminus env:create "${TERMINUS_SITE}.dev" "$TERMINUS_ENV"
+terminus env:wipe "$SITE_ENV" --yes
 
 ###
 # Get all necessary environment details.
@@ -38,10 +50,12 @@ PANTHEON_SITE_URL="$TERMINUS_ENV-$TERMINUS_SITE.pantheonsite.io"
 PREPARE_DIR="/tmp/$TERMINUS_ENV-$TERMINUS_SITE"
 BASH_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+PHP_VERSION="$(terminus env:info $SITE_ENV --field=php_version)"
+echo "PHP Version: $PHP_VERSION"
+
 ###
 # Switch to git mode for pushing the files up
 ###
-terminus connection:set $SITE_ENV git
 rm -rf $PREPARE_DIR
 git clone -b $TERMINUS_ENV $PANTHEON_GIT_URL $PREPARE_DIR
 
@@ -52,12 +66,6 @@ rm -rf $PREPARE_DIR/wp-content/plugins/pantheon-hud
 cd $BASH_DIR/..
 rsync -av --exclude='vendor/' --exclude='node_modules/' --exclude='tests/' ./* $PREPARE_DIR/wp-content/plugins/pantheon-hud
 rm -rf $PREPARE_DIR/wp-content/plugins/pantheon-hud/.git
-
-# Download the latest Classic Editor release from WordPress.org
-wget -O $PREPARE_DIR/classic-editor.zip https://downloads.wordpress.org/plugin/classic-editor.zip
-unzip $PREPARE_DIR/classic-editor.zip -d $PREPARE_DIR
-mv $PREPARE_DIR/classic-editor $PREPARE_DIR/wp-content/plugins/
-rm $PREPARE_DIR/classic-editor.zip
 
 ###
 # Push files to the environment
@@ -80,6 +88,6 @@ terminus build:workflow:wait $TERMINUS_SITE.$TERMINUS_ENV
   terminus wp $SITE_ENV -- core install --title=$TERMINUS_ENV-$TERMINUS_SITE --url=$PANTHEON_SITE_URL --admin_user=$WORDPRESS_ADMIN_USERNAME --admin_email=pantheon-hud@getpantheon.com --admin_password=$WORDPRESS_ADMIN_PASSWORD
 } &> /dev/null
 terminus wp $SITE_ENV -- cache flush
-terminus wp $SITE_ENV -- plugin activate pantheon-hud classic-editor
-terminus wp $SITE_ENV -- theme activate twentyseventeen
+terminus wp $SITE_ENV -- plugin activate pantheon-hud
+terminus wp $SITE_ENV -- theme activate twentytwentythree
 terminus wp $SITE_ENV -- rewrite structure '/%year%/%monthnum%/%day%/%postname%/'

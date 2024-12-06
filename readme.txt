@@ -1,17 +1,15 @@
 === Pantheon HUD ===
-Contributors: getpantheon, danielbachhuber, jspellman, jazzs3quence
-Tags: Pantheon, hosting
+Contributors: getpantheon, danielbachhuber, jazzs3quence, jspellman, pwtyler
+Tags: Pantheon, hosting, environment-indicator
 Requires at least: 4.9
-Tested up to: 6.2
-Stable tag: 0.4.3
+Tested up to: 6.7.1
+Stable tag: 0.4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A heads-up display into your Pantheon environment.
 
 == Description ==
-
-[![Build Status](https://travis-ci.org/pantheon-systems/pantheon-hud.svg?branch=master)](https://travis-ci.org/pantheon-systems/pantheon-hud)
 
 This plugin provides situational awareness of the Pantheon plaform from within your WordPress dashboard. It's helpful to be reminded what environment you're in, as well as providing quick links to get back to Pantheon's dashboard, or to interface with your WordPress installation via the command line.
 
@@ -36,6 +34,12 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 1. Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links.
 
 == Changelog ==
+= 0.4.4 (December 6, 2024) =
+* Fix admin bar item layout issue [[#145](https://github.com/pantheon-systems/pantheon-hud/pull/145)] props @cbirdsong and @westonruter
+* Update CONTRIBUTING.md [[#123](https://github.com/pantheon-systems/pantheon-hud/pull/123)]
+* Added "environment-indicator" to tags [[#128](https://github.com/pantheon-systems/pantheon-hud/pull/128)]
+* Updates Pantheon WP Coding Standards to 2.0 [[#131](https://github.com/pantheon-systems/pantheon-hud/pull/131)]
+
 = 0.4.3 (April 6, 2023) =
 * Update Composer dependencies [[#116](https://github.com/pantheon-systems/pantheon-hud/pull/116)] [[#118](https://github.com/pantheon-systems/pantheon-hud/pull/118)]
 * Update Actively Maintained anchor link [[#102](https://github.com/pantheon-systems/pantheon-hud/pull/102)]

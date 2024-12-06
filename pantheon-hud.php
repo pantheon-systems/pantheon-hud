@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Pantheon HUD
- * Version: 0.4.3
+ * Version: 0.4.4
  * Description: A heads-up display into your Pantheon environment.
  * Author: Pantheon
  * Author URI: https://pantheon.io
@@ -16,7 +16,7 @@ define( 'PANTHEON_HUD_ROOT_FILE', __FILE__ );
 
 add_action(
 	'init',
-	function() {
+	function () {
 		$view_pantheon_hud = apply_filters( 'pantheon_hud_current_user_can_view', current_user_can( 'manage_options' ) );
 		if ( $view_pantheon_hud ) {
 			Pantheon\HUD\Toolbar::get_instance();
@@ -25,7 +25,7 @@ add_action(
 );
 
 spl_autoload_register(
-	function( $pantheon_class ) {
+	function ( $pantheon_class ) {
 		$class = ltrim( $pantheon_class, '\\' );
 		if ( 0 !== stripos( $class, 'Pantheon\HUD\\' ) ) {
 			return;
