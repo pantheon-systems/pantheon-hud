@@ -2,3 +2,7 @@
 binding.*
 node_modules/
 vendor/
+bin/helpers.sh
+bin/install-local-tests.sh
+bin/install-wp-tests.sh
+bin/phpunit-test.sh
