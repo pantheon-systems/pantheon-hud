@@ -69,19 +69,19 @@ jobs:
         run: composer phplint
       - name: Run PHPUnit
         run: bash ./bin/phpunit-test.sh
-  test-phpunit-83:
+  test-phpunit-84:
     needs: lint
     runs-on: ubuntu-latest
     services:
       mariadb:
         image: mariadb:10.6
-    name: PHP 8.3 Unit Tests
+    name: PHP 8.4 Unit Tests
     steps:
       - uses: actions/checkout@v3
-      - name: Setup PHP 8.3
+      - name: Setup PHP 8.4
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.3
+          php-version: 8.4
           extensions: mysqli, zip, imagick
       - name: Start MySQL Service
         run: sudo systemctl start mysql
