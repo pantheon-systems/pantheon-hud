@@ -91,6 +91,8 @@ jobs:
           path: ~/vendor
           key: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
           restore-keys: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
+      - name: Setup WP-CLI
+        uses: godaddy-wordpress/setup-wp-cli@1
       - name: Install Composer dependencies
         run: composer install
       - name: Run PHP linting
