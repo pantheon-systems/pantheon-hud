@@ -76,24 +76,24 @@ jobs:
           fi
           { composer config -g github-oauth.github.com "${GITHUB_TOKEN}"; } &>/dev/null
 
-#      - name: Terminus login (optional)
-#        env:
-#          TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
-#        run: |
-#          if [ -z "${TERMINUS_TOKEN}" ]; then
-#            echo "TERMINUS_TOKEN missing; assuming unauthenticated build"; exit 0
-#          fi
-#          terminus auth:login --machine-token="${TERMINUS_TOKEN}"
-#
-#      - name: Validate fixture version
-#        run: ./bin/validate-fixture-version.sh
-#
-#      - name: Behat prepare
-#        run: ./bin/behat-prepare.sh
-#
-#      - name: Behat tests (strict)
-#        run: ./bin/behat-test.sh --strict
-#
-#      - name: Behat cleanup (always)
-#        if: always()
-#        run: ./bin/behat-cleanup.sh
+      - name: Terminus login (optional)
+        env:
+          TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
+        run: |
+          if [ -z "${TERMINUS_TOKEN}" ]; then
+            echo "TERMINUS_TOKEN missing; assuming unauthenticated build"; exit 0
+          fi
+          terminus auth:login --machine-token="${TERMINUS_TOKEN}"
+
+      - name: Validate fixture version
+        run: ./bin/validate-fixture-version.sh
+
+      - name: Behat prepare
+        run: ./bin/behat-prepare.sh
+
+      - name: Behat tests (strict)
+        run: ./bin/behat-test.sh --strict
+
+      - name: Behat cleanup (always)
+        if: always()
+        run: ./bin/behat-cleanup.sh
