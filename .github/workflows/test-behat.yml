@@ -17,6 +17,7 @@ jobs:
     # Run all steps inside the CircleCI-equivalent container
     container:
       image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2
+      options: --user 0:0
 
     defaults:
       run:
