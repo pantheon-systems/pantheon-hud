@@ -37,23 +37,11 @@ jobs:
           key: test-lint-dependencies-{{ checksum "composer.json" }}
           restore-keys: test-lint-dependencies-{{ checksum "composer.json" }}
 
-#      - name: Setup PHP
-#        uses: shivammathur/setup-php@v2
-#        with:
-#          php-version: '8.2'
-
       - name: Install dependencies
         run: composer install -n --prefer-dist
 
       - name: Run PHP Lint
         run: composer phpcs
-
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/vendor
-          key: test-behat-dependencies-{{ checksum "composer.json" }}
-          restore-keys: test-behat-dependencies-{{ checksum "composer.json" }}
 
       - name: Generate WP admin password
         run: echo "$(openssl rand -hex 8)" > /tmp/WORDPRESS_ADMIN_PASSWORD
