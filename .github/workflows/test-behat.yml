@@ -15,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
 #    # Run all steps inside the CircleCI-equivalent container
-#    container:
-#      image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2
-#      options: --user 0:0
+    container:
+      image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2
+      options: --user root
 
     defaults:
       run:
@@ -47,9 +47,6 @@ jobs:
 
       - name: Run PHP Lint
         run: composer phpcs
-
-      - name: Install dependencies
-        run: composer install -n --prefer-dist
 
       - name: Cache dependencies
         uses: actions/cache@v3
