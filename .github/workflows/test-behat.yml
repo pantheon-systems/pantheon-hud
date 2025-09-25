@@ -14,10 +14,10 @@ jobs:
     if: github.event_name != 'schedule' || github.ref_name == 'release'
     runs-on: ubuntu-latest
 
-    # Run all steps inside the CircleCI-equivalent container
-    container:
-      image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2
-      options: --user 0:0
+#    # Run all steps inside the CircleCI-equivalent container
+#    container:
+#      image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2
+#      options: --user 0:0
 
     defaults:
       run:
@@ -30,25 +30,33 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Optional: if your repo root is not the project root,
-      # set working-directory on steps or change this to your subdir.
-
-      - name: Restore Composer cache
-        uses: actions/cache@v4
+      - name: Cache dependencies
+        uses: actions/cache@v3
         with:
-          path: vendor
-          key: composer-${{ hashFiles('**/composer.lock', 'composer.json') }}
-          restore-keys: |
-            composer-
+          path: ~/vendor
+          key: test-lint-dependencies-{{ checksum "composer.json" }}
+          restore-keys: test-lint-dependencies-{{ checksum "composer.json" }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
 
       - name: Install dependencies
         run: composer install -n --prefer-dist
 
-      - name: Save Composer cache (no-op if unchanged)
-        uses: actions/cache@v4
+      - name: Run PHP Lint
+        run: composer phpcs
+
+      - name: Install dependencies
+        run: composer install -n --prefer-dist
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
         with:
-          path: vendor
-          key: composer-${{ hashFiles('**/composer.lock', 'composer.json') }}
+          path: ~/vendor
+          key: test-behat-dependencies-{{ checksum "composer.json" }}
+          restore-keys: test-behat-dependencies-{{ checksum "composer.json" }}
 
       - name: Generate WP admin password
         run: echo "$(openssl rand -hex 8)" > /tmp/WORDPRESS_ADMIN_PASSWORD
@@ -66,6 +74,11 @@ jobs:
         run: |
           mkdir -p "$HOME/.ssh"
           echo "StrictHostKeyChecking no" >> "$HOME/.ssh/config"
+
+      - name: Install SSH key
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SITE_OWNER_SSH_PRIVATE_KEY }}
 
       - name: Configure Composer GitHub OAuth (optional)
         env:
