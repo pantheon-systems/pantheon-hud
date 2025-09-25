@@ -37,10 +37,10 @@ jobs:
           key: test-lint-dependencies-{{ checksum "composer.json" }}
           restore-keys: test-lint-dependencies-{{ checksum "composer.json" }}
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
+#      - name: Setup PHP
+#        uses: shivammathur/setup-php@v2
+#        with:
+#          php-version: '8.2'
 
       - name: Install dependencies
         run: composer install -n --prefer-dist
