@@ -55,10 +55,9 @@ jobs:
           echo "WORDPRESS_ADMIN_EMAIL=no-reply@getpantheon.com" >> "$GITHUB_ENV"
           echo "WORDPRESS_ADMIN_PASSWORD=$(cat /tmp/WORDPRESS_ADMIN_PASSWORD)" >> "$GITHUB_ENV"
 
-      - name: Disable StrictHostKeyChecking
-        run: |
-          mkdir -p "$HOME/.ssh"
-          echo "StrictHostKeyChecking no" >> "$HOME/.ssh/config"
+      # Configures SSH to automatically accept new host keys.
+      - name: Force SSH to ignore host keys
+        run: echo "GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" >> $GITHUB_ENV
 
       - name: Install SSH key
         uses: webfactory/ssh-agent@v0.7.0
