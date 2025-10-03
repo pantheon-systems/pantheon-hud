@@ -1,7 +1,6 @@
 name: Test Behat CI
 
 on:
-  push:
   pull_request:
   workflow_dispatch:
   # Nightly at 00:00 UTC (CircleCI: "0 0 * * *")
