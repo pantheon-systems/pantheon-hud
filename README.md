@@ -34,6 +34,16 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
         return false;
     });
 
+By default, the Pantheon HUD shows dev, test and live. You can modify these values with the `pantheon_hud_envs` filter:
+
+    add_filter(
+        'pantheon_hud_envs',
+        function ( $envs ) {
+            array_push( $envs, 'multidev' );
+            return $envs;
+        }
+    );
+
 ## Screenshots ##
 
 ### 1. Pantheon HUD is present in the WordPress toolbar. On hover, it displays environmental details and helpful links. ###
@@ -43,6 +53,7 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 ## Changelog ##
 ### 0.4.5-dev ###
 * Supports PHP 8.4 [[#153](https://github.com/pantheon-systems/pantheon-hud/pull/153/)]
+* Add Enviroment Filter
 
 ### 0.4.4 (December 6, 2024 ###
 * Fix admin bar item layout issue [[#145](https://github.com/pantheon-systems/pantheon-hud/pull/145)] props @cbirdsong and @westonruter
