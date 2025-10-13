@@ -13,11 +13,6 @@ jobs:
     if: github.event_name != 'schedule' || github.ref_name == 'release'
     runs-on: ubuntu-latest
 
-#    # Run all steps inside the CircleCI-equivalent container
-    container:
-      image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2
-      options: --user root
-
     defaults:
       run:
         shell: bash
@@ -27,7 +22,9 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -72,17 +69,16 @@ jobs:
           fi
           { composer config -g github-oauth.github.com "${GITHUB_TOKEN}"; } &>/dev/null
 
-      - name: Terminus login (optional)
-        env:
-          TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
-        run: |
-          if [ -z "${TERMINUS_TOKEN}" ]; then
-            echo "TERMINUS_TOKEN missing; assuming unauthenticated build"; exit 0
-          fi
-          terminus auth:login --machine-token="${TERMINUS_TOKEN}"
+      - name: Install Terminus
+        uses: pantheon-systems/terminus-github-actions@v1
+        with:
+          pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
 
       - name: Validate fixture version
-        run: ./bin/validate-fixture-version.sh
+        uses: jazzsequence/action-validate-plugin-version@v1
+        with:
+          branch: ${{ github.head_ref }}
+          dry-run: 'true'
 
       - name: Behat prepare
         run: ./bin/behat-prepare.sh
