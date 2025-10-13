@@ -8,18 +8,18 @@
 
 terminus whoami > /dev/null
 if [ $? -ne 0 ]; then
-	echo "Terminus unauthenticated; assuming unauthenticated build"
-	exit 0
+  echo "Terminus unauthenticated; assuming unauthenticated build"
+  exit 0
 fi
 
 if [ -z "$TERMINUS_SITE" ] || [ -z "$TERMINUS_ENV" ]; then
-	echo "TERMINUS_SITE and TERMINUS_ENV environment variables must be set"
-	exit 1
+  echo "TERMINUS_SITE and TERMINUS_ENV environment variables must be set"
+  exit 1
 fi
 
 if [ -z "$WORDPRESS_ADMIN_USERNAME" ] || [ -z "$WORDPRESS_ADMIN_PASSWORD" ]; then
-	echo "WORDPRESS_ADMIN_USERNAME and WORDPRESS_ADMIN_PASSWORD environment variables must be set"
-	exit 1
+  echo "WORDPRESS_ADMIN_USERNAME and WORDPRESS_ADMIN_PASSWORD environment variables must be set"
+  exit 1
 fi
 
 set -ex
@@ -89,10 +89,20 @@ terminus workflow:wait $TERMINUS_SITE.$TERMINUS_ENV
 ###
 # Set up WordPress, theme, and plugins for the test run
 ###
-# Silence output so as not to show the password.
-{
-  terminus wp $SITE_ENV -- core install --title=$TERMINUS_ENV-$TERMINUS_SITE --url=$PANTHEON_SITE_URL --admin_user=$WORDPRESS_ADMIN_USERNAME --admin_email=pantheon-hud@getpantheon.com --admin_password=$WORDPRESS_ADMIN_PASSWORD
-} &> /dev/null
+
+# Retry WP core install as the environment may take a moment to be ready.
+max_attempts=5
+attempt_num=1
+until terminus wp $SITE_ENV -- core install --title=$TERMINUS_ENV-$TERMINUS_SITE --url=$PANTHEON_SITE_URL --admin_user=$WORDPRESS_ADMIN_USERNAME --admin_email=pantheon-hud@getpantheon.com --admin_password=$WORDPRESS_ADMIN_PASSWORD; do
+  if [ $attempt_num -eq $max_attempts ]; then
+    echo "WP core install failed after $max_attempts attempts."
+    exit 1
+  fi
+  echo "WP core install failed. Retrying in 15 seconds... (Attempt $attempt_num of $max_attempts)"
+  sleep 15
+  attempt_num=$((attempt_num+1))
+done
+
 terminus wp $SITE_ENV -- cache flush
 terminus wp $SITE_ENV -- plugin activate pantheon-hud
 terminus wp $SITE_ENV -- theme activate twentytwentythree
