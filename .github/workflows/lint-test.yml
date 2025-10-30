@@ -44,8 +44,6 @@ jobs:
     services:
       mariadb:
         image: mariadb:10.5
-        env:
-          MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: true
     name: PHP 7.4 Unit Tests
     steps:
       - uses: actions/checkout@v5
@@ -71,6 +69,16 @@ jobs:
           chmod +x bin/*.sh
       - name: Run PHP linting
         run: composer phplint
+      - name: Reset MariaDB root password to empty
+        run: |
+          until mysqladmin ping -h127.0.0.1 -uroot -proot --silent; do
+            sleep 1
+          done
+          mysql -h127.0.0.1 -uroot -proot <<'SQL'
+            ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '';
+            ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
+            FLUSH PRIVILEGES;
+          mysqladmin ping -h127.0.0.1 -uroot --silent
       - name: Install WPUnit tests
         run: composer test:install:withdb
       - name: Run PHPUnit
@@ -81,8 +89,6 @@ jobs:
     services:
       mariadb:
         image: mariadb:10.6
-        env:
-          MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: true
     name: PHP 8.4 Unit Tests
     steps:
       - uses: actions/checkout@v4
@@ -107,6 +113,16 @@ jobs:
           chmod +x bin/*.sh
       - name: Run PHP linting
         run: composer phplint
+      - name: Reset MariaDB root password to empty
+        run: |
+          until mysqladmin ping -h127.0.0.1 -uroot -proot --silent; do
+            sleep 1
+          done
+          mysql -h127.0.0.1 -uroot -proot <<'SQL'
+            ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '';
+            ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
+            FLUSH PRIVILEGES;
+          mysqladmin ping -h127.0.0.1 -uroot --silent
       - name: Install WPUnit tests
         run: composer test:install:withdb
       - name: Run PHPUnit
