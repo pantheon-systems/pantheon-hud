@@ -69,6 +69,8 @@ jobs:
           composer update && composer install
       - name: Run PHP linting
         run: composer phplint
+      - name: Install WPUnit tests
+        run: composer test:install:withdb
       - name: Run PHPUnit
         run: composer phpunit
   test-phpunit-84:
@@ -99,5 +101,7 @@ jobs:
         run: composer install
       - name: Run PHP linting
         run: composer phplint
+      - name: Install WPUnit tests
+        run: composer test:install:withdb
       - name: Run PHPUnit
         run: composer phpunit
