@@ -8,7 +8,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist
       - name: Run PHP Lint
@@ -25,14 +25,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
       - uses: pantheon-systems/validate-readme-spacing@v1
   php8-compatibility:
     name: PHP 8.x Compatibility
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
       - name: PHP Compatibility
         uses: pantheon-systems/phpcompatibility-action@dev
         with:
@@ -46,7 +46,7 @@ jobs:
         image: mariadb:10.5
     name: PHP 7.4 Unit Tests
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - name: Setup PHP 7.4
         uses: shivammathur/setup-php@v2
         with:
