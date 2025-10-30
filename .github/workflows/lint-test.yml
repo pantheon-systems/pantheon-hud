@@ -2,9 +2,7 @@ name: Lint & Test
 on:
   schedule:
     - cron: "0 0 * * *"
-  push:
-    branches:
-      - '**'
+  pull_request:
 jobs:
   lint:
     name: Lint
