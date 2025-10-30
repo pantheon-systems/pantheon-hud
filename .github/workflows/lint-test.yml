@@ -66,7 +66,9 @@ jobs:
         uses: godaddy-wordpress/setup-wp-cli@1
       - name: Install Composer dependencies
         run: |
-          composer update && composer install
+          composer update
+          composer install
+          chmod +x bin/*.sh
       - name: Run PHP linting
         run: composer phplint
       - name: Install WPUnit tests
@@ -98,7 +100,9 @@ jobs:
       - name: Setup WP-CLI
         uses: godaddy-wordpress/setup-wp-cli@1
       - name: Install Composer dependencies
-        run: composer install
+        run: |
+          composer install
+          chmod +x bin/*.sh
       - name: Run PHP linting
         run: composer phplint
       - name: Install WPUnit tests
