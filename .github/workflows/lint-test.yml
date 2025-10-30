@@ -44,6 +44,8 @@ jobs:
     services:
       mariadb:
         image: mariadb:10.5
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     name: PHP 7.4 Unit Tests
     steps:
       - uses: actions/checkout@v5
@@ -79,6 +81,8 @@ jobs:
     services:
       mariadb:
         image: mariadb:10.6
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     name: PHP 8.4 Unit Tests
     steps:
       - uses: actions/checkout@v4
