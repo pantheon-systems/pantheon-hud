@@ -2,6 +2,7 @@ name: Validate Plugin "Tested Up To" Version
 on:
   schedule:
     - cron: '0 0 * * 0'
+  pull_request:
 permissions:
   contents: write
   pull-requests: write
