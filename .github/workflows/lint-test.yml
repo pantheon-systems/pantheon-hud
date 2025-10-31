@@ -64,6 +64,7 @@ jobs:
         uses: godaddy-wordpress/setup-wp-cli@1
       - name: Install Composer dependencies
         run: |
+          composer require pantheon-systems/pantheon-wp-coding-standards:^2.0 --dev --no-update
           composer update
           composer install
           chmod +x bin/*.sh
