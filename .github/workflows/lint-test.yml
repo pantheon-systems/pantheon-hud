@@ -91,7 +91,7 @@ jobs:
         image: mariadb:10.6
     name: PHP 8.4 Unit Tests
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Setup PHP 8.4
         uses: shivammathur/setup-php@v2
         with:
