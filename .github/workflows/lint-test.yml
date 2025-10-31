@@ -55,7 +55,7 @@ jobs:
       - name: Start MySQL Service
         run: sudo systemctl start mysql
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/vendor
           key: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
@@ -100,7 +100,7 @@ jobs:
       - name: Start MySQL Service
         run: sudo systemctl start mysql
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/vendor
           key: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
