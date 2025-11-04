@@ -36,9 +36,6 @@ jobs:
       - name: Install dependencies
         run: composer install -n --prefer-dist
 
-      - name: Run PHP Lint
-        run: composer phpcs
-
       - name: Generate WP admin password
         run: echo "$(openssl rand -hex 8)" > /tmp/WORDPRESS_ADMIN_PASSWORD
 

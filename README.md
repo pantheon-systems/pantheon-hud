@@ -1,11 +1,11 @@
 # Pantheon HUD #
-**Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon/), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/), [jspellman](https://profiles.wordpress.org/jspellman/), [jazzs3quence](https://profiles.wordpress.org/jazzs3quence), [pwtyler](https://profiles.wordpress.org/pwtyler)
-**Tags:** Pantheon, hosting, environment-indicator
-**Requires at least:** 4.9
-**Tested up to:** 6.8.3
-**Requires PHP:** 7.4
-**Stable tag:** 0.4.5-dev
-**License:** GPLv2 or later
+**Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon/), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/), [jspellman](https://profiles.wordpress.org/jspellman/), [jazzs3quence](https://profiles.wordpress.org/jazzs3quence), [pwtyler](https://profiles.wordpress.org/pwtyler)  
+**Tags:** Pantheon, hosting, environment-indicator  
+**Requires at least:** 4.9  
+**Tested up to:** 6.8.3  
+**Requires PHP:** 7.4  
+**Stable tag:** 0.4.5-dev  
+**License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
 A heads-up display into your Pantheon environment.
