@@ -3,7 +3,7 @@ name: Test Behat CI
 on:
   pull_request:
   workflow_dispatch:
-  # Nightly at 00:00 UTC (CircleCI: "0 0 * * *")
+  # Nightly at 00:00 UTC
   schedule:
     - cron: "0 0 * * *"
 
@@ -20,10 +20,6 @@ jobs:
 
     permissions:
       contents: read
-
-#    container:
-#      image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2
-#      options: --user root
 
     steps:
       - name: Checkout
