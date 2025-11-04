@@ -72,10 +72,10 @@ jobs:
           fi
           { composer config -g github-oauth.github.com "${GITHUB_TOKEN}"; } &>/dev/null
 
-      - name: Install Terminus
-        uses: pantheon-systems/terminus-github-actions@v1
-        with:
-          pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
+#      - name: Install Terminus
+#        uses: pantheon-systems/terminus-github-actions@v1
+#        with:
+#          pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
 
       - name: Validate fixture version
         uses: jazzsequence/action-validate-plugin-version@v1
