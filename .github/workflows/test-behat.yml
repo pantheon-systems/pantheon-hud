@@ -43,10 +43,6 @@ jobs:
           coverage: none
           extensions: mbstring, intl, zip
 
-      - name: Verify Behat install
-        run: |
-          composer require --dev behat/behat:^3.13 behat/mink:^1.11 behat/mink-extension:^2.6 friends-of-behat/mink-browserkit-driver:^1.5";
-
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
