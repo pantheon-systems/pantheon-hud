@@ -30,9 +30,6 @@ jobs:
         run: | 
           composer install -n --prefer-dist
 
-      - name: Export BIN_DIR
-        run: echo "BIN_DIR=$(composer config bin-dir)" >> "$GITHUB_ENV"
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
