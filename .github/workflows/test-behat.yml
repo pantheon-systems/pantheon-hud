@@ -45,13 +45,7 @@ jobs:
 
       - name: Verify Behat install
         run: |
-          echo "BIN DIR: $(composer config bin-dir)"
-          ls -la "$(composer config bin-dir)"
-          composer show -D | grep -i '^behat/' || {
-            echo "Behat not present in require-dev. Add behat/behat to composer.json or run:";
-            echo "   composer require --dev behat/behat:^3.13 behat/mink:^1.11 behat/mink-extension:^2.6 friends-of-behat/mink-browserkit-driver:^1.5";
-            exit 1;
-          }
+          composer require --dev behat/behat:^3.13 behat/mink:^1.11 behat/mink-extension:^2.6 friends-of-behat/mink-browserkit-driver:^1.5";
 
       - name: Cache dependencies
         uses: actions/cache@v3
