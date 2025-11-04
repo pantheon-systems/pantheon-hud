@@ -16,6 +16,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: .
 
     permissions:
       contents: read
