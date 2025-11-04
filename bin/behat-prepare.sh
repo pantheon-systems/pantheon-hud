@@ -25,12 +25,6 @@ fi
 set -ex
 
 ###
-# Install Composer dependencies, including Behat. This makes the
-# ./vendor/bin/behat executable available for the test runner.
-###
-composer install --no-progress --prefer-dist
-
-###
 # Check for and apply any outstanding upstream updates.
 # This never happens manually, so we might as well do it in automation before we run tests.
 ###

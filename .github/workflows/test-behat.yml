@@ -34,7 +34,8 @@ jobs:
           restore-keys: test-lint-dependencies-{{ checksum "composer.json" }}
 
       - name: Install dependencies
-        run: composer install -n --prefer-dist
+        run: | 
+          composer install -n --prefer-dist
 
       - name: Generate WP admin password
         run: echo "$(openssl rand -hex 8)" > /tmp/WORDPRESS_ADMIN_PASSWORD
