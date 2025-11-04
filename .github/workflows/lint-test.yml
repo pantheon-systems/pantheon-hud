@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: pantheon-systems/action-wporg-validator@v2.0.0
         with:
-          build-dir: './'
+          path: ./plugin
           type: 'plugin'
   validate-readme-spacing:
     name: Validate README Spacing
