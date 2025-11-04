@@ -30,6 +30,9 @@ jobs:
         run: | 
           composer install -n --prefer-dist
 
+      - name: Export BIN_DIR
+        run: echo "BIN_DIR=$(composer config bin-dir)" >> "$GITHUB_ENV"
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -88,6 +91,12 @@ jobs:
 
       - name: Behat prepare
         run: ./bin/behat-prepare.sh
+
+      - name: Show Composer bin dir and Behat packages
+        run: |
+          echo "BIN DIR: $(composer config bin-dir)"
+          ls -la "$(composer config bin-dir)" || true
+          composer show -D | grep -i behat || true
 
       - name: Behat tests (strict)
         run: ./bin/behat-test.sh --strict
