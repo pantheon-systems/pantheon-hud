@@ -26,16 +26,24 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install dependencies
+        run: | 
+          composer install -n --prefer-dist
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: composer
+          coverage: none
+          extensions: mbstring, intl, zip
+
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
           path: ~/vendor
           key: test-lint-dependencies-{{ checksum "composer.json" }}
           restore-keys: test-lint-dependencies-{{ checksum "composer.json" }}
-
-      - name: Install dependencies
-        run: | 
-          composer install -n --prefer-dist
 
       - name: Generate WP admin password
         run: echo "$(openssl rand -hex 8)" > /tmp/WORDPRESS_ADMIN_PASSWORD
