@@ -92,7 +92,9 @@ jobs:
           dry-run: 'true'
 
       - name: Behat prepare
-        run: ./bin/behat-prepare.sh
+        run: |
+          composer install --no-progress --prefer-dist
+          ./bin/behat-prepare.sh
 
       - name: Behat tests (strict)
         run: ./bin/behat-test.sh --strict
