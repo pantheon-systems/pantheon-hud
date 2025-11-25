@@ -13,7 +13,7 @@ jobs:
     name: Tag and Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Build, tag and release
         uses: pantheon-systems/plugin-release-actions/build-tag-release@main
         with:

@@ -11,7 +11,7 @@ jobs:
   validate-wp-version:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Validate Plugin Tested Up To Version
         uses: jazzsequence/action-validate-plugin-version@v2
         with:
