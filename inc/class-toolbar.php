@@ -174,7 +174,7 @@ class Toolbar {
 		$script .= "	};\n";
 		$script .= "	el.addEventListener('mouseover', fetchData);\n";
 		$script .= "	el.addEventListener('focus', fetchData);\n";
-		$script .= "} );";
+		$script .= '} );';
 		wp_add_inline_script( 'admin-bar', $script );
 		add_filter(
 			'amp_dev_mode_element_xpaths',
