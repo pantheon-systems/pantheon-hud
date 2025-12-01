@@ -20,8 +20,8 @@ jobs:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
       - uses: pantheon-systems/action-wporg-validator@v2.0.0
         with:
-          build-dir: './'
-          slug: 'pantheon-hud'
+          type: plugin
+          path: './'
   validate-readme-spacing:
     name: Validate README Spacing
     runs-on: ubuntu-latest
