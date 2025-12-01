@@ -152,31 +152,29 @@ class Toolbar {
 			],
 			admin_url( 'admin-ajax.php' )
 		);
-		$script      = <<<EOT
-document.addEventListener( 'DOMContentLoaded', function() {
-	var el = document.querySelector('#wp-admin-bar-pantheon-hud');
-	if ( ! el ) {
-		return;
-	}
-	var fetchData = function() {
-		if ( ! document.querySelector('#wp-admin-bar-pantheon-hud-wp-admin-loading') ) {
-			return;
-		}
-		var request = new XMLHttpRequest();
-		request.open('GET', '{$request_url}', true);
-		request.onload = function() {
-			if (this.status >= 200 && this.status < 400) {
-				document.querySelector('#wp-admin-bar-pantheon-hud .ab-sub-wrapper').innerHTML = this.response;
-				el.removeEventListener('mouseover', fetchData);
-				el.removeEventListener('focus', fetchData);
-			}
-		};
-		request.send();
-	};
-	el.addEventListener('mouseover', fetchData);
-	el.addEventListener('focus', fetchData);
-} );
-EOT;
+		$script  = "document.addEventListener( 'DOMContentLoaded', function() {\n";
+		$script .= "	var el = document.querySelector('#wp-admin-bar-pantheon-hud');\n";
+		$script .= "	if ( ! el ) {\n";
+		$script .= "		return;\n";
+		$script .= "	}\n";
+		$script .= "	var fetchData = function() {\n";
+		$script .= "		if ( ! document.querySelector('#wp-admin-bar-pantheon-hud-wp-admin-loading') ) {\n";
+		$script .= "			return;\n";
+		$script .= "		}\n";
+		$script .= "		var request = new XMLHttpRequest();\n";
+		$script .= "		request.open('GET', '" . esc_js( $request_url ) . "', true);\n";
+		$script .= "		request.onload = function() {\n";
+		$script .= "			if (this.status >= 200 && this.status < 400) {\n";
+		$script .= "				document.querySelector('#wp-admin-bar-pantheon-hud .ab-sub-wrapper').innerHTML = this.response;\n";
+		$script .= "				el.removeEventListener('mouseover', fetchData);\n";
+		$script .= "				el.removeEventListener('focus', fetchData);\n";
+		$script .= "			}\n";
+		$script .= "		};\n";
+		$script .= "		request.send();\n";
+		$script .= "	};\n";
+		$script .= "	el.addEventListener('mouseover', fetchData);\n";
+		$script .= "	el.addEventListener('focus', fetchData);\n";
+		$script .= "} );";
 		wp_add_inline_script( 'admin-bar', $script );
 		add_filter(
 			'amp_dev_mode_element_xpaths',
