@@ -19,10 +19,37 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-      - uses: pantheon-systems/action-wporg-validator@v2.0.0
+      - name: WordPress Plugin Check
+        uses: wordpress/plugin-check-action@v1
         with:
-          path: ./
-          type: 'plugin'
+          build-dir: ./
+          exclude-directories: |
+            .github
+            .wordpress-org
+            .git
+            .idea
+            .codacy
+            bin
+            tests
+            node_modules
+            vendor
+          exclude-files: |
+            .editorconfig
+            .gitattributes
+            .gitignore
+            .distignore
+            behat.yml
+            composer.json
+            composer.lock
+            Gruntfile.js
+            package.json
+            package-lock.json
+            phpcs.xml.dist
+            phpunit.xml.dist
+            README.md
+            CONTRIBUTING.md
+            CODEOWNERS
+            catalog-info.yaml
   validate-readme-spacing:
     name: Validate README Spacing
     runs-on: ubuntu-latest
