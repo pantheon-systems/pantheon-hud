@@ -152,31 +152,29 @@ class Toolbar {
 			],
 			admin_url( 'admin-ajax.php' )
 		);
-		$script      = <<<EOT
-document.addEventListener( 'DOMContentLoaded', function() {
-	var el = document.querySelector('#wp-admin-bar-pantheon-hud');
-	if ( ! el ) {
-		return;
-	}
-	var fetchData = function() {
-		if ( ! document.querySelector('#wp-admin-bar-pantheon-hud-wp-admin-loading') ) {
-			return;
-		}
-		var request = new XMLHttpRequest();
-		request.open('GET', '{$request_url}', true);
-		request.onload = function() {
-			if (this.status >= 200 && this.status < 400) {
-				document.querySelector('#wp-admin-bar-pantheon-hud .ab-sub-wrapper').innerHTML = this.response;
-				el.removeEventListener('mouseover', fetchData);
-				el.removeEventListener('focus', fetchData);
-			}
-		};
-		request.send();
-	};
-	el.addEventListener('mouseover', fetchData);
-	el.addEventListener('focus', fetchData);
-} );
-EOT;
+		$script      = "document.addEventListener( 'DOMContentLoaded', function() {\n" .
+			"\tvar el = document.querySelector('#wp-admin-bar-pantheon-hud');\n" .
+			"\tif ( ! el ) {\n" .
+			"\t\treturn;\n" .
+			"\t}\n" .
+			"\tvar fetchData = function() {\n" .
+			"\t\tif ( ! document.querySelector('#wp-admin-bar-pantheon-hud-wp-admin-loading') ) {\n" .
+			"\t\t\treturn;\n" .
+			"\t\t}\n" .
+			"\t\tvar request = new XMLHttpRequest();\n" .
+			"\t\trequest.open('GET', '{$request_url}', true);\n" .
+			"\t\trequest.onload = function() {\n" .
+			"\t\t\tif (this.status >= 200 && this.status < 400) {\n" .
+			"\t\t\t\tdocument.querySelector('#wp-admin-bar-pantheon-hud .ab-sub-wrapper').innerHTML = this.response;\n" .
+			"\t\t\t\tel.removeEventListener('mouseover', fetchData);\n" .
+			"\t\t\t\tel.removeEventListener('focus', fetchData);\n" .
+			"\t\t\t}\n" .
+			"\t\t};\n" .
+			"\t\trequest.send();\n" .
+			"\t};\n" .
+			"\tel.addEventListener('mouseover', fetchData);\n" .
+			"\tel.addEventListener('focus', fetchData);\n" .
+			'} );';
 		wp_add_inline_script( 'admin-bar', $script );
 		add_filter(
 			'amp_dev_mode_element_xpaths',
