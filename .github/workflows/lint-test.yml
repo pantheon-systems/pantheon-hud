@@ -17,6 +17,8 @@ jobs:
     name: WP.org Plugin Validation
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v5
       - uses: pantheon-systems/action-wporg-validator@v2.0.0
         with:
           path: ./
