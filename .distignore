@@ -1,0 +1,31 @@
+# Directories
+/.github
+/.wordpress-org
+/.git
+/.idea
+/.codacy
+/bin
+/tests
+/node_modules
+/vendor
+
+# Files
+/.editorconfig
+/.gitattributes
+/.gitignore
+/behat.yml
+/composer.json
+/composer.lock
+/Gruntfile.js
+/package.json
+/package-lock.json
+/phpcs.xml.dist
+/phpunit.xml.dist
+/README.md
+/CONTRIBUTING.md
+/CODEOWNERS
+/catalog-info.yaml
+
+# Hidden files
+.*
+!.distignore
