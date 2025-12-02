@@ -43,8 +43,8 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/vendor
-          key: test-lint-dependencies-{{ checksum "composer.json" }}
-          restore-keys: test-lint-dependencies-{{ checksum "composer.json" }}
+          key: test-lint-dependencies-${{ hashFiles('composer.json') }}
+          restore-keys: test-lint-dependencies-${{ hashFiles('composer.json') }}
 
       - name: Generate WP admin password
         run: echo "$(openssl rand -hex 8)" > /tmp/WORDPRESS_ADMIN_PASSWORD
