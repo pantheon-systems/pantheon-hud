@@ -27,10 +27,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install dependencies
-        run: | 
-          composer install -n --prefer-dist
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
