@@ -2,7 +2,7 @@
 **Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon/), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/), [jspellman](https://profiles.wordpress.org/jspellman/), [jazzs3quence](https://profiles.wordpress.org/jazzs3quence), [pwtyler](https://profiles.wordpress.org/pwtyler)  
 **Tags:** Pantheon, hosting, environment-indicator  
 **Requires at least:** 4.9  
-**Tested up to:** 6.8.1  
+**Tested up to:** 6.9  
 **Requires PHP:** 7.4  
 **Stable tag:** 0.4.5-dev  
 **License:** GPLv2 or later  
