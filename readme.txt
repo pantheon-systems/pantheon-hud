@@ -37,7 +37,7 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 == Changelog ==
 = 0.4.5-dev =
 * Supports PHP 8.4 [[#153](https://github.com/pantheon-systems/pantheon-hud/pull/153/)]
-* Supports WordPress 6.9 
+* Supports WordPress 6.9 [#173](https://github.com/pantheon-systems/pantheon-hud/pull/173/)
 
 = 0.4.4 (December 6, 2024) =
 * Fix admin bar item layout issue [[#145](https://github.com/pantheon-systems/pantheon-hud/pull/145)] props @cbirdsong and @westonruter
