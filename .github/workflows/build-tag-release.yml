@@ -13,9 +13,9 @@ jobs:
     name: Tag and Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
       - name: Build, tag and release
-        uses: pantheon-systems/plugin-release-actions/build-tag-release@main
+        uses: pantheon-systems/plugin-release-actions/build-tag-release@a3839d25efa9d0d4270c088702c2072a2e49edde # main 2025-11-07T23:23:14Z
         with:
           gh_token: ${{ github.token }}
           generate_release_notes: "true"
