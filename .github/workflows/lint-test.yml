@@ -2,15 +2,13 @@ name: Lint & Test
 on:
   schedule:
     - cron: "0 0 * * *"
-  push:
-    branches:
-      - '**'
+  pull_request:
 jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist
       - name: Run PHP Lint
@@ -19,7 +17,7 @@ jobs:
     name: WP.org Plugin Validation
     runs-on: ubuntu-latest
     steps:
-      - uses: pantheon-systems/action-wporg-validator@1.0.0
+      - uses: pantheon-systems/action-wporg-validator@v2.0.0
         with:
           type: 'plugin'
   validate-readme-spacing:
@@ -27,14 +25,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
       - uses: pantheon-systems/validate-readme-spacing@v1
   php8-compatibility:
     name: PHP 8.x Compatibility
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
       - name: PHP Compatibility
         uses: pantheon-systems/phpcompatibility-action@dev
         with:
@@ -48,7 +46,7 @@ jobs:
         image: mariadb:10.5
     name: PHP 7.4 Unit Tests
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
       - name: Setup PHP 7.4
         uses: shivammathur/setup-php@v2
         with:
@@ -57,43 +55,76 @@ jobs:
       - name: Start MySQL Service
         run: sudo systemctl start mysql
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/vendor
           key: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
           restore-keys: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
+      - name: Setup WP-CLI
+        uses: godaddy-wordpress/setup-wp-cli@1
       - name: Install Composer dependencies
         run: |
-          composer update && composer install
+          composer require pantheon-systems/pantheon-wp-coding-standards:^2.0 --dev --no-update
+          composer update
+          composer install
+          chmod +x bin/*.sh
       - name: Run PHP linting
         run: composer phplint
+      - name: Reset MariaDB root password to empty
+        run: |
+          until mysqladmin ping -h127.0.0.1 -uroot -proot --silent; do
+            sleep 1
+          done
+          mysql -h127.0.0.1 -uroot -proot <<'SQL'
+            ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
+            FLUSH PRIVILEGES;
+          SQL
+          mysqladmin ping -h127.0.0.1 -uroot --silent
+      - name: Install WPUnit tests
+        run: composer test:install:withdb
       - name: Run PHPUnit
-        run: bash ./bin/phpunit-test.sh
-  test-phpunit-83:
+        run: composer phpunit
+  test-phpunit-84:
     needs: lint
     runs-on: ubuntu-latest
     services:
       mariadb:
         image: mariadb:10.6
-    name: PHP 8.3 Unit Tests
+    name: PHP 8.4 Unit Tests
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup PHP 8.3
+      - uses: actions/checkout@v5
+      - name: Setup PHP 8.4
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.3
+          php-version: 8.4
           extensions: mysqli, zip, imagick
       - name: Start MySQL Service
         run: sudo systemctl start mysql
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/vendor
           key: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
           restore-keys: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
+      - name: Setup WP-CLI
+        uses: godaddy-wordpress/setup-wp-cli@1
       - name: Install Composer dependencies
-        run: composer install
+        run: |
+          composer install
+          chmod +x bin/*.sh
       - name: Run PHP linting
         run: composer phplint
+      - name: Reset MariaDB root password to empty
+        run: |
+          until mysqladmin ping -h127.0.0.1 -uroot -proot --silent; do
+            sleep 1
+          done
+          mysql -h127.0.0.1 -uroot -proot <<'SQL'
+            ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
+            FLUSH PRIVILEGES;
+          SQL
+          mysqladmin ping -h127.0.0.1 -uroot --silent
+      - name: Install WPUnit tests
+        run: composer test:install:withdb
       - name: Run PHPUnit
-        run: bash ./bin/phpunit-test.sh
+        run: composer phpunit

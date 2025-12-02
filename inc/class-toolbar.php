@@ -86,7 +86,8 @@ class Toolbar {
 
 		$env_admins = '';
 		// TODO: List envs from API to include Multidev.
-		foreach ( [ 'dev', 'test', 'live' ] as $e ) {
+		$envs = apply_filters( 'pantheon_hud_envs', [ 'dev', 'test', 'live' ] );
+		foreach ( $envs as $e ) {
 			$url = $api->get_primary_environment_url( $e );
 			if ( $url ) {
 				$env_admins .= '<a target="_blank" href="' . esc_url( rtrim( $url ) . '/wp-admin/' ) . '">' . esc_html( $e ) . '</a> | ';
