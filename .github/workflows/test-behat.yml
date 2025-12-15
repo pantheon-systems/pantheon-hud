@@ -1,10 +1,9 @@
 name: Test Behat CI
 
 on:
-  push:
   pull_request:
   workflow_dispatch:
-  # Nightly at 00:00 UTC (CircleCI: "0 0 * * *")
+  # Nightly at 00:00 UTC
   schedule:
     - cron: "0 0 * * *"
 
@@ -14,54 +13,55 @@ jobs:
     if: github.event_name != 'schedule' || github.ref_name == 'release'
     runs-on: ubuntu-latest
 
-    # Run all steps inside the CircleCI-equivalent container
-    container:
-      image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2
-
     defaults:
       run:
         shell: bash
+        working-directory: .
+
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      # Optional: if your repo root is not the project root,
-      # set working-directory on steps or change this to your subdir.
-
-      - name: Restore Composer cache
-        uses: actions/cache@v4
+        uses: actions/checkout@v5
         with:
-          path: vendor
-          key: composer-${{ hashFiles('**/composer.lock', 'composer.json') }}
-          restore-keys: |
-            composer-
+          fetch-depth: 0
 
-      - name: Install dependencies
-        run: composer install -n --prefer-dist
-
-      - name: Save Composer cache (no-op if unchanged)
-        uses: actions/cache@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          path: vendor
-          key: composer-${{ hashFiles('**/composer.lock', 'composer.json') }}
+          php-version: '8.2'
+          tools: composer
+          coverage: none
+          extensions: mbstring, intl, zip
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/vendor
+          key: test-lint-dependencies-${{ hashFiles('composer.json') }}
+          restore-keys: test-lint-dependencies-${{ hashFiles('composer.json') }}
 
       - name: Generate WP admin password
         run: echo "$(openssl rand -hex 8)" > /tmp/WORDPRESS_ADMIN_PASSWORD
 
-      - name: Export environment (CircleCI -> GHA equivalents)
+      - name: Export environment
         run: |
           echo "TERMINUS_ENV=ci-${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
-          echo "TERMINUS_SITE=wp-redis" >> "$GITHUB_ENV"
-          echo "SITE_ENV=wp-redis.ci-${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
+          echo "TERMINUS_SITE=pantheon-hud" >> "$GITHUB_ENV"
+          echo "SITE_ENV=pantheon-hud.ci-${GITHUB_RUN_NUMBER}" >> "$GITHUB_ENV"
           echo "WORDPRESS_ADMIN_USERNAME=pantheon" >> "$GITHUB_ENV"
           echo "WORDPRESS_ADMIN_EMAIL=no-reply@getpantheon.com" >> "$GITHUB_ENV"
           echo "WORDPRESS_ADMIN_PASSWORD=$(cat /tmp/WORDPRESS_ADMIN_PASSWORD)" >> "$GITHUB_ENV"
 
-      - name: Disable StrictHostKeyChecking
-        run: |
-          mkdir -p "$HOME/.ssh"
-          echo "StrictHostKeyChecking no" >> "$HOME/.ssh/config"
+      # Configures SSH to automatically accept new host keys.
+      - name: Force SSH to ignore host keys
+        run: echo "GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" >> $GITHUB_ENV
+
+      - name: Install SSH key
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SITE_OWNER_SSH_PRIVATE_KEY }}
 
       - name: Configure Composer GitHub OAuth (optional)
         env:
@@ -72,20 +72,21 @@ jobs:
           fi
           { composer config -g github-oauth.github.com "${GITHUB_TOKEN}"; } &>/dev/null
 
-      - name: Terminus login (optional)
-        env:
-          TERMINUS_TOKEN: ${{ secrets.TERMINUS_TOKEN }}
-        run: |
-          if [ -z "${TERMINUS_TOKEN}" ]; then
-            echo "TERMINUS_TOKEN missing; assuming unauthenticated build"; exit 0
-          fi
-          terminus auth:login --machine-token="${TERMINUS_TOKEN}"
+      - name: Install Terminus
+        uses: pantheon-systems/terminus-github-actions@v1
+        with:
+          pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
 
       - name: Validate fixture version
-        run: ./bin/validate-fixture-version.sh
+        uses: jazzsequence/action-validate-plugin-version@v1
+        with:
+          branch: ${{ github.head_ref }}
+          dry-run: 'true'
 
       - name: Behat prepare
-        run: ./bin/behat-prepare.sh
+        run: |
+          composer install --no-progress --prefer-dist
+          ./bin/behat-prepare.sh
 
       - name: Behat tests (strict)
         run: ./bin/behat-test.sh --strict
