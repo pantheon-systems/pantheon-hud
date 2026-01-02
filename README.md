@@ -2,9 +2,9 @@
 **Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon/), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/), [jspellman](https://profiles.wordpress.org/jspellman/), [jazzs3quence](https://profiles.wordpress.org/jazzs3quence), [pwtyler](https://profiles.wordpress.org/pwtyler)  
 **Tags:** Pantheon, hosting, environment-indicator  
 **Requires at least:** 4.9  
-**Tested up to:** 6.8.1  
+**Tested up to:** 6.9  
 **Requires PHP:** 7.4  
-**Stable tag:** 0.4.5-dev  
+**Stable tag:** 0.4.5
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,9 +51,10 @@ By default, the Pantheon HUD shows dev, test and live. You can modify these valu
 
 
 ## Changelog ##
-### 0.4.5-dev ###
+### 0.4.5 ###
 * Supports PHP 8.4 [[#153](https://github.com/pantheon-systems/pantheon-hud/pull/153/)]
 * Add Enviroment Filter
+* Supports WordPress 6.9 [#173](https://github.com/pantheon-systems/pantheon-hud/pull/173/)
 
 ### 0.4.4 (December 6, 2024 ###
 * Fix admin bar item layout issue [[#145](https://github.com/pantheon-systems/pantheon-hud/pull/145)] props @cbirdsong and @westonruter
