@@ -13,6 +13,10 @@
  * @package Pantheon HUD
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 define( 'PANTHEON_HUD_ROOT_FILE', __FILE__ );
 
 add_action(

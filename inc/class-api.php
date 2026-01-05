@@ -5,6 +5,10 @@
  * @package Pantheon HUD
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 namespace Pantheon\HUD;
 
 /**
@@ -39,7 +43,7 @@ class API {
 	 * @return string
 	 */
 	public function get_site_id() {
-		return ! empty( $_ENV['PANTHEON_SITE'] ) ? $_ENV['PANTHEON_SITE'] : '';
+		return ! empty( $_ENV['PANTHEON_SITE'] ) ? sanitize_text_field( wp_unslash( $_ENV['PANTHEON_SITE'] ) ) : '';
 	}
 
 	/**
@@ -48,7 +52,7 @@ class API {
 	 * @return string
 	 */
 	public function get_site_name() {
-		return ! empty( $_ENV['PANTHEON_SITE_NAME'] ) ? $_ENV['PANTHEON_SITE_NAME'] : '';
+		return ! empty( $_ENV['PANTHEON_SITE_NAME'] ) ? sanitize_text_field( wp_unslash( $_ENV['PANTHEON_SITE_NAME'] ) ) : '';
 	}
 
 	/**
@@ -114,7 +118,7 @@ class API {
 	 * @return string|false
 	 */
 	public function get_php_version() {
-		return ! empty( $_ENV['php_version'] ) ? $_ENV['php_version'] : PHP_VERSION;
+		return ! empty( $_ENV['php_version'] ) ? sanitize_text_field( wp_unslash( $_ENV['php_version'] ) ) : PHP_VERSION;
 	}
 
 	/**
@@ -146,7 +150,7 @@ class API {
 			return $this->environment_settings_data;
 		}
 		if ( ! empty( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
-			$url = sprintf( '%s/sites/self/environments/%s/settings', self::API_URL_BASE, $_ENV['PANTHEON_ENVIRONMENT'] );
+			$url = sprintf( '%s/sites/self/environments/%s/settings', self::API_URL_BASE, sanitize_text_field( wp_unslash( $_ENV['PANTHEON_ENVIRONMENT'] ) ) );
 			$this->environment_settings_data = self::fetch_api_data( $url );
 		} else {
 			$this->environment_settings_data = [];

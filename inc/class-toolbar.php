@@ -5,6 +5,10 @@
  * @package Pantheon HUD
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 namespace Pantheon\HUD;
 
 /**
@@ -237,6 +241,6 @@ class Toolbar {
 	 * @return string Pantheon environment or 'local'.
 	 */
 	private function get_environment() {
-		return ! empty( $_ENV['PANTHEON_ENVIRONMENT'] ) ? $_ENV['PANTHEON_ENVIRONMENT'] : 'local';
+		return ! empty( $_ENV['PANTHEON_ENVIRONMENT'] ) ? sanitize_text_field( wp_unslash( $_ENV['PANTHEON_ENVIRONMENT'] ) ) : 'local';
 	}
 }
