@@ -7,6 +7,10 @@
 
 namespace Pantheon\HUD;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Pull data from the Pantheon site API.
  */
