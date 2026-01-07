@@ -17,9 +17,40 @@ jobs:
     name: WP.org Plugin Validation
     runs-on: ubuntu-latest
     steps:
-      - uses: pantheon-systems/action-wporg-validator@v2.0.0
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: WordPress Plugin Check
+        uses: wordpress/plugin-check-action@ec9b3fe9beaa76bcc4510b7ba2cb5855a5f80f3f  # v1
         with:
-          type: 'plugin'
+          build-dir: ./
+          exclude-directories: |
+            .github
+            .wordpress-org
+            .git
+            .idea
+            .codacy
+            bin
+            tests
+            node_modules
+            vendor
+          exclude-files: |
+            .editorconfig
+            .gitattributes
+            .gitignore
+            .distignore
+            .wp-env.json
+            behat.yml
+            composer.json
+            composer.lock
+            Gruntfile.js
+            package.json
+            package-lock.json
+            phpcs.xml.dist
+            phpunit.xml.dist
+            README.md
+            CONTRIBUTING.md
+            CODEOWNERS
+            catalog-info.yaml
   validate-readme-spacing:
     name: Validate README Spacing
     runs-on: ubuntu-latest

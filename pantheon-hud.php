@@ -8,9 +8,15 @@
  * Plugin URI: https://pantheon.io
  * Text Domain: pantheon-hud
  * Domain Path: /languages
+ * License: GPLv2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  *
  * @package Pantheon HUD
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 define( 'PANTHEON_HUD_ROOT_FILE', __FILE__ );
 
