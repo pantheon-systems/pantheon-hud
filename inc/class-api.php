@@ -87,7 +87,7 @@ class API {
 	 */
 	public function get_environment_details(): array {
 		$details = [
-			'web'      => [],
+			'web' => [],
 			'database' => [],
 		];
 		$environment_settings = $this->get_environment_settings_data();
@@ -96,7 +96,6 @@ class API {
 		}
 		$php_version = $this->get_php_version();
 		if ( $php_version ) {
-			$php_version                    = (string) $php_version;
 			$details['web']['php_version'] = 'PHP ' . $php_version;
 		}
 		if ( ! empty( $environment_settings['dbserver'] ) ) {
@@ -138,7 +137,7 @@ class API {
 			return $this->domains_data[ $env ];
 		}
 		if ( ! empty( $env ) ) {
-			$url                         = sprintf( '%s/sites/self/environments/%s/domains', self::API_URL_BASE, $env );
+			$url = sprintf( '%s/sites/self/environments/%s/domains', self::API_URL_BASE, $env );
 			$this->domains_data[ $env ] = self::fetch_api_data( $url );
 		} else {
 			$this->domains_data[ $env ] = [];
@@ -159,7 +158,7 @@ class API {
 			return $this->environment_settings_data;
 		}
 		if ( ! empty( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
-			$url                             = sprintf( '%s/sites/self/environments/%s/settings', self::API_URL_BASE, $_ENV['PANTHEON_ENVIRONMENT'] );
+			$url = sprintf( '%s/sites/self/environments/%s/settings', self::API_URL_BASE, $_ENV['PANTHEON_ENVIRONMENT'] );
 			$this->environment_settings_data = self::fetch_api_data( $url );
 		} else {
 			$this->environment_settings_data = [];
@@ -191,9 +190,9 @@ class API {
 		// Function internal to Pantheon infrastructure.
 		$pem_file = apply_filters( 'pantheon_hud_pem_file', null );
 		if ( function_exists( 'pantheon_curl' ) ) {
-			$bits     = wp_parse_url( $url );
+			$bits = wp_parse_url( $url );
 			$response = pantheon_curl( sprintf( '%s://%s%s', $bits['scheme'], $bits['host'], $bits['path'] ), null, $bits['port'] );
-			$body     = ! empty( $response['body'] ) ? $response['body'] : '';
+			$body = ! empty( $response['body'] ) ? $response['body'] : '';
 			return json_decode( $body, true );
 
 			// For those developing locally who know what they're doing.

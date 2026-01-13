@@ -63,16 +63,16 @@ class Toolbar {
 		$bits[] = $env;
 		$title .= ' ' . esc_html( strtolower( implode( ':', $bits ) ) );
 		$wp_admin_bar->add_node( [
-			'id'    => 'pantheon-hud',
-			'href'  => false,
+			'id' => 'pantheon-hud',
+			'href' => false,
 			'title' => $title,
 		] );
 
 		$wp_admin_bar->add_node( [
-			'id'     => 'pantheon-hud-wp-admin-loading',
+			'id' => 'pantheon-hud-wp-admin-loading',
 			'parent' => 'pantheon-hud',
-			'href'   => false,
-			'title'  => 'Loading&hellip;',
+			'href' => false,
+			'title' => 'Loading&hellip;',
 		] );
 	}
 
@@ -84,11 +84,11 @@ class Toolbar {
 	public function action_handle_ajax_markup(): void {
 		check_ajax_referer( 'pantheon_hud' );
 
-		$api     = new API();
-		$name    = $api->get_site_name();
+		$api = new API();
+		$name = $api->get_site_name();
 		$site_id = $api->get_site_id();
-		$env     = $this->get_environment();
-		$markup  = [];
+		$env = $this->get_environment();
+		$markup = [];
 		$markup[] = '<ul id="wp-admin-bar-pantheon-hud-default" class="ab-submenu">';
 
 		$env_admins = '';
@@ -126,18 +126,18 @@ class Toolbar {
 			}
 			if ( ! empty( $details_html ) ) {
 				$details_html = '<em>' . esc_html__( 'Environment Details', 'pantheon-hud' ) . '</em><br /> - ' . implode( '<br /> - ', $details_html );
-				$markup[]     = '<li id="wp-admin-bar-pantheon-hud-environment-details"><div class="ab-item ab-empty-item">' . $details_html . '</div></li>';
+				$markup[] = '<li id="wp-admin-bar-pantheon-hud-environment-details"><div class="ab-item ab-empty-item">' . $details_html . '</div></li>';
 			}
 		}
 
 		if ( $name && $env ) {
 			$wp_cli_stub = sprintf( 'terminus wp %s.%s', $name, $env );
-			$markup[]    = '<li id="wp-admin-bar-pantheon-hud-wp-cli-stub"><div class="ab-item ab-empty-item"><em>' . esc_html__( 'WP-CLI via Terminus', 'pantheon-hud' ) . '</em><br /><input value="' . esc_attr( $wp_cli_stub ) . '"></div></li>';
+			$markup[] = '<li id="wp-admin-bar-pantheon-hud-wp-cli-stub"><div class="ab-item ab-empty-item"><em>' . esc_html__( 'WP-CLI via Terminus', 'pantheon-hud' ) . '</em><br /><input value="' . esc_attr( $wp_cli_stub ) . '"></div></li>';
 		}
 
 		if ( $site_id && $env ) {
 			$dashboard_link = sprintf( 'https://dashboard.pantheon.io/sites/%s#%s/code', $site_id, $env );
-			$markup[]       = sprintf( '<li id="wp-admin-bar-pantheon-hud-dashboard-link"><a class="ab-item" href="%s" target="_blank">Visit Pantheon Dashboard</a></li>', esc_url( $dashboard_link ) );
+			$markup[] = sprintf( '<li id="wp-admin-bar-pantheon-hud-dashboard-link"><a class="ab-item" href="%s" target="_blank">Visit Pantheon Dashboard</a></li>', esc_url( $dashboard_link ) );
 		}
 
 		$markup[] = '</ul>';
@@ -174,7 +174,7 @@ class Toolbar {
 		// Prepare AJAX request URL.
 		$request_url = add_query_arg(
 			[
-				'action'   => 'pantheon_hud_markup',
+				'action' => 'pantheon_hud_markup',
 				'_wpnonce' => wp_create_nonce( 'pantheon_hud' ),
 			],
 			admin_url( 'admin-ajax.php' )
