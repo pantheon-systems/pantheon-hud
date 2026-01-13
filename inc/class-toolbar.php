@@ -156,34 +156,27 @@ class Toolbar {
 			],
 			admin_url( 'admin-ajax.php' )
 		);
-		$script  = "document.addEventListener( 'DOMContentLoaded', function() {\n";
-		$script .= "	var el = document.querySelector('#wp-admin-bar-pantheon-hud');\n";
-		$script .= "	if ( ! el ) {\n";
-		$script .= "		return;\n";
-		$script .= "	}\n";
-		$script .= "	var fetchData = function() {\n";
-		$script .= "		if ( ! document.querySelector('#wp-admin-bar-pantheon-hud-wp-admin-loading') ) {\n";
-		$script .= "			return;\n";
-		$script .= "		}\n";
-		$script .= "		var request = new XMLHttpRequest();\n";
-		$script .= "		request.open('GET', '" . esc_js( $request_url ) . "', true);\n";
-		$script .= "		request.onload = function() {\n";
-		$script .= "			if (this.status >= 200 && this.status < 400) {\n";
-		$script .= "				document.querySelector('#wp-admin-bar-pantheon-hud .ab-sub-wrapper').innerHTML = this.response;\n";
-		$script .= "				el.removeEventListener('mouseover', fetchData);\n";
-		$script .= "				el.removeEventListener('focus', fetchData);\n";
-		$script .= "			}\n";
-		$script .= "		};\n";
-		$script .= "		request.send();\n";
-		$script .= "	};\n";
-		$script .= "	el.addEventListener('mouseover', fetchData);\n";
-		$script .= "	el.addEventListener('focus', fetchData);\n";
-		$script .= '} );';
-		wp_add_inline_script( 'admin-bar', $script );
+
+		wp_enqueue_script(
+			'pantheon-hud',
+			plugins_url( 'assets/js/pantheon-hud.js', PANTHEON_HUD_ROOT_FILE ),
+			[ 'admin-bar' ],
+			'0.4.5',
+			true
+		);
+
+		wp_localize_script(
+			'pantheon-hud',
+			'pantheonHudData',
+			[
+				'requestUrl' => $request_url,
+			]
+		);
+
 		add_filter(
 			'amp_dev_mode_element_xpaths',
 			static function ( $xpaths ) {
-				$xpaths[] = '//script[ contains( text(), "wp-admin-bar-pantheon-hud" ) ]';
+				$xpaths[] = '//script[ contains( @src, "pantheon-hud.js" ) ]';
 				return $xpaths;
 			}
 		);
