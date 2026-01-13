@@ -61,6 +61,9 @@ Note that dependencies are installed via Composer and the `vendor` directory is 
     * Add a new `** X.Y.Z-dev **` heading to the changelog
     * `git add -A .`
     * `git commit -m "Prepare X.Y.Z-dev"`
-    * `git checkout -b release-XYZ-dev` (we need to test this commit but we will _not_ PR it into main)
-    * _Wait for all required status checks to pass in CI._
-    * `git push origin main`
+    * `git checkout -b release-XYZ-dev`
+    * `git push origin release-XYZ-dev`
+    * Create a pull request on GitHub UI from `release-XYZ-dev` to `main` to trigger all required status checks
+    * _Wait for all required status checks to pass in CI. Once all tests pass, push to main from the terminal:_
+    * `git checkout main && git push origin main`
+    * _Note: While main is typically protected, having an open PR with passing tests allows direct push to main, which is the preferred method here._
