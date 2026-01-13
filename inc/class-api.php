@@ -22,7 +22,7 @@ class API {
 	/**
 	 * Holds the domains data when present.
 	 *
-	 * @var array
+	 * @var array<string, array>
 	 */
 	private $domains_data;
 
@@ -38,7 +38,7 @@ class API {
 	 *
 	 * @return string
 	 */
-	public function get_site_id() {
+	public function get_site_id(): string {
 		return ! empty( $_ENV['PANTHEON_SITE'] ) ? $_ENV['PANTHEON_SITE'] : '';
 	}
 
@@ -47,7 +47,7 @@ class API {
 	 *
 	 * @return string
 	 */
-	public function get_site_name() {
+	public function get_site_name(): string {
 		return ! empty( $_ENV['PANTHEON_SITE_NAME'] ) ? $_ENV['PANTHEON_SITE_NAME'] : '';
 	}
 
@@ -56,7 +56,7 @@ class API {
 	 *
 	 * @return int
 	 */
-	public function get_last_code_push_timestamp() {
+	public function get_last_code_push_timestamp(): int {
 		$environment_settings = $this->get_environment_settings_data();
 		if ( ! empty( $environment_settings['last_code_push']['timestamp'] ) ) {
 			return strtotime( $environment_settings['last_code_push']['timestamp'] );
@@ -71,7 +71,7 @@ class API {
 	 * @param string $env Environment to fetch the domains of.
 	 * @return string
 	 */
-	public function get_primary_environment_url( $env ) {
+	public function get_primary_environment_url( string $env ): string {
 		$domains = $this->get_domains_data( $env );
 		if ( ! empty( $domains[0]['key'] ) ) {
 			return $domains[0]['key'];
@@ -85,7 +85,7 @@ class API {
 	 *
 	 * @return array
 	 */
-	public function get_environment_details() {
+	public function get_environment_details(): array {
 		$details = [
 			'web' => [],
 			'database' => [],
@@ -96,7 +96,6 @@ class API {
 		}
 		$php_version = $this->get_php_version();
 		if ( $php_version ) {
-			$php_version = (string) $php_version;
 			$details['web']['php_version'] = 'PHP ' . $php_version;
 		}
 		if ( ! empty( $environment_settings['dbserver'] ) ) {
@@ -120,10 +119,20 @@ class API {
 	/**
 	 * Gets the domains data.
 	 *
+	 * TODO: Consider caching this data using WordPress transients to reduce API calls.
+	 * Example implementation:
+	 *   $cache_key = 'pantheon_hud_domains_' . $env;
+	 *   $cached = get_transient( $cache_key );
+	 *   if ( false !== $cached ) {
+	 *       return $cached;
+	 *   }
+	 *   // Fetch from API...
+	 *   set_transient( $cache_key, $data, HOUR_IN_SECONDS );
+	 *
 	 * @param string $env Environment to fetch the domains of.
 	 * @return array
 	 */
-	private function get_domains_data( $env ) {
+	private function get_domains_data( string $env ): array {
 		if ( isset( $this->domains_data[ $env ] ) ) {
 			return $this->domains_data[ $env ];
 		}
@@ -139,9 +148,12 @@ class API {
 	/**
 	 * Gets the environment settings data.
 	 *
+	 * TODO: Consider caching this data using WordPress transients to reduce API calls.
+	 * This data changes infrequently and could be cached for better performance.
+	 *
 	 * @return array
 	 */
-	private function get_environment_settings_data() {
+	private function get_environment_settings_data(): array {
 		if ( isset( $this->environment_settings_data ) ) {
 			return $this->environment_settings_data;
 		}
@@ -157,10 +169,23 @@ class API {
 	/**
 	 * Fetch data from a given Pantheon API URL.
 	 *
+	 * TODO: Improve error handling:
+	 * - Currently returns empty array on all failures, making it hard to distinguish
+	 *   between "no data" and "API error"
+	 * - Consider logging errors with error_log() for debugging
+	 * - Consider returning WP_Error on failure for better error messages
+	 * - Add timeout handling for slow API responses
+	 *
+	 * Example improved error handling:
+	 *   if ( is_wp_error( $response ) ) {
+	 *       error_log( 'Pantheon HUD API Error: ' . $response->get_error_message() );
+	 *       return new WP_Error( 'api_failed', $response->get_error_message() );
+	 *   }
+	 *
 	 * @param string $url URL from which to fetch data.
-	 * @return array
+	 * @return array Returns empty array on failure.
 	 */
-	private function fetch_api_data( $url ) {
+	private function fetch_api_data( string $url ): array {
 
 		// Function internal to Pantheon infrastructure.
 		$pem_file = apply_filters( 'pantheon_hud_pem_file', null );
@@ -172,11 +197,11 @@ class API {
 
 			// For those developing locally who know what they're doing.
 		} elseif ( $pem_file || ( defined( 'PANTHEON_HUD_PHPUNIT_RUNNING' ) && PANTHEON_HUD_PHPUNIT_RUNNING ) ) {
-			$require_curl = function () {
+			$require_curl = function (): array {
 				return [ 'curl' ];
 			};
 			add_filter( 'http_api_transports', $require_curl );
-			$client_cert = function ( $handle ) use ( $pem_file ) {
+			$client_cert = function ( $handle ) use ( $pem_file ): void {
 				curl_setopt( $handle, CURLOPT_SSLCERT, $pem_file ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 			};
 			add_action( 'http_api_curl', $client_cert );
@@ -184,17 +209,20 @@ class API {
 				$url,
 				[ 'sslverify' => false ] // yolo.
 			);
+			// Silent failure: Returns empty array instead of providing error context.
 			if ( is_wp_error( $response ) ) {
 				return [];
 			}
 			remove_action( 'http_api_curl', $client_cert );
 			remove_filter( 'http_api_transports', $require_curl );
+			// Silent failure: Returns empty array instead of providing error context.
 			if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
 				return [];
 			}
 			$body = wp_remote_retrieve_body( $response );
 			return json_decode( $body, true );
 		}
+		// Silent failure: Returns empty array when neither pantheon_curl nor local dev setup exists.
 		return [];
 	}
 }

@@ -16,14 +16,16 @@ class Toolbar {
 	/**
 	 * Class Instance.
 	 *
-	 * @var $instance
+	 * @var Toolbar
 	 */
 	private static $instance;
 
 	/**
 	 * Singleton
+	 *
+	 * @return Toolbar
 	 */
-	public static function get_instance() {
+	public static function get_instance(): Toolbar {
 		if ( ! isset( self::$instance ) ) {
 			self::$instance = new self();
 			self::$instance->setup_actions();
@@ -33,23 +35,26 @@ class Toolbar {
 
 	/**
 	 * Setup Actions
+	 *
+	 * @return void
 	 */
-	private function setup_actions() {
+	private function setup_actions(): void {
 		add_action( 'admin_bar_menu', [ $this, 'action_admin_bar_menu' ], 100 );
 		add_action( 'wp_ajax_pantheon_hud_markup', [ $this, 'action_handle_ajax_markup' ] );
-		add_action( 'wp_enqueue_scripts', [ $this, 'add_admin_bar_inline_styles' ] );
-		add_action( 'admin_enqueue_scripts', [ $this, 'add_admin_bar_inline_styles' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_admin_bar_assets' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_bar_assets' ] );
 	}
 
 	/**
 	 * Hook into Admin Bar
 	 *
-	 * @param object $wp_admin_bar The Admin Bar Object.
+	 * @param \WP_Admin_Bar $wp_admin_bar The Admin Bar Object.
+	 * @return void
 	 */
-	public function action_admin_bar_menu( $wp_admin_bar ) {
-		$api = new API();
+	public function action_admin_bar_menu( \WP_Admin_Bar $wp_admin_bar ): void {
+		$api  = new API();
 		$name = $api->get_site_name();
-		$env = $this->get_environment();
+		$env  = $this->get_environment();
 		$title = '<img src="' . esc_url( plugins_url( 'assets/img/pantheon-fist-color.svg', PANTHEON_HUD_ROOT_FILE ) ) . '" width="32" height="32" />';
 		$bits = [];
 		if ( $name ) {
@@ -73,8 +78,10 @@ class Toolbar {
 
 	/**
 	 * Handles an AJAX request to fetch additional markup for the dropdown menu.
+	 *
+	 * @return void
 	 */
-	public function action_handle_ajax_markup() {
+	public function action_handle_ajax_markup(): void {
 		check_ajax_referer( 'pantheon_hud' );
 
 		$api = new API();
@@ -119,118 +126,86 @@ class Toolbar {
 			}
 			if ( ! empty( $details_html ) ) {
 				$details_html = '<em>' . esc_html__( 'Environment Details', 'pantheon-hud' ) . '</em><br /> - ' . implode( '<br /> - ', $details_html );
-				$markup[]     = '<li id="wp-admin-bar-pantheon-hud-environment-details"><div class="ab-item ab-empty-item">' . $details_html . '</div></li>';
+				$markup[] = '<li id="wp-admin-bar-pantheon-hud-environment-details"><div class="ab-item ab-empty-item">' . $details_html . '</div></li>';
 			}
 		}
 
 		if ( $name && $env ) {
 			$wp_cli_stub = sprintf( 'terminus wp %s.%s', $name, $env );
-			$markup[]    = '<li id="wp-admin-bar-pantheon-hud-wp-cli-stub"><div class="ab-item ab-empty-item"><em>' . esc_html__( 'WP-CLI via Terminus', 'pantheon-hud' ) . '</em><br /><input value="' . esc_attr( $wp_cli_stub ) . '"></div></li>';
+			$markup[] = '<li id="wp-admin-bar-pantheon-hud-wp-cli-stub"><div class="ab-item ab-empty-item"><em>' . esc_html__( 'WP-CLI via Terminus', 'pantheon-hud' ) . '</em><br /><input value="' . esc_attr( $wp_cli_stub ) . '"></div></li>';
 		}
 
 		if ( $site_id && $env ) {
 			$dashboard_link = sprintf( 'https://dashboard.pantheon.io/sites/%s#%s/code', $site_id, $env );
-			$markup[]       = sprintf( '<li id="wp-admin-bar-pantheon-hud-dashboard-link"><a class="ab-item" href="%s" target="_blank">Visit Pantheon Dashboard</a></li>', $dashboard_link );
+			$markup[] = sprintf( '<li id="wp-admin-bar-pantheon-hud-dashboard-link"><a class="ab-item" href="%s" target="_blank">Visit Pantheon Dashboard</a></li>', esc_url( $dashboard_link ) );
 		}
 
 		$markup[] = '</ul>';
-		echo implode( PHP_EOL, $markup ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		// All values in $markup are escaped at point of insertion, safe to output.
+		echo implode( PHP_EOL, $markup ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- All values are escaped above.
 		exit;
 	}
 
 	/**
-	 * Add admin bar inline styles.
+	 * Enqueue admin bar CSS and JavaScript assets.
+	 *
+	 * @return void
 	 */
-	public function add_admin_bar_inline_styles() {
+	public function enqueue_admin_bar_assets(): void {
 		if ( ! is_admin_bar_showing() ) {
 			return;
 		}
+
+		// Get plugin version from main plugin file header.
+		$plugin_data = get_file_data(
+			PANTHEON_HUD_ROOT_FILE,
+			[ 'Version' => 'Version' ]
+		);
+		$version = $plugin_data['Version'] ?? '0.4.5';
+
+		// Enqueue CSS.
+		wp_enqueue_style(
+			'pantheon-hud',
+			plugins_url( 'assets/css/pantheon-hud.css', PANTHEON_HUD_ROOT_FILE ),
+			[ 'admin-bar' ],
+			$version
+		);
+
+		// Prepare AJAX request URL.
 		$request_url = add_query_arg(
 			[
-				'action'   => 'pantheon_hud_markup',
+				'action' => 'pantheon_hud_markup',
 				'_wpnonce' => wp_create_nonce( 'pantheon_hud' ),
 			],
 			admin_url( 'admin-ajax.php' )
 		);
-		$script      = <<<EOT
-document.addEventListener( 'DOMContentLoaded', function() {
-	var el = document.querySelector('#wp-admin-bar-pantheon-hud');
-	if ( ! el ) {
-		return;
-	}
-	var fetchData = function() {
-		if ( ! document.querySelector('#wp-admin-bar-pantheon-hud-wp-admin-loading') ) {
-			return;
-		}
-		var request = new XMLHttpRequest();
-		request.open('GET', '{$request_url}', true);
-		request.onload = function() {
-			if (this.status >= 200 && this.status < 400) {
-				document.querySelector('#wp-admin-bar-pantheon-hud .ab-sub-wrapper').innerHTML = this.response;
-				el.removeEventListener('mouseover', fetchData);
-				el.removeEventListener('focus', fetchData);
-			}
-		};
-		request.send();
-	};
-	el.addEventListener('mouseover', fetchData);
-	el.addEventListener('focus', fetchData);
-} );
-EOT;
-		wp_add_inline_script( 'admin-bar', $script );
+
+		// Enqueue JavaScript.
+		wp_enqueue_script(
+			'pantheon-hud',
+			plugins_url( 'assets/js/pantheon-hud.js', PANTHEON_HUD_ROOT_FILE ),
+			[ 'admin-bar' ],
+			$version,
+			true
+		);
+
+		// Pass data to JavaScript.
+		wp_localize_script(
+			'pantheon-hud',
+			'pantheonHudData',
+			[
+				'requestUrl' => $request_url,
+			]
+		);
+
+		// AMP compatibility filter.
 		add_filter(
 			'amp_dev_mode_element_xpaths',
-			static function ( $xpaths ) {
-				$xpaths[] = '//script[ contains( text(), "wp-admin-bar-pantheon-hud" ) ]';
+			static function ( array $xpaths ): array {
+				$xpaths[] = '//script[ contains( @src, "pantheon-hud.js" ) ]';
 				return $xpaths;
 			}
 		);
-		ob_start();
-		?>
-		<style>
-			#wpadminbar li#wp-admin-bar-pantheon-hud > .ab-item img {
-				display:inline;
-				height:32px;
-				width:32px;
-				vertical-align:middle;
-				margin-top:-4px;
-			}
-			#wpadminbar li#wp-admin-bar-pantheon-hud em {
-				font-size: 11px;
-				line-height: 13px;
-				font-style: italic;
-			}
-			#wpadminbar li#wp-admin-bar-pantheon-hud br {
-				line-height: 0;
-			}
-			#wpadminbar #wp-admin-bar-pantheon-hud-wp-admin-links a {
-				display: inline;
-				padding:0;
-				height: auto;
-			}
-			#wpadminbar ul li#wp-admin-bar-pantheon-hud-wp-admin-links .ab-item,
-			#wpadminbar ul li#wp-admin-bar-pantheon-hud-environment-details .ab-item,
-			#wpadminbar ul li#wp-admin-bar-pantheon-hud-wp-cli-stub .ab-item {
-				height: auto;
-			}
-			#wpadminbar ul li#wp-admin-bar-pantheon-hud-wp-cli-stub input {
-				width: 100%;
-				line-height: 15px;
-				background-color: rgba( 255, 255, 255, 0.9 );
-				border-width: 1px;
-			}
-			#wpadminbar ul li#wp-admin-bar-pantheon-hud-dashboard-link {
-				padding-left: 3px;
-				padding-right: 3px;
-			}
-			#wpadminbar ul li#wp-admin-bar-pantheon-hud-dashboard-link a {
-				border-top: 1px solid rgba(240,245,250,.4);
-				padding-top: 3px;
-				margin-top: 10px;
-			}
-		</style>
-		<?php
-		wp_add_inline_style( 'admin-bar', str_replace( [ '<style>', '</style>' ], '', ob_get_clean() ) );
 	}
 
 	/**
@@ -238,7 +213,7 @@ EOT;
 	 *
 	 * @return string Pantheon environment or 'local'.
 	 */
-	private function get_environment() {
+	private function get_environment(): string {
 		return ! empty( $_ENV['PANTHEON_ENVIRONMENT'] ) ? $_ENV['PANTHEON_ENVIRONMENT'] : 'local';
 	}
 }
