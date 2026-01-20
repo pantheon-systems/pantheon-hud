@@ -5,11 +5,11 @@
  * @package Pantheon HUD
  */
 
-namespace Pantheon\HUD;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+namespace Pantheon\HUD;
 
 /**
  * Pull data from the Pantheon site API.

@@ -5,11 +5,11 @@
  * @package Pantheon HUD
  */
 
-namespace Pantheon\HUD;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+namespace Pantheon\HUD;
 
 /**
  * Adds Pantheon details to the WordPress toolbar
