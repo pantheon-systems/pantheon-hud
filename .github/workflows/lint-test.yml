@@ -18,14 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
-      - name: Create build directory
-        run: |
-          mkdir -p build/pantheon-hud
-          rsync -av --exclude-from=.distignore ./ build/pantheon-hud/
-      - uses: pantheon-systems/action-wporg-validator@a4e56c641359547609152a5b3702f77625282ff2 # v2.0.0
-        with:
-          type: plugin
-          path: './build/pantheon-hud'
+      - uses: wordpress/plugin-check-action@v1.1.5
   validate-readme-spacing:
     name: Validate README Spacing
     runs-on: ubuntu-latest
