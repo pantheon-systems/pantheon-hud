@@ -8,7 +8,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist
       - name: Run PHP Lint
@@ -17,24 +17,30 @@ jobs:
     name: WP.org Plugin Validation
     runs-on: ubuntu-latest
     steps:
-      - uses: pantheon-systems/action-wporg-validator@v2.0.0
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      - name: Create build directory
+        run: |
+          mkdir -p build/pantheon-hud
+          rsync -av --exclude-from=.distignore ./ build/pantheon-hud/
+      - uses: pantheon-systems/action-wporg-validator@a4e56c641359547609152a5b3702f77625282ff2 # v2.0.0
         with:
-          type: 'plugin'
+          type: plugin
+          path: './build/pantheon-hud'
   validate-readme-spacing:
     name: Validate README Spacing
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
-      - uses: pantheon-systems/validate-readme-spacing@v1
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      - uses: pantheon-systems/validate-readme-spacing@229ea162621009cf8e09bf2beba405017150130e # v1.0.5
   php8-compatibility:
     name: PHP 8.x Compatibility
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
       - name: PHP Compatibility
-        uses: pantheon-systems/phpcompatibility-action@dev
+        uses: pantheon-systems/phpcompatibility-action@bd72eb001d4fb9817c9d6e1a157a71e287f3ff80 # dev 2023-10-04T16:54:18Z
         with:
           test-versions: 8.0-
           paths: ${{ github.workspace }}/*.php ${{ github.workspace }}/inc/*.php
@@ -46,9 +52,9 @@ jobs:
         image: mariadb:10.5
     name: PHP 7.4 Unit Tests
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
       - name: Setup PHP 7.4
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@44454db4f0199b8b9685a5d763dc37cbf79108e1 # v2
         with:
           php-version: 7.4
           extensions: mysqli, zip, imagick
@@ -61,7 +67,7 @@ jobs:
           key: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
           restore-keys: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
       - name: Setup WP-CLI
-        uses: godaddy-wordpress/setup-wp-cli@1
+        uses: godaddy-wordpress/setup-wp-cli@80c9a89bd347082429795c0f12acf567e2c390d4 # 1 2022-10-04T19:52:20Z
       - name: Install Composer dependencies
         run: |
           composer require pantheon-systems/pantheon-wp-coding-standards:^2.0 --dev --no-update
@@ -92,9 +98,9 @@ jobs:
         image: mariadb:10.6
     name: PHP 8.4 Unit Tests
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
       - name: Setup PHP 8.4
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@44454db4f0199b8b9685a5d763dc37cbf79108e1 # v2
         with:
           php-version: 8.4
           extensions: mysqli, zip, imagick
@@ -107,7 +113,7 @@ jobs:
           key: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
           restore-keys: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
       - name: Setup WP-CLI
-        uses: godaddy-wordpress/setup-wp-cli@1
+        uses: godaddy-wordpress/setup-wp-cli@80c9a89bd347082429795c0f12acf567e2c390d4 # 1 2022-10-04T19:52:20Z
       - name: Install Composer dependencies
         run: |
           composer install

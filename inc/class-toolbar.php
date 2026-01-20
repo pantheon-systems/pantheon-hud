@@ -7,6 +7,10 @@
 
 namespace Pantheon\HUD;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Adds Pantheon details to the WordPress toolbar
  * Instantiation expects the user to be able to view Pantheon details
@@ -152,36 +156,27 @@ class Toolbar {
 			],
 			admin_url( 'admin-ajax.php' )
 		);
-		$script      = <<<EOT
-document.addEventListener( 'DOMContentLoaded', function() {
-	var el = document.querySelector('#wp-admin-bar-pantheon-hud');
-	if ( ! el ) {
-		return;
-	}
-	var fetchData = function() {
-		if ( ! document.querySelector('#wp-admin-bar-pantheon-hud-wp-admin-loading') ) {
-			return;
-		}
-		var request = new XMLHttpRequest();
-		request.open('GET', '{$request_url}', true);
-		request.onload = function() {
-			if (this.status >= 200 && this.status < 400) {
-				document.querySelector('#wp-admin-bar-pantheon-hud .ab-sub-wrapper').innerHTML = this.response;
-				el.removeEventListener('mouseover', fetchData);
-				el.removeEventListener('focus', fetchData);
-			}
-		};
-		request.send();
-	};
-	el.addEventListener('mouseover', fetchData);
-	el.addEventListener('focus', fetchData);
-} );
-EOT;
-		wp_add_inline_script( 'admin-bar', $script );
+
+		wp_enqueue_script(
+			'pantheon-hud',
+			plugins_url( 'assets/js/pantheon-hud.js', PANTHEON_HUD_ROOT_FILE ),
+			[ 'admin-bar' ],
+			'0.4.5',
+			true
+		);
+
+		wp_localize_script(
+			'pantheon-hud',
+			'pantheonHudData',
+			[
+				'requestUrl' => $request_url,
+			]
+		);
+
 		add_filter(
 			'amp_dev_mode_element_xpaths',
 			static function ( $xpaths ) {
-				$xpaths[] = '//script[ contains( text(), "wp-admin-bar-pantheon-hud" ) ]';
+				$xpaths[] = '//script[ contains( @src, "pantheon-hud.js" ) ]';
 				return $xpaths;
 			}
 		);
@@ -239,6 +234,6 @@ EOT;
 	 * @return string Pantheon environment or 'local'.
 	 */
 	private function get_environment() {
-		return ! empty( $_ENV['PANTHEON_ENVIRONMENT'] ) ? $_ENV['PANTHEON_ENVIRONMENT'] : 'local';
+		return ! empty( $_ENV['PANTHEON_ENVIRONMENT'] ) ? sanitize_text_field( wp_unslash( $_ENV['PANTHEON_ENVIRONMENT'] ) ) : 'local';
 	}
 }
