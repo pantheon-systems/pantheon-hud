@@ -1,0 +1,30 @@
+# Directories
+/.circleci
+/.git
+/.github
+/.gitignore
+/.wordpress-org
+/tests
+/vendor
+/node_modules
+/bin
+
+# Files
+.DS_Store
+Thumbs.db
+.editorconfig
+.gitattributes
+.gitignore
+behat.yml
+CODEOWNERS
+composer.json
+composer.lock
+CONTRIBUTING.md
+Gruntfile.js
+package-lock.json
+package.json
+phpcs.xml.dist
+phpunit.xml.dist
+README.md
+catalog-info.yaml
+.distignore

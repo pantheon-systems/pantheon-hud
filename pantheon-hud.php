@@ -6,11 +6,16 @@
  * Author: Pantheon
  * Author URI: https://pantheon.io
  * Plugin URI: https://pantheon.io
+ * License: GPL-2.0-or-later
  * Text Domain: pantheon-hud
  * Domain Path: /languages
  *
  * @package Pantheon HUD
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 define( 'PANTHEON_HUD_ROOT_FILE', __FILE__ );
 
