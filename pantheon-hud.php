@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Pantheon HUD
- * Version: 0.4.5
+ * Version: 0.4.6-dev
  * Description: A heads-up display into your Pantheon environment.
  * Author: Pantheon
  * Author URI: https://pantheon.io
