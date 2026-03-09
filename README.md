@@ -4,7 +4,7 @@
 **Requires at least:** 4.9  
 **Tested up to:** 6.9  
 **Requires PHP:** 7.4  
-**Stable tag:** 0.4.6-dev  
+**Stable tag:** 0.4.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,7 +51,7 @@ By default, the Pantheon HUD shows dev, test and live. You can modify these valu
 
 
 ## Changelog ##
-### 0.4.6-dev ###
+### 0.4.6 (9 March 2026) ###
 
 ### 0.4.5 ###
 * Supports PHP 8.4 [[#153](https://github.com/pantheon-systems/pantheon-hud/pull/153/)]
