@@ -6,7 +6,8 @@
  * Author: Pantheon
  * Author URI: https://pantheon.io
  * Plugin URI: https://pantheon.io
- * License: GPL-2.0-or-later
+ * License: GPLv2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: pantheon-hud
  * Domain Path: /languages
  *
