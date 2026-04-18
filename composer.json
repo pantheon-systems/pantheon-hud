@@ -16,7 +16,7 @@
     "require-dev": {
         "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-master",
         "pantheon-systems/pantheon-wp-coding-standards": "^3.0",
-        "phpunit/phpunit": "^9",
+        "phpunit/phpunit": "^12",
         "yoast/phpunit-polyfills": "^4.0",
         "symfony/yaml": "^5.4 || ^6",
         "pantheon-systems/wpunit-helpers": "^2.0"
