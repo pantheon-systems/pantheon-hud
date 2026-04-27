@@ -89,8 +89,7 @@ class Toolbar {
 		$markup[] = '<ul id="wp-admin-bar-pantheon-hud-default" class="ab-submenu">';
 
 		$env_admins = '';
-		// TODO: List envs from API to include Multidev.
-		$envs = apply_filters( 'pantheon_hud_envs', [ 'dev', 'test', 'live' ] );
+		$envs = apply_filters( 'pantheon_hud_envs', $api->get_environments() );
 		foreach ( $envs as $e ) {
 			$url = $api->get_primary_environment_url( $e );
 			if ( $url ) {
@@ -172,6 +171,7 @@ class Toolbar {
 				'requestUrl' => $request_url,
 			]
 		);
+
 
 		add_filter(
 			'amp_dev_mode_element_xpaths',
