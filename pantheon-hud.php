@@ -1,13 +1,12 @@
 <?php
 /**
  * Plugin Name: Pantheon HUD
- * Version: 0.4.5
+ * Version: 0.4.6-dev
  * Description: A heads-up display into your Pantheon environment.
  * Author: Pantheon
  * Author URI: https://pantheon.io
  * Plugin URI: https://pantheon.io
- * License: GPLv2 or later
- * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * License: GPL-2.0-or-later
  * Text Domain: pantheon-hud
  * Domain Path: /languages
  *

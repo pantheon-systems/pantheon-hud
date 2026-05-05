@@ -1,32 +1,30 @@
 # Directories
-/.github
-/.wordpress-org
+/.circleci
 /.git
-/.idea
-/.codacy
-/bin
+/.github
+/.gitignore
+/.wordpress-org
 /tests
-/node_modules
 /vendor
-/languages
+/node_modules
+/bin
 
 # Files
-/.editorconfig
-/.gitattributes
-/.gitignore
-/behat.yml
-/composer.json
-/composer.lock
-/Gruntfile.js
-/package.json
-/package-lock.json
-/phpcs.xml.dist
-/phpunit.xml.dist
-/README.md
-/CONTRIBUTING.md
-/CODEOWNERS
-/catalog-info.yaml
-
-# Hidden files
-.*
-!.distignore
+.DS_Store
+Thumbs.db
+.editorconfig
+.gitattributes
+.gitignore
+behat.yml
+CODEOWNERS
+composer.json
+composer.lock
+CONTRIBUTING.md
+Gruntfile.js
+package-lock.json
+package.json
+phpcs.xml.dist
+phpunit.xml.dist
+README.md
+catalog-info.yaml
+.distignore
