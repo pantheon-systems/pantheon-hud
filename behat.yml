@@ -10,7 +10,6 @@ default:
     core:
       filters:
         tags: "~@upstreamonly"
-        name: "/^(?!.*Clear the site cache)/"
       paths:
         - vendor/pantheon-systems/pantheon-wordpress-upstream-tests/features
       contexts:
