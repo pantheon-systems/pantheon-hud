@@ -19,7 +19,7 @@ jobs:
     working_directory: ~/pantheon-systems/pantheon-hud
     parallelism: 1
     docker:
-    - image: quay.io/pantheon-public/build-tools-ci:8.x-php8.2
+    - image: quay.io/pantheon-public/build-tools-ci:9.x-php8.4
     steps:
     - checkout
     - restore_cache:
