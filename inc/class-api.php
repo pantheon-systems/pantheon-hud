@@ -122,6 +122,23 @@ class API {
 	}
 
 	/**
+	 * Gets the list of environments for the site.
+	 *
+	 * @return array
+	 */
+	public function get_environments() {
+		$url = sprintf( '%s/sites/self/environments', self::API_URL_BASE );
+		$environments = self::fetch_api_data( $url );
+
+		if ( ! empty( $environments ) && is_array( $environments ) ) {
+			return array_keys( $environments );
+		}
+
+		// Fallback to default environments if API call fails.
+		return [ 'dev', 'test', 'live' ];
+	}
+
+	/**
 	 * Gets the domains data.
 	 *
 	 * @param string $env Environment to fetch the domains of.
