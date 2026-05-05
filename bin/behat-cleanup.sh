@@ -20,4 +20,8 @@ fi
 ###
 # Delete the environment used for this test run.
 ###
-terminus multidev:delete $SITE_ENV --delete-branch --yes || echo "Environment $TERMINUS_ENV not found, skipping cleanup"
+if terminus env:info "$SITE_ENV" &>/dev/null; then
+  terminus multidev:delete $SITE_ENV --delete-branch --yes
+else
+  echo "Environment $TERMINUS_ENV does not exist, skipping cleanup"
+fi
