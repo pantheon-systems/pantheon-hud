@@ -1,4 +1,6 @@
 .DS_Store
+.idea/
+.codacy/
 binding.*
 node_modules/
 vendor/

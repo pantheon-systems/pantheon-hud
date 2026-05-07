@@ -1214,12 +1214,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pantheon-systems/pantheon-wordpress-upstream-tests.git",
-                "reference": "1fa393d4d65a888cbd5f11a405827e9695fb0634"
+                "reference": "fc82a3b112080661de52beaa99c4082ad9a642b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pantheon-systems/pantheon-wordpress-upstream-tests/zipball/1fa393d4d65a888cbd5f11a405827e9695fb0634",
-                "reference": "1fa393d4d65a888cbd5f11a405827e9695fb0634",
+                "url": "https://api.github.com/repos/pantheon-systems/pantheon-wordpress-upstream-tests/zipball/fc82a3b112080661de52beaa99c4082ad9a642b5",
+                "reference": "fc82a3b112080661de52beaa99c4082ad9a642b5",
                 "shasum": ""
             },
             "require": {
@@ -1245,7 +1245,7 @@
                 "issues": "https://github.com/pantheon-systems/pantheon-wordpress-upstream-tests/issues",
                 "source": "https://github.com/pantheon-systems/pantheon-wordpress-upstream-tests/tree/master"
             },
-            "time": "2024-09-23T20:47:25+00:00"
+            "time": "2026-05-05T16:37:36+00:00"
         },
         {
             "name": "pantheon-systems/pantheon-wp-coding-standards",
