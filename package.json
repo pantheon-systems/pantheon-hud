@@ -7,7 +7,7 @@
     "readme": "grunt readme"
   },
   "devDependencies": {
-    "grunt": "^1.6.1",
+    "grunt": "^1.6.2",
     "grunt-wp-readme-to-markdown": "^2"
   }
 }
