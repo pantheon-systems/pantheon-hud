@@ -47,19 +47,23 @@ jobs:
         with:
           test-versions: 8.0-
           paths: ${{ github.workspace }}/*.php ${{ github.workspace }}/inc/*.php
-  test-phpunit-74:
+  test-phpunit:
     needs: lint
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['7.4', '8.4', '8.5']
     services:
       mariadb:
-        image: mariadb:10.5
-    name: PHP 7.4 Unit Tests
+        image: ${{ matrix.php-version == '7.4' && 'mariadb:10.5' || 'mariadb:10.6' }}
+    name: PHP ${{ matrix.php-version }} Unit Tests
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Setup PHP 7.4
+      - name: Setup PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
         with:
-          php-version: 7.4
+          php-version: ${{ matrix.php-version }}
           extensions: mysqli, zip, imagick
       - name: Start MySQL Service
         run: sudo systemctl start mysql
@@ -67,58 +71,16 @@ jobs:
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: ~/vendor
-          key: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
-          restore-keys: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
+          key: test-phpunit-dependencies-${{ hashFiles('composer.json') }}-${{ matrix.php-version }}
+          restore-keys: test-phpunit-dependencies-${{ hashFiles('composer.json') }}-${{ matrix.php-version }}
       - name: Setup WP-CLI
         uses: godaddy-wordpress/setup-wp-cli@80c9a89bd347082429795c0f12acf567e2c390d4 # 1 2022-10-04T19:52:20Z
       - name: Install Composer dependencies
         run: |
-          composer require pantheon-systems/pantheon-wp-coding-standards:^2.0 --dev --no-update
-          composer update
-          composer install
-          chmod +x bin/*.sh
-      - name: Run PHP linting
-        run: composer phplint
-      - name: Reset MariaDB root password to empty
-        run: |
-          until mysqladmin ping -h127.0.0.1 -uroot -proot --silent; do
-            sleep 1
-          done
-          mysql -h127.0.0.1 -uroot -proot <<'SQL'
-            ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
-            FLUSH PRIVILEGES;
-          SQL
-          mysqladmin ping -h127.0.0.1 -uroot --silent
-      - name: Install WPUnit tests
-        run: composer test:install:withdb
-      - name: Run PHPUnit
-        run: composer phpunit
-  test-phpunit-84:
-    needs: lint
-    runs-on: ubuntu-latest
-    services:
-      mariadb:
-        image: mariadb:10.6
-    name: PHP 8.4 Unit Tests
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Setup PHP 8.4
-        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
-        with:
-          php-version: 8.4
-          extensions: mysqli, zip, imagick
-      - name: Start MySQL Service
-        run: sudo systemctl start mysql
-      - name: Cache dependencies
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
-        with:
-          path: ~/vendor
-          key: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
-          restore-keys: test-phpunit-dependencies-${{ hashFiles('composer.json') }}
-      - name: Setup WP-CLI
-        uses: godaddy-wordpress/setup-wp-cli@80c9a89bd347082429795c0f12acf567e2c390d4 # 1 2022-10-04T19:52:20Z
-      - name: Install Composer dependencies
-        run: |
+          if [ "${{ matrix.php-version }}" = "7.4" ]; then
+            composer require pantheon-systems/pantheon-wp-coding-standards:^2.0 --dev --no-update
+            composer update
+          fi
           composer install
           chmod +x bin/*.sh
       - name: Run PHP linting

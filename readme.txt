@@ -36,6 +36,7 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 
 == Changelog ==
 = 0.4.6-dev =
+* Supports PHP 8.5
 
 = 0.4.5 =
 * Supports PHP 8.4 [[#153](https://github.com/pantheon-systems/pantheon-hud/pull/153/)]

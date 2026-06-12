@@ -52,6 +52,7 @@ By default, the Pantheon HUD shows dev, test and live. You can modify these valu
 
 ## Changelog ##
 ### 0.4.6-dev ###
+* Supports PHP 8.5
 
 ### 0.4.5 ###
 * Supports PHP 8.4 [[#153](https://github.com/pantheon-systems/pantheon-hud/pull/153/)]
