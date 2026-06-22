@@ -1,5 +1,5 @@
 # Pantheon HUD #
-**Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon/), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/), [jspellman](https://profiles.wordpress.org/jspellman/), [jazzs3quence](https://profiles.wordpress.org/jazzs3quence), [pwtyler](https://profiles.wordpress.org/pwtyler)  
+**Contributors:** [getpantheon](https://profiles.wordpress.org/getpantheon/), [danielbachhuber](https://profiles.wordpress.org/danielbachhuber/), [jspellman](https://profiles.wordpress.org/jspellman/), [jazzs3quence](https://profiles.wordpress.org/jazzs3quence), [pwtyler](https://profiles.wordpress.org/pwtyler), [metasim](https://profiles.wordpress.org/metasim/)  
 **Tags:** Pantheon, hosting, environment-indicator  
 **Requires at least:** 4.9  
 **Tested up to:** 6.9  
@@ -52,6 +52,7 @@ By default, the Pantheon HUD shows dev, test and live. You can modify these valu
 
 ## Changelog ##
 ### 0.4.6-dev ###
+* Supports PHP 8.5 [[#219](https://github.com/pantheon-systems/pantheon-hud/pull/219)]
 
 ### 0.4.5 ###
 * Supports PHP 8.4 [[#153](https://github.com/pantheon-systems/pantheon-hud/pull/153/)]

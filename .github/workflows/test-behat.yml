@@ -29,7 +29,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
         with:
-          php-version: '8.4'
+          php-version: '8.5'
           tools: composer
           coverage: none
           extensions: mbstring, intl, zip
@@ -60,7 +60,7 @@ jobs:
       - name: Install SSH key
         uses: webfactory/ssh-agent@836c84ec59a0e7bc0eabc79988384eb567561ee2 # v0.7.0
         with:
-          ssh-private-key: ${{ secrets.SITE_OWNER_SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Configure Composer GitHub OAuth (optional)
         env:

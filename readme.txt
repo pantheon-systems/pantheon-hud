@@ -1,5 +1,5 @@
 === Pantheon HUD ===
-Contributors: getpantheon, danielbachhuber, jazzs3quence, jspellman, pwtyler
+Contributors: getpantheon, danielbachhuber, jazzs3quence, jspellman, pwtyler, metasim
 Tags: Pantheon, hosting, environment-indicator
 Requires at least: 4.9
 Tested up to: 6.9
@@ -36,6 +36,7 @@ By default, the Pantheon HUD appears for logged-in users with the `manage_option
 
 == Changelog ==
 = 0.4.6-dev =
+* Supports PHP 8.5 [[#219](https://github.com/pantheon-systems/pantheon-hud/pull/219)]
 
 = 0.4.5 =
 * Supports PHP 8.4 [[#153](https://github.com/pantheon-systems/pantheon-hud/pull/153/)]
