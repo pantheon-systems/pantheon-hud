@@ -8,7 +8,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - name: Setup PHP 8.4
         uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
         with:
@@ -21,7 +21,7 @@ jobs:
     name: WP.org Plugin Validation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - name: Create build directory
         run: |
           mkdir -p build/pantheon-hud
@@ -34,14 +34,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - uses: pantheon-systems/validate-readme-spacing@229ea162621009cf8e09bf2beba405017150130e # v1.0.5
   php8-compatibility:
     name: PHP 8.x Compatibility
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - name: PHP Compatibility
         uses: pantheon-systems/phpcompatibility-action@bd72eb001d4fb9817c9d6e1a157a71e287f3ff80 # dev 2023-10-04T16:54:18Z
         with:
@@ -59,7 +59,7 @@ jobs:
         image: ${{ matrix.php-version == '7.4' && 'mariadb:10.5' || 'mariadb:10.6' }}
     name: PHP ${{ matrix.php-version }} Unit Tests
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - name: Setup PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
         with:
