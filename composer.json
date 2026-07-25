@@ -14,7 +14,7 @@
         }
     ],
     "require-dev": {
-        "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-master",
+        "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-fix/replace-goutte-with-browserkit-driver as dev-master",
         "pantheon-systems/pantheon-wp-coding-standards": "^3.0",
         "phpunit/phpunit": "^9",
         "yoast/phpunit-polyfills": "^4.0",
