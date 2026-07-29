@@ -9,5 +9,8 @@
   "devDependencies": {
     "grunt": "^1.6.2",
     "grunt-wp-readme-to-markdown": "^2"
+  },
+  "overrides": {
+    "js-yaml": "^3.15.0"
   }
 }
