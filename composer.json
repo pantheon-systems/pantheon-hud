@@ -49,7 +49,9 @@
         "audit": {
             "ignore": {
                 "GHSA-g446-98w2-8p5w": "Dev-only: guzzlehttp/guzzle 6.5.8 via behat test deps (no 6.x patch line exists). No prod exposure. VUL-24498.",
-                "GHSA-c2w2-prh8-qm98": "Dev-only: guzzlehttp/psr7 1.9.1 via behat test deps (no 1.x patch line exists). No prod exposure. VUL-25209."
+                "GHSA-c2w2-prh8-qm98": "Dev-only: guzzlehttp/psr7 1.9.1 via behat test deps (no 1.x patch line exists). No prod exposure. VUL-25209.",
+                "GHSA-f7vp-7xgx-4w4r": "Dev-only: guzzlehttp/guzzle 6.5.8 via behat test deps (no 6.x patch for CVE-2026-69245). No prod exposure. VUL-26453.",
+                "GHSA-v5mv-p594-2x33": "Dev-only: guzzlehttp/guzzle 6.5.8 via behat test deps (no 6.x patch for CVE-2026-69246). No prod exposure. VUL-26453."
             }
         }
     }
