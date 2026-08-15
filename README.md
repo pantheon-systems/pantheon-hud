@@ -16,7 +16,7 @@ A heads-up display into your Pantheon environment.
 [![Lint & Test](https://github.com/pantheon-systems/pantheon-hud/actions/workflows/lint-test.yml/badge.svg)](https://github.com/pantheon-systems/pantheon-hud/actions/workflows/lint-test.yml)
 [![Actively Maintained](https://img.shields.io/badge/Pantheon-Actively_Maintained-yellow?logo=pantheon&color=FFDC28)](https://docs.pantheon.io/oss-support-levels#actively-maintained-support)
 
-This plugin provides situational awareness of the Pantheon plaform from within your WordPress dashboard. It's helpful to be reminded what environment you're in, as well as providing quick links to get back to Pantheon's dashboard, or to interface with your WordPress installation via the command line.
+This plugin provides situational awareness of the Pantheon platform from within your WordPress dashboard. It's helpful to be reminded what environment you're in, as well as providing quick links to get back to Pantheon's dashboard, or to interface with your WordPress installation via the command line.
 
 Pantheon HUD is in early stages of development. We want your feedback! [Create a Github issue](https://github.com/pantheon-systems/pantheon-hud/issues) with questions, feature requests, or bug reports.
 
@@ -56,7 +56,7 @@ By default, the Pantheon HUD shows dev, test and live. You can modify these valu
 
 ### 0.4.5 ###
 * Supports PHP 8.4 [[#153](https://github.com/pantheon-systems/pantheon-hud/pull/153/)]
-* Add Enviroment Filter
+* Add Environment Filter
 * Supports WordPress 6.9 [#173](https://github.com/pantheon-systems/pantheon-hud/pull/173/)
 
 ### 0.4.4 (December 6, 2024 ###
