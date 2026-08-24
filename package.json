@@ -11,6 +11,6 @@
     "grunt-wp-readme-to-markdown": "^2"
   },
   "overrides": {
-    "js-yaml": "^3.15.0"
+    "js-yaml": "^3.15.1"
   }
 }
