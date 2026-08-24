@@ -45,12 +45,6 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "pantheon-systems/wpunit-helpers": true
-        },
-        "audit": {
-            "ignore": {
-                "GHSA-g446-98w2-8p5w": "Dev-only: guzzlehttp/guzzle 6.5.8 via behat test deps (no 6.x patch line exists). No prod exposure. VUL-24498.",
-                "GHSA-c2w2-prh8-qm98": "Dev-only: guzzlehttp/psr7 1.9.1 via behat test deps (no 1.x patch line exists). No prod exposure. VUL-25209."
-            }
         }
     }
 }
