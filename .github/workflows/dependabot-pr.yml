@@ -1,4 +1,4 @@
-name: Dependabot PRs
+name: Rename Dependabot PRs
 
 on:
   pull_request_target:
@@ -9,13 +9,12 @@ permissions:
   pull-requests: write
 
 jobs:
-  rename-and-notify:
-    name: Rename and notify
+  rename:
+    name: Rename
     if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Rename by update type
-        id: rename
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
@@ -26,7 +25,6 @@ jobs:
           # Stops the `edited` event the rename triggers from looping.
           case "$PR_TITLE" in
             "Security update:"*|"Composer minor:"*|"npm minor:"*|"GitHub Actions minor:"*|"Major update:"*)
-              echo "renamed=false" >> "$GITHUB_OUTPUT"
               exit 0
               ;;
           esac
@@ -54,26 +52,4 @@ jobs:
             exit 1
           fi
 
-          title="${prefix}: ${summary}"
-          gh pr edit "$PR_URL" --title "$title"
-
-          echo "renamed=true" >> "$GITHUB_OUTPUT"
-          echo "title=$title" >> "$GITHUB_OUTPUT"
-
-      - name: Notify Slack
-        if: steps.rename.outputs.renamed == 'true'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
-          TITLE: ${{ steps.rename.outputs.title }}
-        run: |
-          set -euo pipefail
-
-          if [[ -z "${SLACK_WEBHOOK_URL}" ]]; then
-            echo "SLACK_WEBHOOK_URL not set, skipping notification"
-            exit 0
-          fi
-
-          curl -sf -X POST "${SLACK_WEBHOOK_URL}" \
-            -H 'Content-type: application/json' \
-            -d "$(printf '{"text":"%s - <%s|%s>"}' "${TITLE}" "${PR_URL}" "${PR_URL}")"
+          gh pr edit "$PR_URL" --title "${prefix}: ${summary}"
