@@ -1,0 +1,88 @@
+name: Dependabot PRs
+
+on:
+  pull_request_target:
+    types: [opened, reopened, edited]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  rename-and-notify:
+    name: Rename and notify
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rename by update type
+        id: rename
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          set -euo pipefail
+
+          # Stops the `edited` event the rename triggers from looping.
+          case "$PR_TITLE" in
+            "Security update:"*|"Composer minor:"*|"npm minor:"*|"GitHub Actions minor:"*|"Major update:"*)
+              echo "renamed=false" >> "$GITHUB_OUTPUT"
+              exit 0
+              ;;
+          esac
+
+          eco="${PR_TITLE#*\(}"
+          eco="${eco%%\)*}"
+
+          case "$PR_TITLE" in
+            *-security\ group*)    prefix="Security update" ;;
+            *-minor-patch\ group*)
+              case "$eco" in
+                composer) prefix="Composer minor" ;;
+                npm)      prefix="npm minor" ;;
+                *)        prefix="GitHub Actions minor" ;;
+              esac
+              ;;
+            # Minor and patch are always grouped, so ungrouped means major.
+            *) prefix="Major update" ;;
+          esac
+
+          case "$PR_TITLE" in
+            *\ group*)
+              summary="$(printf '%s' "$PR_TITLE" | sed -n 's/.*with \([0-9]* update[s]*\).*/\1/p')"
+              ;;
+            *)
+              summary="$(printf '%s' "${PR_TITLE#*: bump }" | sed 's/ from / /')"
+              ;;
+          esac
+
+          if [ -z "$summary" ]; then
+            echo "Could not read a summary out of: $PR_TITLE"
+            exit 1
+          fi
+
+          title="${prefix}: ${summary}"
+          gh pr edit "$PR_URL" --title "$title"
+
+          echo "renamed=true" >> "$GITHUB_OUTPUT"
+          echo "title=$title" >> "$GITHUB_OUTPUT"
+
+      - name: Notify Slack
+        if: steps.rename.outputs.renamed == 'true'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          TITLE: ${{ steps.rename.outputs.title }}
+        run: |
+          set -euo pipefail
+
+          if [[ -z "${SLACK_WEBHOOK_URL}" ]]; then
+            echo "SLACK_WEBHOOK_URL not set, skipping notification"
+            exit 0
+          fi
+
+          curl -sf -X POST "${SLACK_WEBHOOK_URL}" \
+            -H 'Content-type: application/json' \
+            -d "$(printf '{"text":"%s - <%s|%s PR #%s>"}' \
+              "${TITLE}" "${PR_URL}" "${GITHUB_REPOSITORY}" "${PR_NUMBER}")"
