@@ -1,0 +1,54 @@
+name: Label Dependabot PRs
+
+# Dependabot's own `labels:` are per-ecosystem, so they cannot tell a security
+# update from a version update. The group name in the PR title can, and these
+# labels are what the Slack subscriptions filter on.
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, edited]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  label:
+    name: Label
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      # No checkout: pull_request_target runs with write permissions, so the
+      # head branch is never fetched or executed here.
+      - name: Apply the update-type label
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          set -euo pipefail
+
+          case "$PR_TITLE" in
+            *-security\ group*)    keep="dependabot-security" ;;
+            *-minor-patch\ group*) keep="dependabot-minor" ;;
+            # Every minor and patch update belongs to a group, so anything
+            # ungrouped is a major.
+            *)                     keep="dependabot-major" ;;
+          esac
+
+          gh label create dependabot-security --color b60205 --description "Dependabot security fixes" --force
+          gh label create dependabot-minor    --color 0e8a16 --description "Dependabot minor and patch updates" --force
+          gh label create dependabot-major    --color d93f0b --description "Dependabot major version update" --force
+
+          gh pr edit "$PR_URL" --add-label "$keep"
+
+          # Drop the other two in case an edited title changed the update type.
+          # A label that is not set returns 404, which is not a failure here.
+          for label in dependabot-security dependabot-minor dependabot-major; do
+            if [ "$label" != "$keep" ]; then
+              gh api -X DELETE \
+                "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/labels/${label}" \
+                --silent || true
+            fi
+          done
