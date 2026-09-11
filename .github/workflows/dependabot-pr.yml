@@ -31,18 +31,11 @@ jobs:
               ;;
           esac
 
-          eco="${PR_TITLE#*\(}"
-          eco="${eco%%\)*}"
-
           case "$PR_TITLE" in
             *-security\ group*)    prefix="Security update" ;;
-            *-minor-patch\ group*)
-              case "$eco" in
-                composer) prefix="Composer minor" ;;
-                npm)      prefix="npm minor" ;;
-                *)        prefix="GitHub Actions minor" ;;
-              esac
-              ;;
+            *composer-minor-patch\ group*)       prefix="Composer minor" ;;
+            *npm-minor-patch\ group*)            prefix="npm minor" ;;
+            *github-actions-minor-patch\ group*) prefix="GitHub Actions minor" ;;
             # Minor and patch are always grouped, so ungrouped means major.
             *) prefix="Major update" ;;
           esac
