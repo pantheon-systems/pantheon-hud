@@ -11,7 +11,42 @@ on:
     - cron: "0 0 * * *"
 
 jobs:
+  # Filtering lives here rather than in paths-ignore: a workflow skipped by
+  # paths-ignore posts no status at all, which leaves a required check pending
+  # forever. A skipped job still posts one.
+  changes:
+    name: Detect relevant changes
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.filter.outputs.run }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Decide whether the suite needs to run
+        id: filter
+        env:
+          IGNORE_FILE: .github/behat-ignore.txt
+        run: |
+          if [ "${{ github.event_name }}" != 'pull_request' ]; then
+            echo 'run=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          IGNORED="^($(grep -vE '^\s*(#|$)' "$IGNORE_FILE" | paste -sd '|' -))$"
+          changed=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")
+          # No diff means something is off; run rather than hide a real change.
+          if [ -z "$changed" ] || printf '%s\n' "$changed" | grep -qvE "$IGNORED"; then
+            echo 'run=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'run=false' >> "$GITHUB_OUTPUT"
+            echo 'Only ignored files changed.'
+          fi
+
   test-behat:
+    needs: changes
+    if: needs.changes.outputs.run == 'true'
     runs-on: ubuntu-latest
 
     defaults:
