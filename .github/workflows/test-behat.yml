@@ -24,10 +24,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: '8.5'
           tools: composer
@@ -35,7 +35,7 @@ jobs:
           extensions: mbstring, intl, zip
 
       - name: Cache dependencies
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: vendor
           key: composer-deps-${{ hashFiles('composer.lock') }}
@@ -72,13 +72,13 @@ jobs:
           { composer config -g github-oauth.github.com "${GITHUB_TOKEN}"; } &>/dev/null
 
       - name: Install Terminus
-        uses: pantheon-systems/terminus-github-actions@b0a005d0e886678b25cb6cd7833cf8d8cf779900 # v1.2.9
+        uses: pantheon-systems/terminus-github-actions@8fb365801c4abd633407f65ecb475a540ddb38f1 # v1.2.10
         with:
           pantheon-machine-token: ${{ secrets.TERMINUS_TOKEN }}
 
       - name: Validate WordPress 'Tested Up To' version
         if: github.event_name == 'pull_request'
-        uses: jazzsequence/action-validate-plugin-version@6b8b403af6e9eefde9c36c0d342b717d5952b518 # v2.0.1
+        uses: jazzsequence/action-validate-plugin-version@754dfd0b2c86b788c3912c4b26a0e155acb5d2eb # v2.0.2
         with:
           branch: ${{ github.head_ref }}
           dry-run: 'true'
