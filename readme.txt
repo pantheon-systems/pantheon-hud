@@ -2,7 +2,7 @@
 Contributors: getpantheon, danielbachhuber, jazzs3quence, jspellman, pwtyler, metasim
 Tags: Pantheon, hosting, environment-indicator
 Requires at least: 4.9
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 0.4.6-dev
 License: GPLv2 or later
