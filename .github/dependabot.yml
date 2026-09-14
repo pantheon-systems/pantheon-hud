@@ -3,13 +3,20 @@ updates:
 - package-ecosystem: composer
   directory: "/"
   schedule:
-    interval: weekly
+    interval: daily
     timezone: America/Los_Angeles
-    day: tuesday
   target-branch: main
   open-pull-requests-limit: 99
+  commit-message:
+    prefix: deps(composer)
   groups:
+    composer-security:
+      applies-to: security-updates
+      update-types:
+      - minor
+      - patch
     composer-minor-patch:
+      applies-to: version-updates
       update-types:
       - minor
       - patch
@@ -25,25 +32,40 @@ updates:
 - package-ecosystem: npm
   directory: "/"
   schedule:
-    interval: weekly
+    interval: daily
     timezone: America/Los_Angeles
-    day: tuesday
   target-branch: main
   open-pull-requests-limit: 99
+  commit-message:
+    prefix: deps(npm)
   groups:
+    npm-security:
+      applies-to: security-updates
+      update-types:
+      - minor
+      - patch
     npm-minor-patch:
+      applies-to: version-updates
       update-types:
       - minor
       - patch
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
-    interval: weekly
+    interval: daily
     timezone: America/Los_Angeles
-    day: tuesday
   target-branch: main
   open-pull-requests-limit: 99
+  commit-message:
+    prefix: deps(actions)
   groups:
-    github-actions:
-      patterns:
-      - "*"
+    github-actions-security:
+      applies-to: security-updates
+      update-types:
+      - minor
+      - patch
+    github-actions-minor-patch:
+      applies-to: version-updates
+      update-types:
+      - minor
+      - patch
