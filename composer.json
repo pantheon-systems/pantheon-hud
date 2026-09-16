@@ -14,17 +14,10 @@
         }
     ],
     "require-dev": {
-        "pantheon-systems/pantheon-wordpress-upstream-tests": "dev-master",
         "pantheon-systems/pantheon-wp-coding-standards": "^3.0",
         "phpunit/phpunit": "^9",
         "yoast/phpunit-polyfills": "^4.0",
-        "symfony/yaml": "^5.4 || ^6",
         "pantheon-systems/wpunit-helpers": "^2.0"
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "PantheonSystems\\WPSamlAuth\\Behat\\": "tests/behat/bootstrap/"
-        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
