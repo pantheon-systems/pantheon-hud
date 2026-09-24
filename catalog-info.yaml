@@ -1,12 +1,13 @@
+# Managed by github-terraform — do not edit manually
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: pantheon-hud
-  description: Auto-generated catalog info for pantheon-systems/pantheon-hud
+  name: "pantheon-hud"
+  description: "Pantheon HUD plugin for WordPress providing a heads-up display into your Pantheon environment."
   annotations:
-    backstage.io/techdocs-ref: dir:docs/
+    "backstage.io/techdocs-ref": "dir:docs/"
 spec:
-  type: library
-  lifecycle: mature
-  owner: site-experience
+  type: "library"
+  lifecycle: "mature"
+  owner: "site-experience"
