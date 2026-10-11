@@ -1,4 +1,4 @@
-Feature: Solr Power plugin
+Feature: Pantheon HUD plugin
 
   Background:
     Given I log in as an admin
