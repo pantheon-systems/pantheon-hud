@@ -4,5 +4,5 @@ Feature: Pantheon HUD plugin
     Given I log in as an admin
 
   Scenario: Plugin is loaded
-    When I go to "/wp-admin/"
-    Then the "#wp-admin-bar-pantheon-hud" element should contain "assets/img/pantheon-fist-color.svg"
+    And I visit "/wp-admin/"
+    Then the "#wp-admin-bar-pantheon-hud" element should contain the HTML "assets/img/pantheon-fist-color.svg"
